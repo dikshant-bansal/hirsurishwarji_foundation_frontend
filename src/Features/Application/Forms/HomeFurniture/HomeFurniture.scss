@@ -1,0 +1,26 @@
+#HomeFurniture{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    border: 2px solid #000000;
+    border-radius: 20px;
+    padding: 20px 50px;
+    .formHeader{
+        font-size: 30px;
+        margin: 10px 0px 20px 0px;
+    }
+    .HomeFurnitureForm{
+        display: flex;
+        flex-direction: column;
+        min-width: 400px;
+        .formElements{
+            margin: 10px 0px 10px 0px;
+        }
+        .nextBtn{
+            margin: 20px 0px 10px 0px;
+            width: 80px;
+            align-self: center;
+        }
+    }
+}
