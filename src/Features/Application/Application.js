@@ -16,7 +16,7 @@ import {
 } from "./Forms";
 
 const Application = () => {
-  const [activeFormIndex, setActiveFormIndex] = useState(0);
+  const [activeFormIndex, setActiveFormIndex] = useState(5);
   const nextForm = () => {
     setActiveFormIndex((prev) => prev + 1);
   };

@@ -1,0 +1,91 @@
+#DependentTable{
+    margin: 30px 0px;
+    table{
+        .tableHead{
+            border-bottom: 1px solid rgb(202, 202, 202);
+            background-color: rgb(248,249,250);
+            tr{
+                th{
+                    padding: 0px 10px;
+                }
+                .ReligiousActivity{
+                    display: flex;
+                    flex-direction: column;
+                    .ReligiousActivityText{
+                        align-self: center;
+                    }
+                    .ReligiousActivityFields{
+                        white-space: nowrap;
+                        span{
+                            padding: 0px 5px;
+                        }
+                        .Kanmool{
+                            width: 50px;
+                        }
+                        .Navkarshi{
+
+                        }
+                        .Pooja{
+
+                        }
+                        .NightDinner{
+
+                        }
+                    }
+                }
+            }
+        }
+        .tableBody{
+            tr{
+                height: 20px;
+                margin: 5px 0px;
+                td{
+                    input{
+                        border: 1px solid black;
+                        width: 100%;
+                    }
+                }
+                .SNo{
+                    max-width: 50px;
+                }
+                .Name{
+                    max-width: 100px;
+                }
+                .Age{
+                    max-width: 50px;
+                }
+                .AadharNo{
+                    max-width: 100px;
+                }
+                .Education{
+                    max-width: 100px;
+                }
+                .Profession{
+                    max-width: 100px;
+                }
+                .Income{
+                    max-width: 100px;
+                }
+                .ReligiousEducation{
+                    max-width: 100px;
+                }
+                .ReligiousActivity{
+
+                }
+            }
+        }
+    }
+    .btnContainer{
+        margin: 10px 0px;
+        display: flex;
+        justify-content: center;
+        #addBtn{
+            height: 30px;
+            margin: 5px;
+        }
+        #deleteBtn{
+            height: 30px;
+            margin: 5px;
+        }
+    }
+}
