@@ -1,11 +1,8 @@
 import React from "react";
 import "./HomeFurniture.scss";
-import {
-  TextField,
-  Button,
-} from "@mui/material";
+import { TextField, Button } from "@mui/material";
 
-const HomeFurniture = ({ nextForm }) => {
+const HomeFurniture = ({ nextForm, backForm }) => {
   const submitForm = (event) => {
     nextForm();
     event.preventDefault();
@@ -71,14 +68,25 @@ const HomeFurniture = ({ nextForm }) => {
           type="number"
           required
         />
-        <Button
-          id="nextBtn"
-          className="nextBtn"
-          variant="contained"
-          type="submit"
-        >
-          Next
-        </Button>
+        <div className="btnContainer">
+          <Button
+            id="backBtn"
+            className="backBtn"
+            variant="outlined"
+            color="error"
+            onClick={backForm}
+          >
+            Back
+          </Button>
+          <Button
+            id="nextBtn"
+            className="nextBtn"
+            variant="outlined"
+            type="submit"
+          >
+            Next
+          </Button>
+        </div>
       </form>
     </div>
   );

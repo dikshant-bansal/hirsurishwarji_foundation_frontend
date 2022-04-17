@@ -1,6 +1,6 @@
 import React from "react";
 import "./DependentDetails.scss";
-import { 
+import {
   TextField,
   Radio,
   RadioGroup,
@@ -8,10 +8,10 @@ import {
   FormControl,
   FormLabel,
   Button,
- } from "@mui/material";
+} from "@mui/material";
 import DependentTable from "./DependentTable/DependentTable";
 
-const DependentDetails = ({ nextForm }) => {
+const DependentDetails = ({ nextForm, backForm }) => {
   const submitForm = (event) => {
     nextForm();
     event.preventDefault();
@@ -33,7 +33,7 @@ const DependentDetails = ({ nextForm }) => {
           label="Experience"
           variant="outlined"
         />
-         <FormControl className="formElements">
+        <FormControl className="formElements">
           <FormLabel
             id="demo-row-radio-buttons-group-label"
             className="questionLabel"
@@ -55,14 +55,25 @@ const DependentDetails = ({ nextForm }) => {
           variant="outlined"
           type="number"
         />
-        <Button
-          id="nextBtn"
-          className="nextBtn"
-          variant="contained"
-          type="submit"
-        >
-          Next
-        </Button>
+        <div className="btnContainer">
+          <Button
+            id="backBtn"
+            className="backBtn"
+            variant="outlined"
+            color="error"
+            onClick={backForm}
+          >
+            Back
+          </Button>
+          <Button
+            id="nextBtn"
+            className="nextBtn"
+            variant="outlined"
+            type="submit"
+          >
+            Next
+          </Button>
+        </div>
       </form>
     </div>
   );

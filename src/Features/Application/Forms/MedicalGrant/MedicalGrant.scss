@@ -21,10 +21,14 @@
         .formElements{
             margin: 10px 0px 10px 0px;
         }
-        .nextBtn{
-            margin: 20px 0px 10px 0px;
-            width: 80px;
-            align-self: center;
+        .btnContainer{
+            display: flex;
+            justify-content: center;
+            .nextBtn, .backBtn{
+                margin: 20px 5px 10px 5px;
+                width: 80px;
+                align-self: center;
+            }
         }
     }
 }

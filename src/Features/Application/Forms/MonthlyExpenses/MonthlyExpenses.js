@@ -10,7 +10,7 @@ import {
   Button,
 } from "@mui/material";
 
-const MonthlyExpenses = ({ nextForm }) => {
+const MonthlyExpenses = ({ nextForm, backForm }) => {
   const submitForm = (event) => {
     nextForm();
     event.preventDefault();
@@ -108,14 +108,25 @@ const MonthlyExpenses = ({ nextForm }) => {
             <FormControlLabel value="Owned" control={<Radio />} label="Owned" />
           </RadioGroup>
         </FormControl>
-        <Button
-          id="nextBtn"
-          className="nextBtn"
-          variant="contained"
-          type="submit"
-        >
-          Next
-        </Button>
+        <div className="btnContainer">
+          <Button
+            id="backBtn"
+            className="backBtn"
+            variant="outlined"
+            color="error"
+            onClick={backForm}
+          >
+            Back
+          </Button>
+          <Button
+            id="nextBtn"
+            className="nextBtn"
+            variant="outlined"
+            type="submit"
+          >
+            Next
+          </Button>
+        </div>
       </form>
     </div>
   );

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "./Application.scss";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
+import { Stepper, Step, StepLabel } from "@mui/material";
 import {
   PersonalDetails,
   UpdateDocuments,
@@ -16,9 +14,12 @@ import {
 } from "./Forms";
 
 const Application = () => {
-  const [activeFormIndex, setActiveFormIndex] = useState(5);
+  const [activeFormIndex, setActiveFormIndex] = useState(1);
   const nextForm = () => {
     setActiveFormIndex((prev) => prev + 1);
+  };
+  const backForm = () => {
+    setActiveFormIndex((prev) => prev - 1);
   };
   const steps = [
     "Personal Details",
@@ -33,14 +34,14 @@ const Application = () => {
   ];
   const stepsForm = [
     <PersonalDetails nextForm={nextForm} />,
-    <UpdateDocuments nextForm={nextForm} />,
-    <MiscellaneousQuestions nextForm={nextForm} />,
-    <MonthlyExpenses nextForm={nextForm} />,
-    <HomeFurniture nextForm={nextForm} />,
-    <DependentDetails nextForm={nextForm} />,
-    <MedicalGrant nextForm={nextForm} />,
-    <EarningMember nextForm={nextForm} />,
-    <SkillDetails />,
+    <UpdateDocuments nextForm={nextForm} backForm={backForm} />,
+    <MiscellaneousQuestions nextForm={nextForm} backForm={backForm} />,
+    <MonthlyExpenses nextForm={nextForm} backForm={backForm} />,
+    <HomeFurniture nextForm={nextForm} backForm={backForm} />,
+    <DependentDetails nextForm={nextForm} backForm={backForm} />,
+    <MedicalGrant nextForm={nextForm} backForm={backForm} />,
+    <EarningMember nextForm={nextForm} backForm={backForm} />,
+    <SkillDetails backForm={backForm} />,
   ];
 
   return (

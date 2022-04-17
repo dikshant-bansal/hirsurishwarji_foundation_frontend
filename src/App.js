@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 import { TopNavBar } from "./Components";
-import { Home, Application, ApplicationList, ContactUs } from "./Features";
+import { Home, Application, ApplicationInfo, ApplicationList, ContactUs } from "./Features";
 
 const App = () => {
   return (
@@ -16,6 +16,7 @@ const App = () => {
       <TopNavBar />
       <Routes>
           <Route path="/application" element={<Application />} />
+          <Route path="/application/info" element={<ApplicationInfo />} />
           <Route path="/applicationList" element={<ApplicationList />} />
           <Route path="/contactUs" element={<ContactUs />} />
           <Route path="/" element={<Home />} />

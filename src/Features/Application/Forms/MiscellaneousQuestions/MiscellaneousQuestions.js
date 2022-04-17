@@ -9,7 +9,7 @@ import {
   Button,
 } from "@mui/material";
 
-const MiscellaneousQuestions = ({ nextForm }) => {
+const MiscellaneousQuestions = ({ nextForm, backForm }) => {
   const submitForm = (event) => {
     nextForm();
     event.preventDefault();
@@ -31,7 +31,10 @@ const MiscellaneousQuestions = ({ nextForm }) => {
         {questionsArray.map((question, index) => {
           return (
             <FormControl className="formElements" key={`${question}${index}`}>
-              <FormLabel id="demo-row-radio-buttons-group-label" className="questionLabel">
+              <FormLabel
+                id="demo-row-radio-buttons-group-label"
+                className="questionLabel"
+              >
                 {question}
               </FormLabel>
               <RadioGroup
@@ -45,14 +48,25 @@ const MiscellaneousQuestions = ({ nextForm }) => {
             </FormControl>
           );
         })}
-        <Button
-          id="nextBtn"
-          className="nextBtn"
-          variant="contained"
-          type="submit"
-        >
-          Next
-        </Button>
+        <div className="btnContainer">
+          <Button
+            id="backBtn"
+            className="backBtn"
+            variant="outlined"
+            color="error"
+            onClick={backForm}
+          >
+            Back
+          </Button>
+          <Button
+            id="nextBtn"
+            className="nextBtn"
+            variant="outlined"
+            type="submit"
+          >
+            Next
+          </Button>
+        </div>
       </form>
     </div>
   );

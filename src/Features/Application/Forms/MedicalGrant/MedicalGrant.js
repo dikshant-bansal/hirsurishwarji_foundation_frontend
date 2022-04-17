@@ -2,7 +2,7 @@ import React from "react";
 import "./MedicalGrant.scss";
 import { TextField, Button } from "@mui/material";
 
-const MedicalGrant = ({ nextForm }) => {
+const MedicalGrant = ({ nextForm, backForm }) => {
   const submitForm = (event) => {
     nextForm();
     event.preventDefault();
@@ -76,14 +76,25 @@ const MedicalGrant = ({ nextForm }) => {
           variant="outlined"
           required
         />
-        <Button
-          id="nextBtn"
-          className="nextBtn"
-          variant="contained"
-          type="submit"
-        >
-          Next
-        </Button>
+        <div className="btnContainer">
+          <Button
+            id="backBtn"
+            className="backBtn"
+            variant="outlined"
+            color="error"
+            onClick={backForm}
+          >
+            Back
+          </Button>
+          <Button
+            id="nextBtn"
+            className="nextBtn"
+            variant="outlined"
+            type="submit"
+          >
+            Next
+          </Button>
+        </div>
       </form>
     </div>
   );
