@@ -3,8 +3,15 @@ import "./HomeFurniture.scss";
 import { TextField, Button } from "@mui/material";
 
 const HomeFurniture = ({ nextForm, backForm }) => {
+  let formData = {};
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    formData[name] = value
+  }
+
   const submitForm = (event) => {
-    nextForm();
+    nextForm("homeFurniture", formData);
     event.preventDefault();
   };
 
@@ -18,6 +25,8 @@ const HomeFurniture = ({ nextForm, backForm }) => {
           label="T.V. (in quantity)"
           variant="outlined"
           type="number"
+          name="tv"
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -26,6 +35,8 @@ const HomeFurniture = ({ nextForm, backForm }) => {
           label="Cable (in quantity)"
           variant="outlined"
           type="number"
+          name="cable"
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -34,6 +45,8 @@ const HomeFurniture = ({ nextForm, backForm }) => {
           label="Fridge (in quantity)"
           variant="outlined"
           type="number"
+          name="fridge"
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -42,6 +55,8 @@ const HomeFurniture = ({ nextForm, backForm }) => {
           label="Washing Machine (in quantity)"
           variant="outlined"
           type="number"
+          name="washingMachine"
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -50,6 +65,8 @@ const HomeFurniture = ({ nextForm, backForm }) => {
           label="Vehicles (in quantity)"
           variant="outlined"
           type="number"
+          name="vehicles"
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -58,6 +75,8 @@ const HomeFurniture = ({ nextForm, backForm }) => {
           label="Bikes (in quantity)"
           variant="outlined"
           type="number"
+          name="bikes"
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -66,6 +85,8 @@ const HomeFurniture = ({ nextForm, backForm }) => {
           label="Phones (in quantity)"
           variant="outlined"
           type="number"
+          name="phones"
+          onChange={(event) => handleChange(event)}
           required
         />
         <div className="btnContainer">

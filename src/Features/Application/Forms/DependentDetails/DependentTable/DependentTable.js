@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./DependentTable.scss";
 import { Switch, Button } from "@mui/material";
 
-const DependentTable = () => {
+const DependentTable = ({dependentList}) => {
   const rowsInput = {
     SNo: "",
     Name: "",
@@ -24,6 +24,7 @@ const DependentTable = () => {
     let rows = [...rowsData];
     if (rows.length > 1) {
       rows.pop();
+      dependentList([...rows])
     } else {
       rows = [rowsInput];
     }
@@ -35,6 +36,9 @@ const DependentTable = () => {
     const rowsInput = [...rowsData];
     rowsInput[index][name] = value;
     setRowsData(rowsInput);
+    let duplicateRowsData = [...rowsData]
+    duplicateRowsData.push(rowsInput)
+    dependentList(duplicateRowsData)
   };
 
   return (

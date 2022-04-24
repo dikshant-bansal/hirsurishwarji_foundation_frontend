@@ -3,8 +3,15 @@ import "./UpdateDocuments.scss";
 import { TextField, Button } from "@mui/material";
 
 const UpdateDocuments = ({ nextForm, backForm }) => {
+  let formData = {};
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    formData[name] = value
+  }
+
   const submitForm = (event) => {
-    nextForm();
+    nextForm("updateDocuments", formData);
     event.preventDefault();
   };
 
@@ -18,6 +25,8 @@ const UpdateDocuments = ({ nextForm, backForm }) => {
           label="Aadhaar Number"
           variant="outlined"
           type="number"
+          name='aadhaarNumber'
+          onChange={(event) => handleChange(event)}
           required
         />
         <div className="fileUpload">
@@ -29,6 +38,8 @@ const UpdateDocuments = ({ nextForm, backForm }) => {
           label="Ration Card Number"
           variant="outlined"
           type="number"
+          name='rationCard'
+          onChange={(event) => handleChange(event)}
           required
         />
         <div className="fileUpload">
@@ -39,6 +50,8 @@ const UpdateDocuments = ({ nextForm, backForm }) => {
           className="formElements"
           label="Bank Account Number"
           variant="outlined"
+          name='bankAccount'
+          onChange={(event) => handleChange(event)}
           required
         />
         <div className="fileUpload">
@@ -49,15 +62,8 @@ const UpdateDocuments = ({ nextForm, backForm }) => {
           className="formElements"
           label="Rent / Maintenance Reciept Number"
           variant="outlined"
-        />
-        <div className="fileUpload">
-          <input name="fileUpload" className="fileUploadInput" type="file"></input>
-        </div>
-        <TextField
-          id="rentInput"
-          className="formElements"
-          label="Rent / Maintenance Reciept Number"
-          variant="outlined"
+          name='rent'
+          onChange={(event) => handleChange(event)}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
@@ -67,6 +73,8 @@ const UpdateDocuments = ({ nextForm, backForm }) => {
           className="formElements"
           label="Electricity Consumer Number"
           variant="outlined"
+          name='electricity'
+          onChange={(event) => handleChange(event)}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
@@ -76,6 +84,8 @@ const UpdateDocuments = ({ nextForm, backForm }) => {
           className="formElements"
           label="Insurer ID Number"
           variant="outlined"
+          name='insurer'
+          onChange={(event) => handleChange(event)}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
@@ -85,6 +95,8 @@ const UpdateDocuments = ({ nextForm, backForm }) => {
           className="formElements"
           label="Salary Certificate ID"
           variant="outlined"
+          name='salary'
+          onChange={(event) => handleChange(event)}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
@@ -94,6 +106,8 @@ const UpdateDocuments = ({ nextForm, backForm }) => {
           className="formElements"
           label="Jain Minority Certificate ID"
           variant="outlined"
+          name='jain'
+          onChange={(event) => handleChange(event)}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
@@ -103,6 +117,8 @@ const UpdateDocuments = ({ nextForm, backForm }) => {
           className="formElements"
           label="Telephone Account Number"
           variant="outlined"
+          name='telephone'
+          onChange={(event) => handleChange(event)}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
@@ -112,6 +128,8 @@ const UpdateDocuments = ({ nextForm, backForm }) => {
           className="formElements"
           label="Referral Letter Serial Number"
           variant="outlined"
+          name='referral'
+          onChange={(event) => handleChange(event)}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
@@ -121,6 +139,8 @@ const UpdateDocuments = ({ nextForm, backForm }) => {
           className="formElements"
           label="School/College Fees Reciept Number"
           variant="outlined"
+          name='school'
+          onChange={(event) => handleChange(event)}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>

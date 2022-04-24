@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Application.scss";
-import { Stepper, Step, StepLabel } from "@mui/material";
+import { Stepper, Step, StepLabel, Alert } from "@mui/material";
 import {
   PersonalDetails,
   UpdateDocuments,
@@ -13,14 +13,33 @@ import {
   SkillDetails,
 } from "./Forms";
 
-const Application = () => {
-  const [activeFormIndex, setActiveFormIndex] = useState(1);
-  const nextForm = () => {
+const Application = ({ addData, data }) => {
+  const [activeFormIndex, setActiveFormIndex] = useState(0);
+  const [collectiveData, setCollectiveData] = useState({});
+  const [alert, setAlert] = useState(false);
+
+  const nextForm = (formName, formData) => {
+    let copyCollectiveData = { ...collectiveData };
+    copyCollectiveData[formName] = formData;
+    setCollectiveData({ ...copyCollectiveData });
     setActiveFormIndex((prev) => prev + 1);
   };
+
   const backForm = () => {
     setActiveFormIndex((prev) => prev - 1);
   };
+
+  const submitFormDetails = () => {
+    data.push(collectiveData);
+    addData(data);
+    setAlert(true);
+  };
+
+  const closeAlert = () => {
+    setActiveFormIndex(0);
+    setAlert(false);
+  };
+
   const steps = [
     "Personal Details",
     "Update Documents",
@@ -32,6 +51,7 @@ const Application = () => {
     "Earning Member Details",
     "Skill Details",
   ];
+
   const stepsForm = [
     <PersonalDetails nextForm={nextForm} />,
     <UpdateDocuments nextForm={nextForm} backForm={backForm} />,
@@ -41,8 +61,10 @@ const Application = () => {
     <DependentDetails nextForm={nextForm} backForm={backForm} />,
     <MedicalGrant nextForm={nextForm} backForm={backForm} />,
     <EarningMember nextForm={nextForm} backForm={backForm} />,
-    <SkillDetails backForm={backForm} />,
+    <SkillDetails backForm={backForm} submitFormDetails={submitFormDetails} />,
   ];
+
+  console.log(collectiveData);
 
   return (
     <div id="Application" className="Application">
@@ -56,8 +78,14 @@ const Application = () => {
             );
           })}
         </Stepper>
-      </div>
-      {stepsForm[activeFormIndex]}
+      </div>     
+      {alert ? (
+        <Alert onClose={() => closeAlert()}>
+          This is a success alert!
+        </Alert>
+      ) : (
+        stepsForm[activeFormIndex]
+      )}
     </div>
   );
 };

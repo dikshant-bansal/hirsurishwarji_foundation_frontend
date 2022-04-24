@@ -11,8 +11,15 @@ import {
 } from "@mui/material";
 
 const MonthlyExpenses = ({ nextForm, backForm }) => {
+  let formData = {};
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    formData[name] = value
+  }
+
   const submitForm = (event) => {
-    nextForm();
+    nextForm('monthlyExpenses', formData);
     event.preventDefault();
   };
 
@@ -26,6 +33,8 @@ const MonthlyExpenses = ({ nextForm, backForm }) => {
           label="Maintainance Expenses"
           variant="outlined"
           type="number"
+          name='maintainance'
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -34,6 +43,8 @@ const MonthlyExpenses = ({ nextForm, backForm }) => {
           label="Electric Expenses"
           variant="outlined"
           type="number"
+          name='electric'
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -42,6 +53,8 @@ const MonthlyExpenses = ({ nextForm, backForm }) => {
           label="Medical Expenses"
           variant="outlined"
           type="number"
+          name='medical'
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -50,6 +63,8 @@ const MonthlyExpenses = ({ nextForm, backForm }) => {
           label="Groceries Expenses"
           variant="outlined"
           type="number"
+          name='groceries'
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -58,6 +73,8 @@ const MonthlyExpenses = ({ nextForm, backForm }) => {
           label="Telephone Expenses"
           variant="outlined"
           type="number"
+          name='telephone'
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -66,6 +83,8 @@ const MonthlyExpenses = ({ nextForm, backForm }) => {
           label="Education Expenses"
           variant="outlined"
           type="number"
+          name='education'
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -74,6 +93,8 @@ const MonthlyExpenses = ({ nextForm, backForm }) => {
           label="Tution Expenses"
           variant="outlined"
           type="number"
+          name='tution'
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -82,6 +103,8 @@ const MonthlyExpenses = ({ nextForm, backForm }) => {
           label="Others Expenses"
           variant="outlined"
           type="number"
+          name='others'
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -90,6 +113,8 @@ const MonthlyExpenses = ({ nextForm, backForm }) => {
           label="Total Area of Flat (in sqft)"
           variant="outlined"
           type="number"
+          name='area'
+          onChange={(event) => handleChange(event)}
           required
         />
         <FormControl className="formElements">
@@ -104,8 +129,8 @@ const MonthlyExpenses = ({ nextForm, backForm }) => {
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
           >
-            <FormControlLabel value="Rented" control={<Radio />} label="Rented" />
-            <FormControlLabel value="Owned" control={<Radio />} label="Owned" />
+            <FormControlLabel value="Rented" control={<Radio />} label="Rented" name='home' onChange={(event) => handleChange(event)}/>
+            <FormControlLabel value="Owned" control={<Radio />} label="Owned" name='home' onChange={(event) => handleChange(event)}/>
           </RadioGroup>
         </FormControl>
         <div className="btnContainer">

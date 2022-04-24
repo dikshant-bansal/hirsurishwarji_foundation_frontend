@@ -10,8 +10,15 @@ import {
 } from "@mui/material";
 
 const MiscellaneousQuestions = ({ nextForm, backForm }) => {
+  let formData = {};
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    formData[name] = value
+  }
+
   const submitForm = (event) => {
-    nextForm();
+    nextForm("miscellaneousQuestions", formData);
     event.preventDefault();
   };
 
@@ -42,8 +49,8 @@ const MiscellaneousQuestions = ({ nextForm, backForm }) => {
                 aria-labelledby="demo-row-radio-buttons-group-label"
                 name="row-radio-buttons-group"
               >
-                <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="No" control={<Radio />} label="No" />
+                <FormControlLabel value={true} control={<Radio />} label="Yes" name={`${question}`} onChange={(event) => handleChange(event)}/>
+                <FormControlLabel value={false} control={<Radio />} label="No" name={`${question}`} onChange={(event) => handleChange(event)}/>
               </RadioGroup>
             </FormControl>
           );

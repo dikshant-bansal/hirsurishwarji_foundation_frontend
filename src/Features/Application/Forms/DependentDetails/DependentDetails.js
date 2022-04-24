@@ -12,26 +12,42 @@ import {
 import DependentTable from "./DependentTable/DependentTable";
 
 const DependentDetails = ({ nextForm, backForm }) => {
+  
+  let formData = {};
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    formData[name] = value
+  }
+
   const submitForm = (event) => {
-    nextForm();
+    nextForm("dependentDetails", formData);
     event.preventDefault();
   };
+
+  const dependentList = (dependentListArray) => {
+    formData.dependentListArr = dependentListArray
+  }
 
   return (
     <div id="DependentDetails" className="DependentDetails">
       <div className="formHeader">Dependent Details</div>
-      <DependentTable />
+      <DependentTable dependentList={dependentList}/>
       <form className="DependentDetailsForm" onSubmit={submitForm}>
         <div className="formSubHeader">Unemployed Person:</div>
         <TextField
           className="formElements"
           label="Education"
           variant="outlined"
+          name="education"
+          onChange={(event) => handleChange(event)}
         />
         <TextField
           className="formElements"
           label="Experience"
           variant="outlined"
+          name="experience"
+          onChange={(event) => handleChange(event)}
         />
         <FormControl className="formElements">
           <FormLabel
@@ -45,8 +61,8 @@ const DependentDetails = ({ nextForm, backForm }) => {
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
           >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
+            <FormControlLabel value={true} control={<Radio />} label="Yes" name="previousLoan" onChange={(event) => handleChange(event)}/>
+            <FormControlLabel value={false} control={<Radio />} label="No" name="previousLoan" onChange={(event) => handleChange(event)}/>
           </RadioGroup>
         </FormControl>
         <TextField
@@ -54,6 +70,8 @@ const DependentDetails = ({ nextForm, backForm }) => {
           label="Previous Loan Amount (in Rs.)"
           variant="outlined"
           type="number"
+          name="previousLoanAmount"
+          onChange={(event) => handleChange(event)}
         />
         <div className="btnContainer">
           <Button

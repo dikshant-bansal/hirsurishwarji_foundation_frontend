@@ -3,9 +3,10 @@ import "./SkillDetails.scss";
 import { TextField, Button } from "@mui/material";
 import SkillDetailsTable from "./SkillDetailsTable/SkillDetailsTable";
 
-const SkillDetails = ({ backForm }) => {
+const SkillDetails = ({ backForm, submitFormDetails }) => {
   const submitForm = (event) => {
     event.preventDefault();
+    submitFormDetails();
   };
 
   return (

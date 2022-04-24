@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PersonalDetails.scss";
 import {
   TextField,
@@ -10,9 +10,18 @@ import {
   Button,
 } from "@mui/material";
 
-const PersonalDetails = ({ nextForm, backForm }) => {
+const PersonalDetails = ({ nextForm }) => {
+  const [formDataState, setFormDataState ] = useState({});
+  let formData = {};
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    formData[name] = value
+  }
+  
   const submitForm = (event) => {
-    nextForm();
+    setFormDataState(formData);
+    nextForm("personalDetails", formData);
     event.preventDefault();
   };
 
@@ -25,6 +34,8 @@ const PersonalDetails = ({ nextForm, backForm }) => {
           className="formElements"
           label="Name"
           variant="outlined"
+          name='name'
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -32,6 +43,8 @@ const PersonalDetails = ({ nextForm, backForm }) => {
           className="formElements"
           label="Father's/Husband's Name"
           variant="outlined"
+          name='fathersName'
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -39,6 +52,8 @@ const PersonalDetails = ({ nextForm, backForm }) => {
           className="formElements"
           label="Address Line 1"
           variant="outlined"
+          name='address1'
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -46,12 +61,16 @@ const PersonalDetails = ({ nextForm, backForm }) => {
           className="formElements"
           label="Address Line 2"
           variant="outlined"
+          name='address2'
+          onChange={(event) => handleChange(event)}
         />
         <TextField
           id="cityInput"
           className="formElements"
           label="City"
           variant="outlined"
+          name='city'
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -59,6 +78,8 @@ const PersonalDetails = ({ nextForm, backForm }) => {
           className="formElements"
           label="State"
           variant="outlined"
+          name='state'
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -67,6 +88,8 @@ const PersonalDetails = ({ nextForm, backForm }) => {
           label="PinCode"
           variant="outlined"
           type="number"
+          name='pincode'
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -74,6 +97,8 @@ const PersonalDetails = ({ nextForm, backForm }) => {
           className="formElements"
           label="Native Town"
           variant="outlined"
+          name='nativeTown'
+          onChange={(event) => handleChange(event)}
         />
         <TextField
           id="mobileNumberInput"
@@ -81,6 +106,8 @@ const PersonalDetails = ({ nextForm, backForm }) => {
           label="Mobile Number"
           variant="outlined"
           type="number"
+          name='mobileNumber'
+          onChange={(event) => handleChange(event)}
           required
         />
         <TextField
@@ -88,12 +115,16 @@ const PersonalDetails = ({ nextForm, backForm }) => {
           className="formElements"
           label="Phone Number"
           variant="outlined"
+          name='phoneNumber'
+          onChange={(event) => handleChange(event)}
         />
         <TextField
           id="creedInput"
           className="formElements"
           label="Creed"
           variant="outlined"
+          name='creed'
+          onChange={(event) => handleChange(event)}
         />
         <FormControl id="categoryInput" className="formElements">
           <FormLabel id="demo-row-radio-buttons-group-label">
@@ -108,16 +139,22 @@ const PersonalDetails = ({ nextForm, backForm }) => {
               value="Financial"
               control={<Radio />}
               label="Financial"
+              name="category"
+              onChange={(event) => handleChange(event)}
             />
             <FormControlLabel
               value="Medical"
               control={<Radio />}
               label="Medical"
+              name="category"
+              onChange={(event) => handleChange(event)}
             />
             <FormControlLabel
               value="Education"
               control={<Radio />}
               label="Education"
+              name="category"
+              onChange={(event) => handleChange(event)}
             />
           </RadioGroup>
         </FormControl>
@@ -130,8 +167,8 @@ const PersonalDetails = ({ nextForm, backForm }) => {
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
           >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
+            <FormControlLabel value={true} control={<Radio />} label="Yes" name='jain' onChange={(event) => handleChange(event)}/>
+            <FormControlLabel value={false} control={<Radio />} label="No" name='jain' onChange={(event) => handleChange(event)}/>
           </RadioGroup>
         </FormControl>
         <div className="btnContainer">
