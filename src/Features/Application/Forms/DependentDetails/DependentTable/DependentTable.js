@@ -2,19 +2,23 @@ import React, { useState } from "react";
 import "./DependentTable.scss";
 import { Switch, Button } from "@mui/material";
 
-const DependentTable = ({dependentList}) => {
+const DependentTable = ({dependentList, list}) => {
   const rowsInput = {
-    SNo: "",
-    Name: "",
-    Age: "",
-    AadhaarNo: "",
-    Education: "",
-    Profession: "",
-    Income: "",
-    ReligiousEducation: "",
+    sNo: null,
+    name: null,
+    Age: null,
+    aadhaarNo: null,
+    education: null,
+    profession: null,
+    income: null,
+    religiousEducation: null,
+    kanmool: null,
+    navkarshi: null,
+    pooja: null,
+    nightDinner: null,
   };
 
-  const [rowsData, setRowsData] = useState([rowsInput]);
+  const [rowsData, setRowsData] = useState(list ? list :[]);
 
   const addTableRows = () => {
     setRowsData([...rowsData, rowsInput]);
@@ -33,12 +37,13 @@ const DependentTable = ({dependentList}) => {
 
   const handleChange = (index, event) => {
     const { name, value } = event.target;
-    const rowsInput = [...rowsData];
-    rowsInput[index][name] = value;
-    setRowsData(rowsInput);
-    let duplicateRowsData = [...rowsData]
-    duplicateRowsData.push(rowsInput)
-    dependentList(duplicateRowsData)
+    const rowsInputData = [...rowsData];
+    rowsInputData[index][name] = value;
+    if(rowsInputData[index].sNo === null){
+      rowsInputData[index].sNo = index+1
+    }
+    setRowsData(rowsInputData);
+    dependentList(rowsInputData)
   };
 
   return (
@@ -46,21 +51,21 @@ const DependentTable = ({dependentList}) => {
       <table>
         <thead className="tableHead">
           <tr>
-            <th className="SNo">S. No.</th>
-            <th className="Name">Name</th>
-            <th className="Age">Age</th>
-            <th className="AadharNo">Aadhaar No.</th>
-            <th className="Education">Education</th>
-            <th className="Profession">Profession</th>
-            <th className="Income">Income</th>
-            <th className="ReligiousEducation">Religious Education</th>
-            <th className="ReligiousActivity">
-              <span className="ReligiousActivityText">Religious Activity</span>
-              <span className="ReligiousActivityFields">
-                <span className="Kanmool">Kanmool</span>
-                <span className="Navkarshi">Navkarshi</span>
-                <span className="Pooja">Pooja</span>
-                <span className="NightDinner">Night Dinner</span>
+            <th className="sNo">S. No.</th>
+            <th className="name">Name</th>
+            <th className="age">Age</th>
+            <th className="aadharNo">Aadhaar No.</th>
+            <th className="education">Education</th>
+            <th className="profession">Profession</th>
+            <th className="income">Income</th>
+            <th className="religiousEducation">Religious Education</th>
+            <th className="religiousActivity">
+              <span className="religiousActivityText">Religious Activity</span>
+              <span className="religiousActivityFields">
+                <span className="kanmool">Kanmool</span>
+                <span className="navkarshi">Navkarshi</span>
+                <span className="pooja">Pooja</span>
+                <span className="nightDinner">Night Dinner</span>
               </span>
             </th>
           </tr>
@@ -68,84 +73,84 @@ const DependentTable = ({dependentList}) => {
         <tbody className="tableBody">
           {rowsData?.map((rowData, index) => {
             return (
-              <tr>
-                <td className="SNo">
+              <tr key={index}>
+                <td className="sNo">
                   <input
                     type="number"
-                    value={rowData.SNo}
-                    onChange={(event) => handleChange(index, event)}
-                    name="SNo"
-                    className="SNoInput"
+                    value={`${index+1}`}
+                    name="sNo"
+                    className="sNoInput"
+                    readOnly
                   />
                 </td>
-                <td className="Name">
+                <td className="name">
                   <input
                     type="text"
-                    value={rowData.Name}
+                    value={rowData.name}
                     onChange={(event) => handleChange(index, event)}
-                    name="Name"
-                    className="NameInput"
+                    name="name"
+                    className="nameInput"
                   />
                 </td>
-                <td className="Age">
+                <td className="age">
                   <input
                     type="number"
-                    value={rowData.Age}
+                    value={rowData.age}
                     onChange={(event) => handleChange(index, event)}
-                    name="Age"
-                    className="AgeInput"
+                    name="age"
+                    className="ageInput"
                   />
                 </td>
-                <td className="AadhaarNo">
+                <td className="aadhaarNo">
                   <input
                     type="number"
-                    value={rowData.AadhaarNo}
+                    value={rowData.aadhaarNo}
                     onChange={(event) => handleChange(index, event)}
-                    name="AadhaarNo"
-                    className="AadhaarNoInput"
+                    name="aadhaarNo"
+                    className="aadhaarNoInput"
                   />
                 </td>
-                <td className="Education">
+                <td className="education">
                   <input
                     type="text"
-                    value={rowData.Education}
+                    value={rowData.education}
                     onChange={(event) => handleChange(index, event)}
-                    name="Education"
-                    className="EducationInput"
+                    name="education"
+                    className="educationInput"
                   />
                 </td>
-                <td className="Profession">
+                <td className="profession">
                   <input
                     type="text"
-                    value={rowData.Profession}
+                    value={rowData.profession}
                     onChange={(event) => handleChange(index, event)}
-                    name="Profession"
-                    className="ProfessionInput"
+                    name="profession"
+                    className="professionInput"
                   />
                 </td>
-                <td className="Income">
+                <td className="income">
                   <input
                     type="number"
-                    value={rowData.Income}
+                    value={rowData.income}
                     onChange={(event) => handleChange(index, event)}
-                    name="Income"
-                    className="IncomeInput"
+                    name="income"
+                    className="incomeInput"
                   />
                 </td>
-                <td className="ReligiousEducation">
+                <td className="religiousEducation">
                   <input
                     type="text"
-                    value={rowData.ReligiousEducation}
+                    value={rowData.religiousEducation}
                     onChange={(event) => handleChange(index, event)}
-                    name="ReligiousEducation"
-                    className="ReligiousEducationInput"
+                    name="religiousEducation"
+                    className="religiousEducationInput"
                   />
                 </td>
-                <td className="ReligiousActivity">
-                  <Switch />
-                  <Switch />
-                  <Switch />
-                  <Switch />
+                <td className="religiousActivity">
+                  <Switch name="kanmool" onChange={(event) => handleChange(index, event)}/>
+                  <Switch name="navkarshi" onChange={(event) => handleChange(index, event)}/>
+                  <Switch name="pooja" onChange={(event) => handleChange(index, event)}/>
+                  <Switch name="nightDinner" onChange={(event) => handleChange(index, event)}/>
                 </td>
               </tr>
             );

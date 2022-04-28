@@ -13,7 +13,7 @@ import {
   SkillDetails,
 } from "./Forms";
 
-const Application = ({ addData, data }) => {
+const Application = ({ addData }) => {
   const [activeFormIndex, setActiveFormIndex] = useState(0);
   const [collectiveData, setCollectiveData] = useState({});
   const [alert, setAlert] = useState(false);
@@ -29,9 +29,12 @@ const Application = ({ addData, data }) => {
     setActiveFormIndex((prev) => prev - 1);
   };
 
-  const submitFormDetails = () => {
-    data.push(collectiveData);
-    addData(data);
+  const submitFormDetails = (skillDetails, administrativeDetails) => {
+    let copyCollectiveData = { ...collectiveData };
+    copyCollectiveData.skillDetails = skillDetails;
+    copyCollectiveData.administrativeDetails = administrativeDetails;
+    setCollectiveData({ ...copyCollectiveData });
+    addData({ ...copyCollectiveData});
     setAlert(true);
   };
 
@@ -53,15 +56,15 @@ const Application = ({ addData, data }) => {
   ];
 
   const stepsForm = [
-    <PersonalDetails nextForm={nextForm} />,
-    <UpdateDocuments nextForm={nextForm} backForm={backForm} />,
-    <MiscellaneousQuestions nextForm={nextForm} backForm={backForm} />,
-    <MonthlyExpenses nextForm={nextForm} backForm={backForm} />,
-    <HomeFurniture nextForm={nextForm} backForm={backForm} />,
-    <DependentDetails nextForm={nextForm} backForm={backForm} />,
-    <MedicalGrant nextForm={nextForm} backForm={backForm} />,
-    <EarningMember nextForm={nextForm} backForm={backForm} />,
-    <SkillDetails backForm={backForm} submitFormDetails={submitFormDetails} />,
+    <PersonalDetails nextForm={nextForm} data={collectiveData.personalDetails}/>,
+    <UpdateDocuments nextForm={nextForm} backForm={backForm} data={collectiveData.updateDocuments}/>,
+    <MiscellaneousQuestions nextForm={nextForm} backForm={backForm} data={collectiveData.miscellaneousQuestions}/>,
+    <MonthlyExpenses nextForm={nextForm} backForm={backForm} data={collectiveData.monthlyExpenses}/>,
+    <HomeFurniture nextForm={nextForm} backForm={backForm} data={collectiveData.homeFurniture}/>,
+    <DependentDetails nextForm={nextForm} backForm={backForm} data={collectiveData.dependentDetails}/>,
+    <MedicalGrant nextForm={nextForm} backForm={backForm} data={collectiveData.medicalGrant}/>,
+    <EarningMember nextForm={nextForm} backForm={backForm} data={collectiveData.earningMembersDetails}/>,
+    <SkillDetails backForm={backForm} submitFormDetails={submitFormDetails} skillDetailsData={collectiveData.skillDetails} administrativeDetailsData={collectiveData.administrativeDetails}/>,
   ];
 
   console.log(collectiveData);

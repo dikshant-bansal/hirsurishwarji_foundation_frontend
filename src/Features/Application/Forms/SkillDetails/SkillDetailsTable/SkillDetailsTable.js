@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import "./SkillDetailsTable.scss";
 import { Button } from "@mui/material";
 
-const SkillDetailsTable = () => {
+const SkillDetailsTable = ({ skillList, list }) => {
   const rowsInput = {
-    SNo: "",
-    Name: "",
-    Work: "",
-    Education: "",
-    PhoneNo: "",
+    sNo: null,
+    name: null,
+    work: null,
+    education: null,
+    phoneNumber: null,
   };
 
-  const [rowsData, setRowsData] = useState([rowsInput]);
+  const [rowsData, setRowsData] = useState(list ? list :[]);
 
   const addTableRows = () => {
     setRowsData([...rowsData, rowsInput]);
@@ -29,9 +29,13 @@ const SkillDetailsTable = () => {
 
   const handleChange = (index, event) => {
     const { name, value } = event.target;
-    const rowsInput = [...rowsData];
-    rowsInput[index][name] = value;
-    setRowsData(rowsInput);
+    const rowsInputData = [...rowsData];
+    rowsInputData[index][name] = value;
+    if(rowsInputData[index].sNo === null){
+      rowsInputData[index].sNo = index+1
+    }
+    setRowsData(rowsInputData);
+    skillList(rowsInputData)
   };
 
   return (
@@ -53,45 +57,45 @@ const SkillDetailsTable = () => {
                 <td className="SNo">
                   <input
                     type="number"
-                    value={rowData.SNo}
-                    onChange={(event) => handleChange(index, event)}
-                    name="SNo"
+                    value={index+1}
+                    name="sNo"
                     className="SNoInput"
+                    readOnly
                   />
                 </td>
                 <td className="Name">
                   <input
                     type="text"
-                    value={rowData.Name}
+                    value={rowData.name}
                     onChange={(event) => handleChange(index, event)}
-                    name="Name"
+                    name="name"
                     className="NameInput"
                   />
                 </td>
                 <td className="Work">
                   <input
                     type="text"
-                    value={rowData.Work}
+                    value={rowData.work}
                     onChange={(event) => handleChange(index, event)}
-                    name="Work"
+                    name="work"
                     className="WorkInput"
                   />
                 </td>
                 <td className="Education">
                   <input
                     type="text"
-                    value={rowData.Education}
+                    value={rowData.education}
                     onChange={(event) => handleChange(index, event)}
-                    name="Education"
+                    name="education"
                     className="EducationInput"
                   />
                 </td>
                 <td className="PhoneNo">
                   <input
                     type="number"
-                    value={rowData.PhoneNo}
+                    value={rowData.phoneNumber}
                     onChange={(event) => handleChange(index, event)}
-                    name="PhoneNo"
+                    name="phoneNumber"
                     className="PhoneNoInput"
                   />
                 </td>

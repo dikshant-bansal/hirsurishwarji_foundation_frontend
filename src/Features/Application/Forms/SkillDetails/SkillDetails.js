@@ -3,17 +3,36 @@ import "./SkillDetails.scss";
 import { TextField, Button } from "@mui/material";
 import SkillDetailsTable from "./SkillDetailsTable/SkillDetailsTable";
 
-const SkillDetails = ({ backForm, submitFormDetails }) => {
+const SkillDetails = ({ backForm, submitFormDetails, skillDetailsData, administrativeDetailsData }) => {
+
+  let skillDetails = {
+    skillDetailsList: null,
+  };
+
+  let administrativeDetails = {
+    referredBy: null,
+    address: null,
+  }
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    administrativeDetails[name] = value
+  }
+
   const submitForm = (event) => {
     event.preventDefault();
-    submitFormDetails();
+    submitFormDetails(skillDetails, administrativeDetails);
   };
+
+  const skillList = (skillList) => {
+    skillDetails.skillDetailsList = skillList;
+  }
 
   return (
     <div id="SkillDetails" className="SkillDetails">
       <div className="formHeader">Skill Details</div>
       <form className="SkillDetailsForm" onSubmit={submitForm}>
-        <SkillDetailsTable />
+        <SkillDetailsTable skillList={skillList} list={skillDetailsData?.skillList}/>
         <div className="administrativeDetails">
           <div className="formHeader">Administrative Details</div>
           <TextField
@@ -21,6 +40,9 @@ const SkillDetails = ({ backForm, submitFormDetails }) => {
             className="formElements"
             label="Referred By:"
             variant="outlined"
+            name='referredBy'
+            onChange={(event) => handleChange(event)}
+            value={administrativeDetailsData?.referredBy}
             required
           />
           <TextField
@@ -28,6 +50,9 @@ const SkillDetails = ({ backForm, submitFormDetails }) => {
             className="formElements"
             label="Address of Referral:"
             variant="outlined"
+            name='address'
+            onChange={(event) => handleChange(event)}
+            value={administrativeDetailsData?.address}
             required
           />
         </div>

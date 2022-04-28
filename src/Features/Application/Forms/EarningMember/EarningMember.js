@@ -3,17 +3,26 @@ import "./EarningMember.scss";
 import { Button } from "@mui/material";
 import EarningMemberTable from "./EarningMemberTable/EarningMemberTable";
 
-const EarningMember = ({ nextForm, backForm }) => {
+const EarningMember = ({ nextForm, backForm, data }) => {
+
+  let formData = {
+    earningMembersList: null
+  };
+
   const submitForm = (event) => {
-    nextForm();
+    nextForm('earningMembersDetails', formData);
     event.preventDefault();
   };
+
+  const earningMembersList = (earningMembersList) => {
+    formData.earningMembersList = earningMembersList
+  }
 
   return (
     <div id="EarningMember" className="EarningMember">
       <div className="formHeader">Earning Member Details</div>
       <form className="EarningMemberForm" onSubmit={submitForm}>
-        <EarningMemberTable />
+        <EarningMemberTable earningMembersList={earningMembersList} list={data?.earningMembersList}/>
         <div className="btnContainer">
           <Button
             id="backBtn"

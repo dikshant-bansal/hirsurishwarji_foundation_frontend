@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./PersonalDetails.scss";
 import {
   TextField,
@@ -10,9 +10,23 @@ import {
   Button,
 } from "@mui/material";
 
-const PersonalDetails = ({ nextForm }) => {
-  const [formDataState, setFormDataState ] = useState({});
-  let formData = {};
+const PersonalDetails = ({ nextForm, data }) => {
+
+  let formData = {
+    name: null,
+    fatherName: null,
+    address1: null,
+    address2: null,
+    city: null,
+    state: null,
+    pincode: null,
+    nativeTown: null,
+    mobileNumber: null,
+    phoneNumber: null,
+    creed: null,
+    category: null,
+    jain: null,
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -20,7 +34,6 @@ const PersonalDetails = ({ nextForm }) => {
   }
   
   const submitForm = (event) => {
-    setFormDataState(formData);
     nextForm("personalDetails", formData);
     event.preventDefault();
   };
@@ -36,6 +49,7 @@ const PersonalDetails = ({ nextForm }) => {
           variant="outlined"
           name='name'
           onChange={(event) => handleChange(event)}
+          value={data?.name}
           required
         />
         <TextField
@@ -43,8 +57,9 @@ const PersonalDetails = ({ nextForm }) => {
           className="formElements"
           label="Father's/Husband's Name"
           variant="outlined"
-          name='fathersName'
+          name='fatherName'
           onChange={(event) => handleChange(event)}
+          value={data?.fatherName}
           required
         />
         <TextField
@@ -54,6 +69,7 @@ const PersonalDetails = ({ nextForm }) => {
           variant="outlined"
           name='address1'
           onChange={(event) => handleChange(event)}
+          value={data?.address1}
           required
         />
         <TextField
@@ -63,6 +79,7 @@ const PersonalDetails = ({ nextForm }) => {
           variant="outlined"
           name='address2'
           onChange={(event) => handleChange(event)}
+          value={data?.address2}
         />
         <TextField
           id="cityInput"
@@ -71,6 +88,7 @@ const PersonalDetails = ({ nextForm }) => {
           variant="outlined"
           name='city'
           onChange={(event) => handleChange(event)}
+          value={data?.address2}
           required
         />
         <TextField
@@ -80,6 +98,7 @@ const PersonalDetails = ({ nextForm }) => {
           variant="outlined"
           name='state'
           onChange={(event) => handleChange(event)}
+          value={data?.state}
           required
         />
         <TextField
@@ -90,6 +109,7 @@ const PersonalDetails = ({ nextForm }) => {
           type="number"
           name='pincode'
           onChange={(event) => handleChange(event)}
+          value={data?.pincode}
           required
         />
         <TextField
@@ -99,6 +119,7 @@ const PersonalDetails = ({ nextForm }) => {
           variant="outlined"
           name='nativeTown'
           onChange={(event) => handleChange(event)}
+          value={data?.nativeTown}
         />
         <TextField
           id="mobileNumberInput"
@@ -108,6 +129,7 @@ const PersonalDetails = ({ nextForm }) => {
           type="number"
           name='mobileNumber'
           onChange={(event) => handleChange(event)}
+          value={data?.mobileNumber}
           required
         />
         <TextField
@@ -117,6 +139,7 @@ const PersonalDetails = ({ nextForm }) => {
           variant="outlined"
           name='phoneNumber'
           onChange={(event) => handleChange(event)}
+          value={data?.phoneNumber}
         />
         <TextField
           id="creedInput"
@@ -125,6 +148,7 @@ const PersonalDetails = ({ nextForm }) => {
           variant="outlined"
           name='creed'
           onChange={(event) => handleChange(event)}
+          value={data?.creed}
         />
         <FormControl id="categoryInput" className="formElements">
           <FormLabel id="demo-row-radio-buttons-group-label">
@@ -134,6 +158,7 @@ const PersonalDetails = ({ nextForm }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
+            defaultValue={data?.category}
           >
             <FormControlLabel
               value="Financial"
@@ -166,6 +191,7 @@ const PersonalDetails = ({ nextForm }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
+            defaultValue={data?.jain}
           >
             <FormControlLabel value={true} control={<Radio />} label="Yes" name='jain' onChange={(event) => handleChange(event)}/>
             <FormControlLabel value={false} control={<Radio />} label="No" name='jain' onChange={(event) => handleChange(event)}/>

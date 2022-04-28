@@ -9,8 +9,15 @@ import {
   Button,
 } from "@mui/material";
 
-const MiscellaneousQuestions = ({ nextForm, backForm }) => {
-  let formData = {};
+const MiscellaneousQuestions = ({ nextForm, backForm, data }) => {
+  let formData = {
+    pathshala: null,
+    religiousEducation: null,
+    templePooja: null,
+    upashraya: null,
+    usageKanmool: null,
+    usageKanmoolStopped: null,
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -23,12 +30,12 @@ const MiscellaneousQuestions = ({ nextForm, backForm }) => {
   };
 
   const questionsArray = [
-    "Pathshala Children",
-    "Religious Education Impart",
-    "Temple Pooja",
-    "Upashraya Visit",
-    "Usage of Kanmool",
-    "Kanmool Usage Stopped",
+    {question: "Pathshala Children", name: "pathshala"},
+    {question: "Religious Education Impart", name: "religiousEducation"},
+    {question: "Temple Pooja", name: "templePooja"},
+    {question: "Upashraya Visit", name: "upashraya"},
+    {question: "Usage of Kanmool", name: "usageKanmool"},
+    {question: "Kanmool Usage Stopped", name: "usageKanmoolStopped"},
   ];
 
   return (
@@ -42,15 +49,15 @@ const MiscellaneousQuestions = ({ nextForm, backForm }) => {
                 id="demo-row-radio-buttons-group-label"
                 className="questionLabel"
               >
-                {question}
+                {question.question}
               </FormLabel>
               <RadioGroup
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
                 name="row-radio-buttons-group"
               >
-                <FormControlLabel value={true} control={<Radio />} label="Yes" name={`${question}`} onChange={(event) => handleChange(event)}/>
-                <FormControlLabel value={false} control={<Radio />} label="No" name={`${question}`} onChange={(event) => handleChange(event)}/>
+                <FormControlLabel value={true} control={<Radio />} label="Yes" name={question.name} onChange={(event) => handleChange(event)}/>
+                <FormControlLabel value={false} control={<Radio />} label="No" name={question.name} onChange={(event) => handleChange(event)}/>
               </RadioGroup>
             </FormControl>
           );
