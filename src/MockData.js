@@ -14,12 +14,12 @@ export let MockData = [
       phoneNumber: null,
       creed: null,
       category: null,
-      jain: null,
+      jain: true,
     },
     updateDocuments: {
       aadhaarNumber: "76573257823238",
       rationCard: "87268723538",
-      bankPassbook: "63287632823",
+      bankAccount: "63287632823",
     },
     miscellaneous: {
       pathhala: null,
@@ -61,7 +61,7 @@ export let MockData = [
     updateDocuments: {
       aadhaarNumber: "1289236823621",
       rationCard: "32986329863296",
-      bankPassbook: "6239632939621",
+      bankAccount: "6239632939621",
     },
     miscellaneous: {
       pathhala: null,
@@ -103,7 +103,7 @@ export let MockData = [
     updateDocuments: {
       aadhaarNumber: "1621612912621",
       rationCard: "290723973339",
-      bankPassbook: "83923869386932",
+      bankAccount: "83923869386932",
     },
     miscellaneous: {
       pathhala: null,
@@ -145,7 +145,7 @@ export let MockData = [
     updateDocuments: {
       aadhaarNumber: "76573257823238",
       rationCard: "87268723538",
-      bankPassbook: "63287632823",
+      bankAccount: "63287632823",
     },
     miscellaneous: {
       pathhala: null,
@@ -187,7 +187,7 @@ export let MockData = [
     updateDocuments: {
       aadhaarNumber: "76573257823238",
       rationCard: "87268723538",
-      bankPassbook: "63287632823",
+      bankAccount: "63287632823",
     },
     miscellaneous: {
       pathhala: null,
@@ -229,7 +229,7 @@ export let MockData = [
     updateDocuments: {
       aadhaarNumber: "1289236823621",
       rationCard: "32986329863296",
-      bankPassbook: "6239632939621",
+      bankAccount: "6239632939621",
     },
     miscellaneous: {
       pathhala: null,
@@ -271,7 +271,7 @@ export let MockData = [
     updateDocuments: {
       aadhaarNumber: "1621612912621",
       rationCard: "290723973339",
-      bankPassbook: "83923869386932",
+      bankAccount: "83923869386932",
     },
     miscellaneous: {
       pathhala: null,
@@ -313,7 +313,7 @@ export let MockData = [
     updateDocuments: {
       aadhaarNumber: "76573257823238",
       rationCard: "87268723538",
-      bankPassbook: "63287632823",
+      bankAccount: "63287632823",
     },
     miscellaneous: {
       pathhala: null,

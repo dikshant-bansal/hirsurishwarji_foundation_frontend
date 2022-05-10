@@ -1,0 +1,35 @@
+#MiscellaneousQuestionsEdit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    border: 2px solid #000000;
+    border-radius: 20px;
+    padding: 20px 50px;
+    .formHeader{
+        font-size: 30px;
+        margin: 10px 0px 20px 0px;
+    }
+    .MiscellaneousQuestionsForm{
+        .formElements{
+            margin: 10px 50px 10px 50px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .questionLabel{
+                display: flex;
+                align-items: center;
+                margin-right: 25px;
+            }
+        }
+        .btnContainer{
+            display: flex;
+            justify-content: center;
+            .nextBtn, .backBtn{
+                margin: 20px 5px 10px 5px;
+                width: 80px;
+                align-self: center;
+            }
+        }
+    }
+}

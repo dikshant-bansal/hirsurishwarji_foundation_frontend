@@ -34,7 +34,7 @@ const Application = ({ addData }) => {
     copyCollectiveData.skillDetails = skillDetails;
     copyCollectiveData.administrativeDetails = administrativeDetails;
     setCollectiveData({ ...copyCollectiveData });
-    addData({ ...copyCollectiveData});
+    addData({ ...copyCollectiveData, status: "Pending" });
     setAlert(true);
   };
 
@@ -56,15 +56,51 @@ const Application = ({ addData }) => {
   ];
 
   const stepsForm = [
-    <PersonalDetails nextForm={nextForm} data={collectiveData.personalDetails}/>,
-    <UpdateDocuments nextForm={nextForm} backForm={backForm} data={collectiveData.updateDocuments}/>,
-    <MiscellaneousQuestions nextForm={nextForm} backForm={backForm} data={collectiveData.miscellaneousQuestions}/>,
-    <MonthlyExpenses nextForm={nextForm} backForm={backForm} data={collectiveData.monthlyExpenses}/>,
-    <HomeFurniture nextForm={nextForm} backForm={backForm} data={collectiveData.homeFurniture}/>,
-    <DependentDetails nextForm={nextForm} backForm={backForm} data={collectiveData.dependentDetails}/>,
-    <MedicalGrant nextForm={nextForm} backForm={backForm} data={collectiveData.medicalGrant}/>,
-    <EarningMember nextForm={nextForm} backForm={backForm} data={collectiveData.earningMembersDetails}/>,
-    <SkillDetails backForm={backForm} submitFormDetails={submitFormDetails} skillDetailsData={collectiveData.skillDetails} administrativeDetailsData={collectiveData.administrativeDetails}/>,
+    <PersonalDetails
+      nextForm={nextForm}
+      data={collectiveData.personalDetails}
+    />,
+    <UpdateDocuments
+      nextForm={nextForm}
+      backForm={backForm}
+      data={collectiveData.updateDocuments}
+    />,
+    <MiscellaneousQuestions
+      nextForm={nextForm}
+      backForm={backForm}
+      data={collectiveData.miscellaneousQuestions}
+    />,
+    <MonthlyExpenses
+      nextForm={nextForm}
+      backForm={backForm}
+      data={collectiveData.monthlyExpenses}
+    />,
+    <HomeFurniture
+      nextForm={nextForm}
+      backForm={backForm}
+      data={collectiveData.homeFurniture}
+    />,
+    <DependentDetails
+      nextForm={nextForm}
+      backForm={backForm}
+      data={collectiveData.dependentDetails}
+    />,
+    <MedicalGrant
+      nextForm={nextForm}
+      backForm={backForm}
+      data={collectiveData.medicalGrant}
+    />,
+    <EarningMember
+      nextForm={nextForm}
+      backForm={backForm}
+      data={collectiveData.earningMembersDetails}
+    />,
+    <SkillDetails
+      backForm={backForm}
+      submitFormDetails={submitFormDetails}
+      skillDetailsData={collectiveData.skillDetails}
+      administrativeDetailsData={collectiveData.administrativeDetails}
+    />,
   ];
 
   console.log(collectiveData);
@@ -81,11 +117,9 @@ const Application = ({ addData }) => {
             );
           })}
         </Stepper>
-      </div>     
+      </div>
       {alert ? (
-        <Alert onClose={() => closeAlert()}>
-          This is a success alert!
-        </Alert>
+        <Alert onClose={() => closeAlert()}>This is a success alert!</Alert>
       ) : (
         stepsForm[activeFormIndex]
       )}

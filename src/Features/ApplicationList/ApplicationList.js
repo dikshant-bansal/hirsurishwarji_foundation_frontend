@@ -11,8 +11,12 @@ import {
   TableRow,
   Button
 } from '@mui/material';
+import { useNavigate } from "react-router-dom";
 
 const ApplicationList = ({ data }) => {
+
+  const navigate = useNavigate();
+  
   const columns = [
     { id: 'id', label: 'ID', minWidth: 50 },
     { id: 'name', label: 'Name', minWidth: 170 },
@@ -51,12 +55,13 @@ const ApplicationList = ({ data }) => {
     )
   };
 
-  const viewBtn = () => {
+  const viewBtn = (id) => {
     return (
       <Button
         id="viewBtn"
         className="viewBtn"
         variant="outlined"
+        onClick={() => navigate(`/application/${id}`)}
       >
         View
       </Button>
@@ -78,28 +83,10 @@ const ApplicationList = ({ data }) => {
         'status',
         approveBtn(), 
         referBtn(), 
-        viewBtn()
+        viewBtn(element.id)
       )
     )
-  })
-  
-  // const rows = [
-  //   createData(1, 'ABC', 9999999999, 1111111111, 5555555555, "status", approveBtn(), referBtn(), viewBtn()),
-  //   createData(2, 'ABC', 9999999999, 1111111111, 5555555555, "status", approveBtn(), referBtn(), viewBtn()),
-  //   createData(3, 'ABC', 9999999999, 1111111111, 5555555555, "status", approveBtn(), referBtn(), viewBtn()),
-  //   createData(4, 'ABC', 9999999999, 1111111111, 5555555555, "status", approveBtn(), referBtn(), viewBtn()),
-  //   createData(5, 'ABC', 9999999999, 1111111111, 5555555555, "status", approveBtn(), referBtn(), viewBtn()),
-  //   createData(6, 'ABC', 9999999999, 1111111111, 5555555555, "status", approveBtn(), referBtn(), viewBtn()),
-  //   createData(7, 'ABC', 9999999999, 1111111111, 5555555555, "status", approveBtn(), referBtn(), viewBtn()),
-  //   createData(8, 'ABC', 9999999999, 1111111111, 5555555555, "status", approveBtn(), referBtn(), viewBtn()),
-  //   createData(9, 'ABC', 9999999999, 1111111111, 5555555555, "status", approveBtn(), referBtn(), viewBtn()),
-  //   createData(10, 'ABC', 9999999999, 1111111111, 5555555555, "status", approveBtn(), referBtn(), viewBtn()),
-  //   createData(11, 'ABC', 9999999999, 1111111111, 5555555555, "status", approveBtn(), referBtn(), viewBtn()),
-  //   createData(12, 'ABC', 9999999999, 1111111111, 5555555555, "status", approveBtn(), referBtn(), viewBtn()),
-  //   createData(13, 'ABC', 9999999999, 1111111111, 5555555555, "status", approveBtn(), referBtn(), viewBtn()),
-  //   createData(14, 'ABC', 9999999999, 1111111111, 5555555555, "status", approveBtn(), referBtn(), viewBtn()),
-  //   createData(15, 'ABC', 9999999999, 1111111111, 5555555555, "status", approveBtn(), referBtn(), viewBtn()),
-  // ];
+  });
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
