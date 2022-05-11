@@ -26,16 +26,18 @@ const ApplicationList = ({ data }) => {
     { id: 'status', label: 'Status', minWidth: 100 },
     { id: 'approve', label: 'Approve', minWidth: 140},
     { id: 'refer', label: 'Refer', minWidth: 140 },
-    { id: 'view', label: 'View', minWidth: 140 }
+    { id: 'view', label: 'View', minWidth: 140 },
+    { id: 'survey', label: 'Survey', minWidth: 140 }
   ];
 
-  const approveBtn = () => {
+  const approveBtn = (id) => {
     return (
       <Button
         id="approveBtn"
         className="approveBtn"
         variant="outlined"
         color="success"
+        onClick={() => navigate(`/approve/${id}`)}
       >
         Approve
       </Button>
@@ -68,8 +70,21 @@ const ApplicationList = ({ data }) => {
     )
   };
 
-  const createData = (id, name, mobile, aadhaar, ration, status, approve, refer, view) => {
-    return { id, name, mobile, aadhaar, ration, status, approve, refer, view };
+  const surveyBtn = (id) => {
+    return (
+      <Button
+        id="surveyBtn"
+        className="surveyBtn"
+        variant="outlined"
+        onClick={() => navigate(`/survey/${id}`)}
+      >
+        Survey
+      </Button>
+    )
+  };
+
+  const createData = (id, name, mobile, aadhaar, ration, status, approve, refer, view, survey) => {
+    return { id, name, mobile, aadhaar, ration, status, approve, refer, view, survey };
   }
 
   const rows = data.map((element, index) => {
@@ -81,9 +96,10 @@ const ApplicationList = ({ data }) => {
         element.updateDocuments.aadhaarNumber,
         element.updateDocuments.rationCard,
         'status',
-        approveBtn(), 
+        approveBtn(element.id), 
         referBtn(), 
-        viewBtn(element.id)
+        viewBtn(element.id),
+        surveyBtn(element.id),
       )
     )
   });

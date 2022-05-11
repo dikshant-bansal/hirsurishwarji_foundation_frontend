@@ -9,6 +9,8 @@ import {
   ApplicationInfo,
   ApplicationList,
   ContactUs,
+  Survey,
+  Approve,
 } from "./Features";
 import { MockData } from "./MockData";
 import axios from "axios";
@@ -55,12 +57,14 @@ const App = () => {
             path="/application"
             element={<Application addData={addData} />}
           />
-          <Route path="/application/:id" element={<ApplicationInfo />} />
           <Route
             path="/applicationList"
             element={<ApplicationList data={data} />}
           />
           <Route path="/contactUs" element={<ContactUs />} />
+          <Route path="/application/:id" element={<ApplicationInfo />} />
+          <Route path="/survey/:id" element={<Survey />} />
+          <Route path="/approve/:id" element={<Approve />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </Router>

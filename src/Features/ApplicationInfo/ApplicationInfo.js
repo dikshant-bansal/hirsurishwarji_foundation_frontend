@@ -46,8 +46,8 @@ const ApplicationInfo = () => {
           </Button>
         </div>
       </div>
-      <div className="ruler"></div>
-      <SurveyDetails />
+      {/* <div className="ruler"></div> */}
+      {/* <SurveyDetails /> */}
     </div>
   );
 };
