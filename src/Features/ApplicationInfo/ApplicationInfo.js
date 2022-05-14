@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ApplicationInfo.scss";
+import { useParams, useLocation } from "react-router-dom";
+import axios from "axios";
 import { Button } from "@mui/material";
 import {
   PersonalDetailsEdit,
@@ -12,12 +14,14 @@ import {
   EarningMemberEdit,
   SkillDetailsEdit,
   AdministrationDetails,
-  SurveyDetails,
+  // SurveyDetails,
 } from "./Sections";
-import { MockData } from "../../MockData";
+// import { MockData } from "../../MockData";
 
 const ApplicationInfo = () => {
-  const applicationData = MockData[0];
+  // const { id } = useParams();
+  const location = useLocation();
+  let applicationData = location.state.info;
 
   return (
     <div id="ApplicationInfo" className="ApplicationInfo">

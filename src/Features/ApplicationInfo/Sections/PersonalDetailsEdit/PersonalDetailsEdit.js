@@ -43,7 +43,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='name'
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.name}
+          defaultValue={data?.name}
           required
         />
         <TextField
@@ -53,7 +53,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='fatherName'
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.fatherName}
+          defaultValue={data?.fatherName}
           required
         />
         <TextField
@@ -63,7 +63,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='address1'
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.address1}
+          defaultValue={data?.address1}
           required
         />
         <TextField
@@ -73,7 +73,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='address2'
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.address2}
+          defaultValue={data?.address2}
         />
         <TextField
           id="cityInput"
@@ -82,7 +82,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='city'
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.address2}
+          defaultValue={data?.address2}
           required
         />
         <TextField
@@ -92,7 +92,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='state'
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.state}
+          defaultValue={data?.state}
           required
         />
         <TextField
@@ -103,7 +103,7 @@ const PersonalDetailsEdit = ({ data }) => {
           type="number"
           name='pincode'
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.pincode}
+          defaultValue={data?.pincode}
           required
         />
         <TextField
@@ -113,7 +113,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='nativeTown'
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.nativeTown}
+          defaultValue={data?.nativeTown}
         />
         <TextField
           id="mobileNumberInput"
@@ -123,7 +123,7 @@ const PersonalDetailsEdit = ({ data }) => {
           type="number"
           name='mobileNumber'
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.mobileNumber}
+          defaultValue={data?.mobileNumber}
           required
         />
         <TextField
@@ -133,7 +133,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='phoneNumber'
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.phoneNumber}
+          defaultValue={data?.phoneNumber}
         />
         <TextField
           id="creedInput"
@@ -142,7 +142,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='creed'
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.creed}
+          defaultValue={data?.creed}
         />
         <FormControl id="categoryInput" className="formElements">
           <FormLabel id="demo-row-radio-buttons-group-label">
@@ -152,7 +152,7 @@ const PersonalDetailsEdit = ({ data }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            defaultValue={formData?.category}
+            defaultValue={data?.category}
           >
             <FormControlLabel
               value="Financial"
@@ -185,7 +185,7 @@ const PersonalDetailsEdit = ({ data }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            defaultValue={formData?.jain}
+            defaultValue={data?.jain}
           >
             <FormControlLabel value={true} control={<Radio />} label="Yes" name='jain' onChange={(event) => handleChange(event)}/>
             <FormControlLabel value={false} control={<Radio />} label="No" name='jain' onChange={(event) => handleChange(event)}/>

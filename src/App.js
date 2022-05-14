@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -12,11 +12,15 @@ import {
   Survey,
   Approve,
 } from "./Features";
-import { MockData } from "./MockData";
+// import { MockData } from "./MockData";
 import axios from "axios";
 
 const App = () => {
-  const [data, setData] = useState(MockData);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getData();
+  },[])
 
   const addData = (newData) => {
     axios({
@@ -26,17 +30,17 @@ const App = () => {
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 201) {
           getData();
         }
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => console.error("error", error));
   };
 
   const getData = () => {
     axios({
       method: "GET",
-      url: "https://hs-foundation.herokuapp.com/get/all",
+      url: "https://hs-foundation.herokuapp.com/fetch/views",
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => {
@@ -45,7 +49,7 @@ const App = () => {
           setData(allApplications);
         }
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => console.error("error", error));
   };
 
   return (
@@ -55,7 +59,7 @@ const App = () => {
         <Routes>
           <Route
             path="/application"
-            element={<Application addData={addData} />}
+            element={<Application addData={addData} getData={getData} />}
           />
           <Route
             path="/applicationList"

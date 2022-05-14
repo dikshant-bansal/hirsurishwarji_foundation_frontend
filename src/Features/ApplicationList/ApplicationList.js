@@ -12,9 +12,9 @@ import {
   Button
 } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const ApplicationList = ({ data }) => {
-
   const navigate = useNavigate();
   
   const columns = [
@@ -63,11 +63,26 @@ const ApplicationList = ({ data }) => {
         id="viewBtn"
         className="viewBtn"
         variant="outlined"
-        onClick={() => navigate(`/application/${id}`)}
+        // onClick={() => navigate(`/application/${id}`)}
+        onClick={() => getApplicationInfo(id)}
       >
         View
       </Button>
     )
+  };
+
+  const getApplicationInfo = (id) => {
+    axios({
+      method: "GET",
+      url: `https://hs-foundation.herokuapp.com/get/${id}`,
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          navigate(`/application/${id}`, {state: {info : response.data}})
+        }
+      })
+      .catch((error) => console.error("error", error));
   };
 
   const surveyBtn = (id) => {
@@ -91,11 +106,11 @@ const ApplicationList = ({ data }) => {
     return(
       createData(
         index+1,
-        element.personalDetails.name,
-        element.personalDetails.mobileNumber,
-        element.updateDocuments.aadhaarNumber,
-        element.updateDocuments.rationCard,
-        'status',
+        element.name,
+        element.mobileNumber,
+        element.aadharnumber,
+        element.rationCard,
+        element.status,
         approveBtn(element.id), 
         referBtn(), 
         viewBtn(element.id),

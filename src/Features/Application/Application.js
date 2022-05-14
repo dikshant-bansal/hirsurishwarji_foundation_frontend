@@ -13,10 +13,11 @@ import {
   SkillDetails,
 } from "./Forms";
 
-const Application = ({ addData }) => {
+const Application = ({ addData, getData }) => {
   const [activeFormIndex, setActiveFormIndex] = useState(0);
   const [collectiveData, setCollectiveData] = useState({});
-  const [alert, setAlert] = useState(false);
+  const [successAlert, setSuccessAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false);
 
   const nextForm = (formName, formData) => {
     let copyCollectiveData = { ...collectiveData };
@@ -29,18 +30,32 @@ const Application = ({ addData }) => {
     setActiveFormIndex((prev) => prev - 1);
   };
 
-  const submitFormDetails = (skillDetails, administrativeDetails) => {
+  const submitFormDetails = async (skillDetails, administrativeDetails) => {
     let copyCollectiveData = { ...collectiveData };
     copyCollectiveData.skillDetails = skillDetails;
     copyCollectiveData.administrativeDetails = administrativeDetails;
     setCollectiveData({ ...copyCollectiveData });
-    addData({ ...copyCollectiveData, status: "Pending" });
-    setAlert(true);
+    addData({
+      ...copyCollectiveData,
+      status: "Pending",
+    })
+    setSuccessAlert(true);
+    // if (addDataResponse.status === 201) {
+    //   setSuccessAlert(true);
+    //   getData();
+    // } else {
+    //   setErrorAlert(true);
+    // }
   };
 
-  const closeAlert = () => {
+  const closeSucessAlert = () => {
+    setCollectiveData({});
     setActiveFormIndex(0);
-    setAlert(false);
+    setSuccessAlert(false);
+  };
+
+  const closeErrorAlert = () => {
+    setErrorAlert(false);
   };
 
   const steps = [
@@ -103,8 +118,6 @@ const Application = ({ addData }) => {
     />,
   ];
 
-  console.log(collectiveData);
-
   return (
     <div id="Application" className="Application">
       <div className="stepperContainer">
@@ -118,11 +131,35 @@ const Application = ({ addData }) => {
           })}
         </Stepper>
       </div>
-      {alert ? (
-        <Alert onClose={() => closeAlert()}>This is a success alert!</Alert>
+      {successAlert || errorAlert ? (
+        <Alert
+          onClose={() =>
+            successAlert ? closeSucessAlert() : closeErrorAlert()
+          }
+        >
+          {`${
+            successAlert
+              ? "Your request has been processed successfully!"
+              : "Something went Wrong! Please try Again!!"
+          }`}
+        </Alert>
       ) : (
         stepsForm[activeFormIndex]
       )}
+      {/* {successAlert ? (
+        <Alert onClose={() => closeSucessAlert()}>
+          Your request has been processed successfully!
+        </Alert>
+      ) : (
+        stepsForm[activeFormIndex]
+      )}
+      {errorAlert ? (
+        <Alert onClose={() => closeErrorAlert()}>
+          Something went Wrong! Please try Again!!
+        </Alert>
+      ) : (
+        stepsForm[activeFormIndex]
+      )} */}
     </div>
   );
 };
