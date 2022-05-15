@@ -54,6 +54,7 @@ const SkillDetails = ({ backForm, submitFormDetails, skillDetailsData, administr
             onChange={(event) => handleChange(event)}
             defaultValue={administrativeDetailsData?.address}
             required
+            multiline
           />
         </div>
         <div className="btnContainer">

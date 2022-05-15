@@ -46,7 +46,7 @@ const App = () => {
       .then((response) => {
         if (response.status === 200) {
           const allApplications = response.data;
-          setData(allApplications);
+          setData(allApplications.reverse());
         }
       })
       .catch((error) => console.error("error", error));

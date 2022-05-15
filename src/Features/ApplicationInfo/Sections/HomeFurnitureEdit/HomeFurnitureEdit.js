@@ -69,7 +69,7 @@ const HomeFurnitureEdit = ({ data }) => {
         <TextField
           id="pincodeInput"
           className="formElements"
-          label="Vehicles (in quantity)"
+          label="Four Wheelers (in quantity)"
           variant="outlined"
           type="number"
           name="vehicles"
@@ -80,7 +80,7 @@ const HomeFurnitureEdit = ({ data }) => {
         <TextField
           id="pincodeInput"
           className="formElements"
-          label="Bikes (in quantity)"
+          label="Two Wheelers (in quantity)"
           variant="outlined"
           type="number"
           name="bikes"

@@ -13,9 +13,10 @@ const PersonalDetailsEdit = ({ data }) => {
 
   let formData = {
     name: data?.name,
-    fatherName: data?.fatherName,
-    address1: data?.address1,
-    address2: data?.address2,
+    // fatherName: data?.fatherName,
+    // address1: data?.address1,
+    // address2: data?.address2,
+    address: data?.address,
     city: data?.city,
     state: data?.state,
     pincode: data?.pincode,
@@ -46,7 +47,7 @@ const PersonalDetailsEdit = ({ data }) => {
           defaultValue={formData?.name}
           required
         />
-        <TextField
+        {/* <TextField
           id="fatherHusbandNameInput"
           className="formElements"
           label="Father's/Husband's Name"
@@ -74,6 +75,17 @@ const PersonalDetailsEdit = ({ data }) => {
           name='address2'
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.address2}
+        /> */}
+        <TextField
+          id="addressLine1Input"
+          className="formElements"
+          label="Address"
+          variant="outlined"
+          name='address'
+          onChange={(event) => handleChange(event)}
+          defaultValue={formData?.address1}
+          multiline
+          required
         />
         <TextField
           id="cityInput"

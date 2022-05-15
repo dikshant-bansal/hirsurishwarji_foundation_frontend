@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./DependentTable.scss";
 import { Switch, Button } from "@mui/material";
 
 const DependentTable = ({dependentList, list}) => {
+
+  useEffect(() => {
+    addTableRows();
+  }, []);
+  
   const rowsInput = {
     sNo: null,
     name: null,

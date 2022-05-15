@@ -17,7 +17,7 @@ const DependentDetails = ({ nextForm, backForm, data }) => {
     dependentList: data?.dependentList || null,
     education: data?.education || null,
     experience: data?.experience || null,
-    previousLoan: data?.previousLoan || null,
+    previousLoan: data?.previousLoan || false,
     previousLoanAmount: data?.previousLoanAmount || null,
   };
 

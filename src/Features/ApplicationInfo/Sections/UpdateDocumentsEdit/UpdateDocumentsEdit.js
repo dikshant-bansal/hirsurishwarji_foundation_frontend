@@ -4,17 +4,18 @@ import { TextField } from "@mui/material";
 
 const UpdateDocumentsEdit = ({ data }) => {
   let formData = {
-    aadhaarNumber: data?.aadhaarNumber,
-    rationCard: data?.rationCard,
-    bankAccount: data?.bankAccount,
-    rent : data?.rent,
-    electricity: data?.electricity,
-    insurer: data?.insurer,
-    salary: data?.salary,
-    jain: data?.jain,
-    telephone: data?.telephone,
-    referral: data?.referral,
-    school: data?.school,
+    aadhaarNumber: data?.aadhaarNumber || null,
+    rationCard: data?.rationCard || null,
+    panNumber: data?.panNumber || null,
+    bankAccount: data?.bankAccount || null,
+    // rent : data?.rent || null,
+    // electricity: data?.electricity || null,
+    // insurer: data?.insurer || null,
+    // salary: data?.salary || null,
+    // jain: data?.jain || null,
+    // telephone: data?.telephone || null,
+    // referral: data?.referral || null,
+    // school: data?.school || null,
   };
 
   const handleChange = (event) => {
@@ -49,6 +50,17 @@ const UpdateDocumentsEdit = ({ data }) => {
           required
         />
         <TextField
+          id="panInput"
+          className="formElements"
+          label="Pan Number"
+          variant="outlined"
+          type="number"
+          name='panNumber'
+          onChange={(event) => handleChange(event)}
+          defaultValue={data?.panNumber}
+          required
+        />
+        <TextField
           id="bankInput"
           className="formElements"
           label="Bank Account Number"
@@ -58,7 +70,7 @@ const UpdateDocumentsEdit = ({ data }) => {
           defaultValue={formData?.bankAccount}
           required
         />
-        <TextField
+        {/* <TextField
           id="rentInput"
           className="formElements"
           label="Rent / Maintenance Reciept Number"
@@ -129,7 +141,7 @@ const UpdateDocumentsEdit = ({ data }) => {
           name='school'
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.school}
-        />
+        /> */}
       </div>
     </div>
   );

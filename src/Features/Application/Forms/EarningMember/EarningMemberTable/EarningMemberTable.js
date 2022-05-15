@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./EarningMemberTable.scss";
 import { Button } from "@mui/material";
 
 const EarningMemberTable = ({ earningMembersList, list }) => {
+
+  useEffect(() => {
+    addTableRows();
+  }, []);
+
   const rowsInput = {
     sNo: null,
     name: null,

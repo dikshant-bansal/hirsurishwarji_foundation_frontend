@@ -27,6 +27,7 @@ const AdministrationDetails = ({ data }) => {
           variant="outlined"
           name="address"
           value={formData?.address}
+          multiline
         />
       </div>
     </div>

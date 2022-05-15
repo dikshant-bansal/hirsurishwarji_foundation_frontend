@@ -14,18 +14,19 @@ const PersonalDetails = ({ nextForm, data }) => {
 
   let formData = {
     name: data?.name || null,
-    fatherName: data?.fatherName || null,
-    address1: data?.address1 || null,
-    address2: data?.address2 || null,
-    city: data?.city || null,
-    state: data?.state || null,
+    // fatherName: data?.fatherName || null,
+    // address1: data?.address1 || null,
+    // address2: data?.address2 || null,
+    address: data?.address || null,
+    city: data?.city || 'Mumbai',
+    state: data?.state || 'Maharashtra',
     pincode: data?.pincode || null,
     nativeTown: data?.nativeTown || null,
     mobileNumber: data?.mobileNumber || null,
     phoneNumber: data?.phoneNumber || null,
     creed: data?.creed || null,
-    category: data?.category || null,
-    jain: data?.jain || null,
+    category: data?.category || 'Medical',
+    jain: data?.jain || false,
   };
 
   const handleChange = (event) => {
@@ -45,31 +46,31 @@ const PersonalDetails = ({ nextForm, data }) => {
         <TextField
           id="nameInput"
           className="formElements"
-          label="Name"
+          label="Full Name"
           variant="outlined"
           name='name'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.name}
+          defaultValue={formData?.name}
           required
         />
-        <TextField
+        {/* <TextField
           id="fatherHusbandNameInput"
           className="formElements"
           label="Father's/Husband's Name"
           variant="outlined"
           name='fatherName'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.fatherName}
+          defaultValue={formData?.fatherName}
           required
-        />
-        <TextField
+        /> */}
+        {/* <TextField
           id="addressLine1Input"
           className="formElements"
           label="Address Line 1"
           variant="outlined"
           name='address1'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.address1}
+          defaultValue={formData?.address1}
           required
         />
         <TextField
@@ -79,7 +80,18 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name='address2'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.address2}
+          defaultValue={formData?.address2}
+        /> */}
+        <TextField
+          id="addressLine2Input"
+          className="formElements"
+          label="Address"
+          variant="outlined"
+          name='address'
+          onChange={(event) => handleChange(event)}
+          defaultValue={formData?.address2}
+          multiline
+          required
         />
         <TextField
           id="cityInput"
@@ -88,7 +100,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name='city'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.city}
+          defaultValue={formData?.city}
           required
         />
         <TextField
@@ -98,7 +110,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name='state'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.state}
+          defaultValue={formData?.state}
           required
         />
         <TextField
@@ -109,7 +121,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           type="number"
           name='pincode'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.pincode}
+          defaultValue={formData?.pincode}
           required
         />
         <TextField
@@ -119,7 +131,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name='nativeTown'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.nativeTown}
+          defaultValue={formData?.nativeTown}
         />
         <TextField
           id="mobileNumberInput"
@@ -129,7 +141,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           type="number"
           name='mobileNumber'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.mobileNumber}
+          defaultValue={formData?.mobileNumber}
           required
         />
         <TextField
@@ -139,7 +151,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name='phoneNumber'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.phoneNumber}
+          defaultValue={formData?.phoneNumber}
         />
         <TextField
           id="creedInput"
@@ -148,7 +160,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name='creed'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.creed}
+          defaultValue={formData?.creed}
         />
         <FormControl id="categoryInput" className="formElements">
           <FormLabel id="demo-row-radio-buttons-group-label">
@@ -158,7 +170,7 @@ const PersonalDetails = ({ nextForm, data }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            defaultValue={data?.category}
+            defaultValue={formData?.category}
           >
             <FormControlLabel
               value="Financial"
@@ -191,7 +203,7 @@ const PersonalDetails = ({ nextForm, data }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            defaultValue={data?.jain}
+            defaultValue={formData?.jain}
           >
             <FormControlLabel value={true} control={<Radio />} label="Yes" name='jain' onChange={(event) => handleChange(event)}/>
             <FormControlLabel value={false} control={<Radio />} label="No" name='jain' onChange={(event) => handleChange(event)}/>

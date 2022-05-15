@@ -2,6 +2,7 @@ import React from "react";
 import "./MonthlyExpensesEdit.scss";
 import {
   TextField,
+  InputAdornment,
   Radio,
   RadioGroup,
   FormControlLabel,
@@ -41,6 +42,9 @@ const MonthlyExpensesEdit = ({ data }) => {
           name='maintainance'
           onChange={(event) => handleChange(event)}
           defaultValue={data?.maintainance}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
+          }}
           required
         />
         <TextField
@@ -52,6 +56,9 @@ const MonthlyExpensesEdit = ({ data }) => {
           name='electric'
           onChange={(event) => handleChange(event)}
           defaultValue={data?.electric}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
+          }}
           required
         />
         <TextField
@@ -63,6 +70,9 @@ const MonthlyExpensesEdit = ({ data }) => {
           name='medical'
           onChange={(event) => handleChange(event)}
           defaultValue={data?.medical}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
+          }}
           required
         />
         <TextField
@@ -74,6 +84,9 @@ const MonthlyExpensesEdit = ({ data }) => {
           name='groceries'
           onChange={(event) => handleChange(event)}
           defaultValue={data?.groceries}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
+          }}
           required
         />
         <TextField
@@ -85,6 +98,9 @@ const MonthlyExpensesEdit = ({ data }) => {
           name='telephone'
           onChange={(event) => handleChange(event)}
           defaultValue={data?.telephone}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
+          }}
           required
         />
         <TextField
@@ -96,6 +112,9 @@ const MonthlyExpensesEdit = ({ data }) => {
           name='education'
           onChange={(event) => handleChange(event)}
           defaultValue={data?.education}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
+          }}
           required
         />
         <TextField
@@ -107,6 +126,9 @@ const MonthlyExpensesEdit = ({ data }) => {
           name='tution'
           onChange={(event) => handleChange(event)}
           defaultValue={data?.tution}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
+          }}
           required
         />
         <TextField
@@ -118,6 +140,9 @@ const MonthlyExpensesEdit = ({ data }) => {
           name='others'
           onChange={(event) => handleChange(event)}
           defaultValue={data?.others}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
+          }}
           required
         />
         <TextField
@@ -129,6 +154,10 @@ const MonthlyExpensesEdit = ({ data }) => {
           name='flatArea'
           onChange={(event) => handleChange(event)}
           defaultValue={data?.flatArea}
+          // InputProps={{
+          //   startAdornment: <InputAdornment position="end">sqft</InputAdornment>,
+          //   // endAdornment: <InputAdornment position="end">sqft</InputAdornment>
+          // }}
           required
         />
         <FormControl className="formElements">

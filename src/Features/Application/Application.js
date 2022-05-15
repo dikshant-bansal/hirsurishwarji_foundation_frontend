@@ -67,7 +67,7 @@ const Application = ({ addData, getData }) => {
     "Dependent Details",
     "Medical Grant Details",
     "Earning Member Details",
-    "Skill Details",
+    "Other Details",
   ];
 
   const stepsForm = [

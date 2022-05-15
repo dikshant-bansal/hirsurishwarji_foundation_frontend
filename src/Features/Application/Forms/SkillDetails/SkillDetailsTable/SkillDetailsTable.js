@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./SkillDetailsTable.scss";
 import { Button } from "@mui/material";
 
 const SkillDetailsTable = ({ skillList, list }) => {
+
+  useEffect(() => {
+    addTableRows();
+  }, []);
+
   const rowsInput = {
     sNo: null,
     name: null,
