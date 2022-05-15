@@ -4,17 +4,17 @@ import { TextField, Button } from "@mui/material";
 
 const UpdateDocuments = ({ nextForm, backForm, data }) => {
   let formData = {
-    aadhaarNumber: null,
-    rationCard: null,
-    bankAccount: null,
-    rent : null,
-    electricity: null,
-    insurer: null,
-    salary: null,
-    jain: null,
-    telephone: null,
-    referral: null,
-    school: null,
+    aadhaarNumber: data?.aadhaarNumber || null,
+    rationCard: data?.rationCard || null,
+    bankAccount: data?.bankAccount || null,
+    rent : data?.rent || null,
+    electricity: data?.electricity || null,
+    insurer: data?.insurer || null,
+    salary: data?.salary || null,
+    jain: data?.jain || null,
+    telephone: data?.telephone || null,
+    referral: data?.referral || null,
+    school: data?.school || null,
   };
 
   const handleChange = (event) => {
@@ -39,7 +39,7 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
           type="number"
           name='aadhaarNumber'
           onChange={(event) => handleChange(event)}
-          value={data?.aadhaarNumber}
+          defaultValue={data?.aadhaarNumber}
           required
         />
         <div className="fileUpload">
@@ -53,7 +53,7 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
           type="number"
           name='rationCard'
           onChange={(event) => handleChange(event)}
-          value={data?.rationCard}
+          defaultValue={data?.rationCard}
           required
         />
         <div className="fileUpload">
@@ -66,7 +66,7 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name='bankAccount'
           onChange={(event) => handleChange(event)}
-          value={data?.bankAccount}
+          defaultValue={data?.bankAccount}
           required
         />
         <div className="fileUpload">
@@ -79,7 +79,7 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name='rent'
           onChange={(event) => handleChange(event)}
-          value={data?.rent}
+          defaultValue={data?.rent}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
@@ -91,7 +91,7 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name='electricity'
           onChange={(event) => handleChange(event)}
-          value={data?.electricity}
+          defaultValue={data?.electricity}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
@@ -103,7 +103,7 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name='insurer'
           onChange={(event) => handleChange(event)}
-          value={data?.insurer}
+          defaultValue={data?.insurer}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
@@ -115,7 +115,7 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name='salary'
           onChange={(event) => handleChange(event)}
-          value={data?.salary}
+          defaultValue={data?.salary}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
@@ -127,7 +127,7 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name='jain'
           onChange={(event) => handleChange(event)}
-          value={data?.jain}
+          defaultValue={data?.jain}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
@@ -139,7 +139,7 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name='telephone'
           onChange={(event) => handleChange(event)}
-          value={data?.telephone}
+          defaultValue={data?.telephone}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
@@ -151,7 +151,7 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name='referral'
           onChange={(event) => handleChange(event)}
-          value={data?.referral}
+          defaultValue={data?.referral}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
@@ -163,7 +163,7 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name='school'
           onChange={(event) => handleChange(event)}
-          value={data?.school}
+          defaultValue={data?.school}
         />
         <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>

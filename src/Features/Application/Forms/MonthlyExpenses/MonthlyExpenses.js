@@ -12,16 +12,16 @@ import {
 
 const MonthlyExpenses = ({ nextForm, backForm, data }) => {
   let formData = {
-    maintainance: null,
-    electric: null, 
-    medical: null,
-    groceries: null,
-    telephone: null,
-    education: null,
-    tution: null,
-    others: null,
-    flatArea: null,
-    home: null,
+    maintainance: data?.maintainance || null,
+    electric: data?.electric || null, 
+    medical: data?.medical || null,
+    groceries: data?.groceries || null,
+    telephone: data?.telephone || null,
+    education: data?.education || null,
+    tution: data?.tution || null,
+    others: data?.others || null,
+    flatArea: data?.flatArea || null,
+    home: data?.home || null,
   };
 
   const handleChange = (event) => {
@@ -46,7 +46,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name='maintainance'
           onChange={(event) => handleChange(event)}
-          value={data?.maintainance}
+          defaultValue={data?.maintainance}
           required
         />
         <TextField
@@ -57,7 +57,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name='electric'
           onChange={(event) => handleChange(event)}
-          value={data?.electric}
+          defaultValue={data?.electric}
           required
         />
         <TextField
@@ -68,7 +68,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name='medical'
           onChange={(event) => handleChange(event)}
-          value={data?.medical}
+          defaultValue={data?.medical}
           required
         />
         <TextField
@@ -79,7 +79,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name='groceries'
           onChange={(event) => handleChange(event)}
-          value={data?.groceries}
+          defaultValue={data?.groceries}
           required
         />
         <TextField
@@ -90,7 +90,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name='telephone'
           onChange={(event) => handleChange(event)}
-          value={data?.telephone}
+          defaultValue={data?.telephone}
           required
         />
         <TextField
@@ -101,7 +101,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name='education'
           onChange={(event) => handleChange(event)}
-          value={data?.education}
+          defaultValue={data?.education}
           required
         />
         <TextField
@@ -112,7 +112,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name='tution'
           onChange={(event) => handleChange(event)}
-          value={data?.tution}
+          defaultValue={data?.tution}
           required
         />
         <TextField
@@ -123,7 +123,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name='others'
           onChange={(event) => handleChange(event)}
-          value={data?.others}
+          defaultValue={data?.others}
           required
         />
         <TextField
@@ -134,7 +134,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name='flatArea'
           onChange={(event) => handleChange(event)}
-          value={data?.flatArea}
+          defaultValue={data?.flatArea}
           required
         />
         <FormControl className="formElements">

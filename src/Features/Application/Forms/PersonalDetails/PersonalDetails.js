@@ -13,19 +13,19 @@ import {
 const PersonalDetails = ({ nextForm, data }) => {
 
   let formData = {
-    name: null,
-    fatherName: null,
-    address1: null,
-    address2: null,
-    city: null,
-    state: null,
-    pincode: null,
-    nativeTown: null,
-    mobileNumber: null,
-    phoneNumber: null,
-    creed: null,
-    category: null,
-    jain: null,
+    name: data?.name || null,
+    fatherName: data?.fatherName || null,
+    address1: data?.address1 || null,
+    address2: data?.address2 || null,
+    city: data?.city || null,
+    state: data?.state || null,
+    pincode: data?.pincode || null,
+    nativeTown: data?.nativeTown || null,
+    mobileNumber: data?.mobileNumber || null,
+    phoneNumber: data?.phoneNumber || null,
+    creed: data?.creed || null,
+    category: data?.category || null,
+    jain: data?.jain || null,
   };
 
   const handleChange = (event) => {
@@ -49,7 +49,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name='name'
           onChange={(event) => handleChange(event)}
-          value={data?.name}
+          defaultValue={data?.name}
           required
         />
         <TextField
@@ -59,7 +59,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name='fatherName'
           onChange={(event) => handleChange(event)}
-          value={data?.fatherName}
+          defaultValue={data?.fatherName}
           required
         />
         <TextField
@@ -69,7 +69,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name='address1'
           onChange={(event) => handleChange(event)}
-          value={data?.address1}
+          defaultValue={data?.address1}
           required
         />
         <TextField
@@ -79,7 +79,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name='address2'
           onChange={(event) => handleChange(event)}
-          value={data?.address2}
+          defaultValue={data?.address2}
         />
         <TextField
           id="cityInput"
@@ -88,7 +88,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name='city'
           onChange={(event) => handleChange(event)}
-          value={data?.address2}
+          defaultValue={data?.city}
           required
         />
         <TextField
@@ -98,7 +98,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name='state'
           onChange={(event) => handleChange(event)}
-          value={data?.state}
+          defaultValue={data?.state}
           required
         />
         <TextField
@@ -109,7 +109,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           type="number"
           name='pincode'
           onChange={(event) => handleChange(event)}
-          value={data?.pincode}
+          defaultValue={data?.pincode}
           required
         />
         <TextField
@@ -119,7 +119,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name='nativeTown'
           onChange={(event) => handleChange(event)}
-          value={data?.nativeTown}
+          defaultValue={data?.nativeTown}
         />
         <TextField
           id="mobileNumberInput"
@@ -129,7 +129,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           type="number"
           name='mobileNumber'
           onChange={(event) => handleChange(event)}
-          value={data?.mobileNumber}
+          defaultValue={data?.mobileNumber}
           required
         />
         <TextField
@@ -139,7 +139,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name='phoneNumber'
           onChange={(event) => handleChange(event)}
-          value={data?.phoneNumber}
+          defaultValue={data?.phoneNumber}
         />
         <TextField
           id="creedInput"
@@ -148,7 +148,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name='creed'
           onChange={(event) => handleChange(event)}
-          value={data?.creed}
+          defaultValue={data?.creed}
         />
         <FormControl id="categoryInput" className="formElements">
           <FormLabel id="demo-row-radio-buttons-group-label">

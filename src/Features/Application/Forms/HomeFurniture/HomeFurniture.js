@@ -4,13 +4,13 @@ import { TextField, Button } from "@mui/material";
 
 const HomeFurniture = ({ nextForm, backForm, data }) => {
   let formData = {
-    tv: null,
-    cable: null,
-    fridge: null,
-    washingMachine: null,
-    vehicles: null,
-    bikes: null,
-    phones: null,
+    tv: data?.tv || null,
+    cable: data?.cable || null,
+    fridge: data?.fridge || null,
+    washingMachine: data?.washingMachine || null,
+    vehicles: data?.vehicles || null,
+    bikes: data?.bikes || null,
+    phones: data?.phones || null,
   };
 
   const handleChange = (event) => {
@@ -35,7 +35,7 @@ const HomeFurniture = ({ nextForm, backForm, data }) => {
           type="number"
           name="tv"
           onChange={(event) => handleChange(event)}
-          value={data?.tv}
+          defaultValue={data?.tv}
           required
         />
         <TextField
@@ -46,7 +46,7 @@ const HomeFurniture = ({ nextForm, backForm, data }) => {
           type="number"
           name="cable"
           onChange={(event) => handleChange(event)}
-          value={data?.cable}
+          defaultValue={data?.cable}
           required
         />
         <TextField
@@ -57,7 +57,7 @@ const HomeFurniture = ({ nextForm, backForm, data }) => {
           type="number"
           name="fridge"
           onChange={(event) => handleChange(event)}
-          value={data?.fridge}
+          defaultValue={data?.fridge}
           required
         />
         <TextField
@@ -68,7 +68,7 @@ const HomeFurniture = ({ nextForm, backForm, data }) => {
           type="number"
           name="washingMachine"
           onChange={(event) => handleChange(event)}
-          value={data?.washingMachine}
+          defaultValue={data?.washingMachine}
           required
         />
         <TextField
@@ -79,7 +79,7 @@ const HomeFurniture = ({ nextForm, backForm, data }) => {
           type="number"
           name="vehicles"
           onChange={(event) => handleChange(event)}
-          value={data?.vehicles}
+          defaultValue={data?.vehicles}
           required
         />
         <TextField
@@ -90,7 +90,7 @@ const HomeFurniture = ({ nextForm, backForm, data }) => {
           type="number"
           name="bikes"
           onChange={(event) => handleChange(event)}
-          value={data?.bikes}
+          defaultValue={data?.bikes}
           required
         />
         <TextField
@@ -101,7 +101,7 @@ const HomeFurniture = ({ nextForm, backForm, data }) => {
           type="number"
           name="phones"
           onChange={(event) => handleChange(event)}
-          value={data?.phones}
+          defaultValue={data?.phones}
           required
         />
         <div className="btnContainer">

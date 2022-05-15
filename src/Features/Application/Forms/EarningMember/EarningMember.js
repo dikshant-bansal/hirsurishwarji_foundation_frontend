@@ -6,7 +6,7 @@ import EarningMemberTable from "./EarningMemberTable/EarningMemberTable";
 const EarningMember = ({ nextForm, backForm, data }) => {
 
   let formData = {
-    earningMembersList: null
+    earningMembersList: data?.earningMembersList || null,
   };
 
   const submitForm = (event) => {

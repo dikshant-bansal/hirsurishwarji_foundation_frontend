@@ -20,7 +20,7 @@ const MiscellaneousQuestionsEdit = ({ data }) => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    formData[name] = value
+    data[name] = value
   }
 
   const questionsArray = [
@@ -49,6 +49,7 @@ const MiscellaneousQuestionsEdit = ({ data }) => {
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
                 name="row-radio-buttons-group"
+                defaultValue={formData && formData[question.name]}
               >
                 <FormControlLabel value={true} control={<Radio />} label="Yes" name={question.name} onChange={(event) => handleChange(event)}/>
                 <FormControlLabel value={false} control={<Radio />} label="No" name={question.name} onChange={(event) => handleChange(event)}/>

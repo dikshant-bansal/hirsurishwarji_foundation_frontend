@@ -5,15 +5,15 @@ import { TextField, Button } from "@mui/material";
 const MedicalGrant = ({ nextForm, backForm, data }) => {
 
   let formData = {
-    hospitalName: null,
-    hospitalAddress: null,
-    diseaseDetails: null,
-    approxExpenses: null,
-    amountNeeded: null,
-    amountContributed: null,
-    anyExisting: null,
-    medicalInsuranceDetails: null,
-    medicalInsuranceAmount: null,
+    hospitalName: data?.hospitalName || null,
+    hospitalAddress: data?.hospitalAddress || null,
+    diseaseDetails: data?.diseaseDetails || null,
+    approxExpenses: data?.approxExpenses || null,
+    amountNeeded: data?.amountNeeded || null,
+    amountContributed: data?.amountContributed || null,
+    anyExisting: data?.anyExisting || null,
+    medicalInsuranceDetails: data?.medicalInsuranceDetails || null,
+    medicalInsuranceAmount: data?.medicalInsuranceAmount || null,
   };
 
   const handleChange = (event) => {
@@ -38,7 +38,7 @@ const MedicalGrant = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name="hospitalName"
           onChange={(event) => handleChange(event)}
-          value={data?.hospitalName}
+          defaultValue={data?.hospitalName}
           required
         />
         <TextField
@@ -48,7 +48,7 @@ const MedicalGrant = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name="hospitalAddress"
           onChange={(event) => handleChange(event)}
-          value={data?.hospitalAddress}
+          defaultValue={data?.hospitalAddress}
           required
         />
         <TextField
@@ -58,7 +58,7 @@ const MedicalGrant = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name="diseaseDetails"
           onChange={(event) => handleChange(event)}
-          value={data?.diseaseDetails}
+          defaultValue={data?.diseaseDetails}
           required
         />
         <TextField
@@ -69,7 +69,7 @@ const MedicalGrant = ({ nextForm, backForm, data }) => {
           type="number"
           name="approxExpenses"
           onChange={(event) => handleChange(event)}
-          value={data?.approxExpenses}
+          defaultValue={data?.approxExpenses}
           required
         />
         <TextField
@@ -80,7 +80,7 @@ const MedicalGrant = ({ nextForm, backForm, data }) => {
           type="number"
           name="amountNeeded"
           onChange={(event) => handleChange(event)}
-          value={data?.amountNeeded}
+          defaultValue={data?.amountNeeded}
           required
         />
         <TextField
@@ -91,7 +91,7 @@ const MedicalGrant = ({ nextForm, backForm, data }) => {
           type="number"
           name="amountContributed"
           onChange={(event) => handleChange(event)}
-          value={data?.amountContributed}
+          defaultValue={data?.amountContributed}
         />
         <TextField
           id="pincodeInput"
@@ -100,7 +100,7 @@ const MedicalGrant = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name="anyExisting"
           onChange={(event) => handleChange(event)}
-          value={data?.anyExisting}
+          defaultValue={data?.anyExisting}
         />
         <TextField
           id="pincodeInput"
@@ -109,7 +109,7 @@ const MedicalGrant = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name="medicalInsuranceDetails"
           onChange={(event) => handleChange(event)}
-          value={data?.medicalInsuranceDetails}
+          defaultValue={data?.medicalInsuranceDetails}
         />
         <TextField
           id="pincodeInput"
@@ -118,7 +118,7 @@ const MedicalGrant = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name="medicalInsuranceAmount"
           onChange={(event) => handleChange(event)}
-          value={data?.medicalInsuranceAmount}
+          defaultValue={data?.medicalInsuranceAmount}
           required
         />
         <div className="btnContainer">

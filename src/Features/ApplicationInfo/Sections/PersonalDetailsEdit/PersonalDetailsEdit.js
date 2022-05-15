@@ -29,7 +29,7 @@ const PersonalDetailsEdit = ({ data }) => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    formData[name] = value
+    data[name] = value
   }
 
   return (
@@ -43,7 +43,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='name'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.name}
+          defaultValue={formData?.name}
           required
         />
         <TextField
@@ -53,7 +53,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='fatherName'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.fatherName}
+          defaultValue={formData?.fatherName}
           required
         />
         <TextField
@@ -63,7 +63,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='address1'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.address1}
+          defaultValue={formData?.address1}
           required
         />
         <TextField
@@ -73,7 +73,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='address2'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.address2}
+          defaultValue={formData?.address2}
         />
         <TextField
           id="cityInput"
@@ -82,7 +82,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='city'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.address2}
+          defaultValue={formData?.address2}
           required
         />
         <TextField
@@ -92,7 +92,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='state'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.state}
+          defaultValue={formData?.state}
           required
         />
         <TextField
@@ -103,7 +103,7 @@ const PersonalDetailsEdit = ({ data }) => {
           type="number"
           name='pincode'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.pincode}
+          defaultValue={formData?.pincode}
           required
         />
         <TextField
@@ -113,7 +113,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='nativeTown'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.nativeTown}
+          defaultValue={formData?.nativeTown}
         />
         <TextField
           id="mobileNumberInput"
@@ -123,7 +123,7 @@ const PersonalDetailsEdit = ({ data }) => {
           type="number"
           name='mobileNumber'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.mobileNumber}
+          defaultValue={formData?.mobileNumber}
           required
         />
         <TextField
@@ -133,7 +133,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='phoneNumber'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.phoneNumber}
+          defaultValue={formData?.phoneNumber}
         />
         <TextField
           id="creedInput"
@@ -142,7 +142,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='creed'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.creed}
+          defaultValue={formData?.creed}
         />
         <FormControl id="categoryInput" className="formElements">
           <FormLabel id="demo-row-radio-buttons-group-label">
@@ -152,7 +152,7 @@ const PersonalDetailsEdit = ({ data }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            defaultValue={data?.category}
+            defaultValue={formData?.category}
           >
             <FormControlLabel
               value="Financial"
@@ -185,7 +185,7 @@ const PersonalDetailsEdit = ({ data }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            defaultValue={data?.jain}
+            defaultValue={formData?.jain}
           >
             <FormControlLabel value={true} control={<Radio />} label="Yes" name='jain' onChange={(event) => handleChange(event)}/>
             <FormControlLabel value={false} control={<Radio />} label="No" name='jain' onChange={(event) => handleChange(event)}/>

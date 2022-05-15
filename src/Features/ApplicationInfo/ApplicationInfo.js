@@ -45,6 +45,7 @@ const ApplicationInfo = () => {
             className="updateBtn"
             variant="outlined"
             type="submit"
+            // onClick={() => console.log(applicationData, 'applicationData')}
           >
             Update
           </Button>

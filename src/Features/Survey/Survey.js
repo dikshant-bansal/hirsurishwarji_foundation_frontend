@@ -1,8 +1,19 @@
 import React from "react";
 import "./Survey.scss";
+// import { useLocation } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
 
 const Survey = () => {
+  // const location = useLocation();
+  // let surveyInfo = location.state.surveyInfo;
+
+  // let formData = {
+  //   surveyDoneBy: surveyInfo?.surveyDoneBy,
+  //   surveyDetails: surveyInfo?.surveyDetails,
+  //   specialNotes: surveyInfo?.specialNotes,
+  //   date: surveyInfo?.date,
+  // };
+
   let formData = {
     surveyDoneBy: null,
     surveyDetails: null,

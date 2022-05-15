@@ -92,11 +92,26 @@ const ApplicationList = ({ data }) => {
         className="surveyBtn"
         variant="outlined"
         onClick={() => navigate(`/survey/${id}`)}
+        // onClick={() => getSurveyInfo(id)}
       >
         Survey
       </Button>
     )
   };
+
+  // const getSurveyInfo = (id) => {
+  //   axios({
+  //     method: "GET",
+  //     url: `https://hs-foundation.herokuapp.com/survey/get/${id}`,
+  //     headers: { "Content-Type": "application/json" },
+  //   })
+  //     .then((response) => {
+  //       if (response.status === 200) {
+  //         navigate(`/survey/${id}`, {state: {surveyInfo : response.data}})
+  //       }
+  //     })
+  //     .catch((error) => console.error("error", error));
+  // };
 
   const createData = (id, name, mobile, aadhaar, ration, status, approve, refer, view, survey) => {
     return { id, name, mobile, aadhaar, ration, status, approve, refer, view, survey };

@@ -14,11 +14,11 @@ import DependentTable from "./DependentTable/DependentTable";
 const DependentDetails = ({ nextForm, backForm, data }) => {
   
   let formData = {
-    dependentList: null,
-    education: null,
-    experience: null,
-    previousLoan: null,
-    previousLoanAmount: null,
+    dependentList: data?.dependentList || null,
+    education: data?.education || null,
+    experience: data?.experience || null,
+    previousLoan: data?.previousLoan || null,
+    previousLoanAmount: data?.previousLoanAmount || null,
   };
 
   const handleChange = (event) => {
@@ -47,7 +47,7 @@ const DependentDetails = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name="education"
           onChange={(event) => handleChange(event)}
-          value={data?.education}
+          defaultValue={data?.education}
         />
         <TextField
           className="formElements"
@@ -55,7 +55,7 @@ const DependentDetails = ({ nextForm, backForm, data }) => {
           variant="outlined"
           name="experience"
           onChange={(event) => handleChange(event)}
-          value={data?.experience}
+          defaultValue={data?.experience}
         />
         <FormControl className="formElements">
           <FormLabel
@@ -81,7 +81,7 @@ const DependentDetails = ({ nextForm, backForm, data }) => {
           type="number"
           name="previousLoanAmount"
           onChange={(event) => handleChange(event)}
-          value={data?.previousLoanAmount}
+          defaultValue={data?.previousLoanAmount}
         />
         <div className="btnContainer">
           <Button

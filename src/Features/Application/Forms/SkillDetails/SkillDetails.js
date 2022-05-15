@@ -6,12 +6,12 @@ import SkillDetailsTable from "./SkillDetailsTable/SkillDetailsTable";
 const SkillDetails = ({ backForm, submitFormDetails, skillDetailsData, administrativeDetailsData }) => {
 
   let skillDetails = {
-    skillDetailsList: null,
+    skillDetailsList: skillDetailsData?.skillDetailsList || null,
   };
 
   let administrativeDetails = {
-    referredBy: null,
-    address: null,
+    referredBy: administrativeDetailsData?.referredBy || null,
+    address: administrativeDetailsData?.address || null,
   }
 
   const handleChange = (event) => {
@@ -42,7 +42,7 @@ const SkillDetails = ({ backForm, submitFormDetails, skillDetailsData, administr
             variant="outlined"
             name='referredBy'
             onChange={(event) => handleChange(event)}
-            value={administrativeDetailsData?.referredBy}
+            defaultValue={administrativeDetailsData?.referredBy}
             required
           />
           <TextField
@@ -52,7 +52,7 @@ const SkillDetails = ({ backForm, submitFormDetails, skillDetailsData, administr
             variant="outlined"
             name='address'
             onChange={(event) => handleChange(event)}
-            value={administrativeDetailsData?.address}
+            defaultValue={administrativeDetailsData?.address}
             required
           />
         </div>

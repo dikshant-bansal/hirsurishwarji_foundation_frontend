@@ -11,12 +11,12 @@ import {
 
 const MiscellaneousQuestions = ({ nextForm, backForm, data }) => {
   let formData = {
-    pathshala: null,
-    religiousEducation: null,
-    templePooja: null,
-    upashraya: null,
-    usageKanmool: null,
-    usageKanmoolStopped: null,
+    pathshala: data?.pathshala || null,
+    religiousEducation: data?.religiousEducation || null,
+    templePooja: data?.templePooja || null,
+    upashraya: data?.upashraya || null,
+    usageKanmool: data?.usageKanmool || null,
+    usageKanmoolStopped: data?.usageKanmoolStopped || null,
   };
 
   const handleChange = (event) => {
@@ -55,6 +55,7 @@ const MiscellaneousQuestions = ({ nextForm, backForm, data }) => {
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
                 name="row-radio-buttons-group"
+                defaultValue={data && data[question.name]}
               >
                 <FormControlLabel value={true} control={<Radio />} label="Yes" name={question.name} onChange={(event) => handleChange(event)}/>
                 <FormControlLabel value={false} control={<Radio />} label="No" name={question.name} onChange={(event) => handleChange(event)}/>
