@@ -21,14 +21,14 @@ const ApplicationList = ({ data }) => {
   const columns = [
     { id: "id", label: "ID", minWidth: 50, sort: true },
     { id: "name", label: "Name", minWidth: 170, sort: true },
-    { id: "mobile", label: "Mobile Number", minWidth: 170, sort: true },
-    { id: "aadhaar", label: "Aadhar Number", minWidth: 170, sort: true },
-    { id: "ration", label: "Ration Card Number", minWidth: 170,  sort: true  },
-    { id: "status", label: "Status", minWidth: 100, sort: false },
-    { id: "approve", label: "Approve", minWidth: 140, sort: false },
-    { id: "refer", label: "Refer", minWidth: 140, sort: false },
-    { id: "view", label: "View", minWidth: 140, sort: false },
-    { id: "survey", label: "Survey", minWidth: 140, sort: false },
+    { id: "mobile", label: "Mobile Number", minWidth: 130, sort: true },
+    { id: "aadhaar", label: "Aadhar Number", minWidth: 140, sort: true },
+    { id: "ration", label: "Ration Card Number", minWidth: 140, sort: true },
+    { id: "status", label: "Status", minWidth: 95, sort: false },
+    { id: "approve", label: "Approve", minWidth: 120, sort: false },
+    { id: "refer", label: "Refer", minWidth: 120, sort: false },
+    { id: "view", label: "View", minWidth: 120, sort: false },
+    { id: "survey", label: "Survey", minWidth: 120, sort: false },
   ];
 
   const approveBtn = (id) => {
@@ -39,6 +39,7 @@ const ApplicationList = ({ data }) => {
         variant="outlined"
         color="success"
         onClick={() => navigate(`/approve/${id}`)}
+        size='small'
       >
         Approve
       </Button>
@@ -52,6 +53,7 @@ const ApplicationList = ({ data }) => {
         className="referBtn"
         variant="outlined"
         color="secondary"
+        size='small'
       >
         Refer
       </Button>
@@ -66,6 +68,7 @@ const ApplicationList = ({ data }) => {
         variant="outlined"
         // onClick={() => navigate(`/application/${id}`)}
         onClick={() => getApplicationInfo(id)}
+        size='small'
       >
         View
       </Button>
@@ -94,6 +97,7 @@ const ApplicationList = ({ data }) => {
         variant="outlined"
         onClick={() => navigate(`/survey/${id}`)}
         // onClick={() => getSurveyInfo(id)}
+        size='small'
       >
         Survey
       </Button>
@@ -114,30 +118,8 @@ const ApplicationList = ({ data }) => {
   //     .catch((error) => console.error("error", error));
   // };
 
-  const createData = (
-    id,
-    name,
-    mobile,
-    aadhaar,
-    ration,
-    status,
-    approve,
-    refer,
-    view,
-    survey
-  ) => {
-    return {
-      id,
-      name,
-      mobile,
-      aadhaar,
-      ration,
-      status,
-      approve,
-      refer,
-      view,
-      survey,
-    };
+  const createData = (id, name, mobile, aadhaar, ration,status, approve, refer, view, survey) => {
+    return { id, name, mobile, aadhaar, ration, status, approve, refer, view, survey };
   };
 
   const rows = data.map((element, index) => {
@@ -178,15 +160,15 @@ const ApplicationList = ({ data }) => {
                   <TableCell
                     key={column.id}
                     align={column.align}
-                    style={{ minWidth: column.minWidth }}
+                    style={{ width: column.minWidth }}
                   >
-                    <TableSortLabel
+                    {/* <TableSortLabel
                       active={column.sort}
                       direction={"asc"}
                       // onClick={createSortHandler(headCell.id)}
-                    >
-                      {column.label}
-                    </TableSortLabel>
+                    > */}
+                    {column.label}
+                    {/* </TableSortLabel> */}
                   </TableCell>
                 ))}
               </TableRow>

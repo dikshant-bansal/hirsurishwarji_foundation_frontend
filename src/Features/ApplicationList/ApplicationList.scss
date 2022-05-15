@@ -8,6 +8,22 @@
             table{
                 thead{
                     border: 2px solid;
+                    tr{
+                        th{
+                            border-right-width: 1px;
+                            border-right-style: solid;
+                            border-right-color: inherit;
+                        }
+                    }
+                }
+                tbody{
+                    tr{
+                        td{
+                            border-right-width: 1px;
+                            border-right-style: solid;
+                            border-right-color: inherit;
+                        }
+                    }
                 }
             }
         }
