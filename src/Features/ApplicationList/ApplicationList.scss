@@ -1,4 +1,17 @@
 #ApplicationList{
+    padding: 30px;
+    margin: 10px;
+    background-color: rgb(248, 249, 250);
+    .MuiPaper-root{
+        border: 2px solid;
+        .MuiTableContainer-root{
+            table{
+                thead{
+                    border: 2px solid;
+                }
+            }
+        }
+    }
     p{
         margin-top: unset;
         margin-bottom: unset;

@@ -1,33 +1,34 @@
 import React from "react";
-import './ApplicationList.scss';
+import "./ApplicationList.scss";
 import {
-  Paper, 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableContainer, 
-  TableHead, 
-  TablePagination, 
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableSortLabel,
+  TablePagination,
   TableRow,
-  Button
-} from '@mui/material';
+  Button,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 const ApplicationList = ({ data }) => {
   const navigate = useNavigate();
-  
+
   const columns = [
-    { id: 'id', label: 'ID', minWidth: 50 },
-    { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'mobile', label: 'Mobile Number', minWidth: 170 },
-    { id: 'aadhaar', label: 'Aadhar Number', minWidth: 170 },
-    { id: 'ration', label: 'Ration Card Number', minWidth: 170 },
-    { id: 'status', label: 'Status', minWidth: 100 },
-    { id: 'approve', label: 'Approve', minWidth: 140},
-    { id: 'refer', label: 'Refer', minWidth: 140 },
-    { id: 'view', label: 'View', minWidth: 140 },
-    { id: 'survey', label: 'Survey', minWidth: 140 }
+    { id: "id", label: "ID", minWidth: 50, sort: true },
+    { id: "name", label: "Name", minWidth: 170, sort: true },
+    { id: "mobile", label: "Mobile Number", minWidth: 170, sort: true },
+    { id: "aadhaar", label: "Aadhar Number", minWidth: 170, sort: true },
+    { id: "ration", label: "Ration Card Number", minWidth: 170,  sort: true  },
+    { id: "status", label: "Status", minWidth: 100, sort: false },
+    { id: "approve", label: "Approve", minWidth: 140, sort: false },
+    { id: "refer", label: "Refer", minWidth: 140, sort: false },
+    { id: "view", label: "View", minWidth: 140, sort: false },
+    { id: "survey", label: "Survey", minWidth: 140, sort: false },
   ];
 
   const approveBtn = (id) => {
@@ -41,7 +42,7 @@ const ApplicationList = ({ data }) => {
       >
         Approve
       </Button>
-    )
+    );
   };
 
   const referBtn = () => {
@@ -54,7 +55,7 @@ const ApplicationList = ({ data }) => {
       >
         Refer
       </Button>
-    )
+    );
   };
 
   const viewBtn = (id) => {
@@ -68,7 +69,7 @@ const ApplicationList = ({ data }) => {
       >
         View
       </Button>
-    )
+    );
   };
 
   const getApplicationInfo = (id) => {
@@ -79,7 +80,7 @@ const ApplicationList = ({ data }) => {
     })
       .then((response) => {
         if (response.status === 200) {
-          navigate(`/application/${id}`, {state: {info : response.data}})
+          navigate(`/application/${id}`, { state: { info: response.data } });
         }
       })
       .catch((error) => console.error("error", error));
@@ -96,7 +97,7 @@ const ApplicationList = ({ data }) => {
       >
         Survey
       </Button>
-    )
+    );
   };
 
   // const getSurveyInfo = (id) => {
@@ -113,25 +114,45 @@ const ApplicationList = ({ data }) => {
   //     .catch((error) => console.error("error", error));
   // };
 
-  const createData = (id, name, mobile, aadhaar, ration, status, approve, refer, view, survey) => {
-    return { id, name, mobile, aadhaar, ration, status, approve, refer, view, survey };
-  }
+  const createData = (
+    id,
+    name,
+    mobile,
+    aadhaar,
+    ration,
+    status,
+    approve,
+    refer,
+    view,
+    survey
+  ) => {
+    return {
+      id,
+      name,
+      mobile,
+      aadhaar,
+      ration,
+      status,
+      approve,
+      refer,
+      view,
+      survey,
+    };
+  };
 
   const rows = data.map((element, index) => {
-    return(
-      createData(
-        index+1,
-        element.name,
-        element.mobileNumber,
-        element.aadharnumber,
-        element.rationCard,
-        element.status,
-        approveBtn(element.id), 
-        referBtn(), 
-        viewBtn(element.id),
-        surveyBtn(element.id),
-      )
-    )
+    return createData(
+      index + 1,
+      element.name,
+      element.mobileNumber,
+      element.aadharnumber,
+      element.rationCard,
+      element.status,
+      approveBtn(element.id),
+      referBtn(),
+      viewBtn(element.id),
+      surveyBtn(element.id)
+    );
   });
 
   const [page, setPage] = React.useState(0);
@@ -159,7 +180,13 @@ const ApplicationList = ({ data }) => {
                     align={column.align}
                     style={{ minWidth: column.minWidth }}
                   >
-                    {column.label}
+                    <TableSortLabel
+                      active={column.sort}
+                      direction={"asc"}
+                      // onClick={createSortHandler(headCell.id)}
+                    >
+                      {column.label}
+                    </TableSortLabel>
                   </TableCell>
                 ))}
               </TableRow>
@@ -169,12 +196,7 @@ const ApplicationList = ({ data }) => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.id}
-                    >
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
