@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./DependentTable.scss";
-import { Switch, Button } from "@mui/material";
+import { Button, Switch } from "@mui/material";
+// import Switch from "react-switch";
 
-const DependentTable = ({dependentList, list}) => {
+const DependentTable = ({ dependentList, list }) => {
+  const [kanmool, setKanmool] = useState(false);
+  const [navkarshi, setNavkarshi] = useState(false);
+  const [pooja, setPooja] = useState(false);
+  const [nightDinner, setNightDinner] = useState(false);
 
   useEffect(() => {
     addTableRows();
   }, []);
-  
+
   const rowsInput = {
     sNo: null,
     name: null,
@@ -23,7 +28,7 @@ const DependentTable = ({dependentList, list}) => {
     nightDinner: null,
   };
 
-  const [rowsData, setRowsData] = useState(list ? list :[]);
+  const [rowsData, setRowsData] = useState(list ? list : []);
 
   const addTableRows = () => {
     setRowsData([...rowsData, rowsInput]);
@@ -33,7 +38,7 @@ const DependentTable = ({dependentList, list}) => {
     let rows = [...rowsData];
     if (rows.length > 1) {
       rows.pop();
-      dependentList([...rows])
+      dependentList([...rows]);
     } else {
       rows = [rowsInput];
     }
@@ -44,11 +49,11 @@ const DependentTable = ({dependentList, list}) => {
     const { name, value } = event.target;
     const rowsInputData = [...rowsData];
     rowsInputData[index][name] = value;
-    if(rowsInputData[index].sNo === null){
-      rowsInputData[index].sNo = index+1
+    if (rowsInputData[index].sNo === null) {
+      rowsInputData[index].sNo = index + 1;
     }
     setRowsData(rowsInputData);
-    dependentList(rowsInputData)
+    dependentList(rowsInputData);
   };
 
   return (
@@ -64,7 +69,11 @@ const DependentTable = ({dependentList, list}) => {
             <th className="profession">Profession</th>
             <th className="income">Income</th>
             <th className="religiousEducation">Religious Education</th>
-            <th className="religiousActivity">
+            <th className="kanmool">Kanmool</th>
+            <th className="navkarshi">Navkarshi</th>
+            <th className="pooja">Pooja</th>
+            <th className="nightDinner">Night Dinner</th>
+            {/* <th className="religiousActivity">
               <span className="religiousActivityText">Religious Activity</span>
               <span className="religiousActivityFields">
                 <span className="kanmool">Kanmool</span>
@@ -72,7 +81,7 @@ const DependentTable = ({dependentList, list}) => {
                 <span className="pooja">Pooja</span>
                 <span className="nightDinner">Night Dinner</span>
               </span>
-            </th>
+            </th> */}
           </tr>
         </thead>
         <tbody className="tableBody">
@@ -82,7 +91,7 @@ const DependentTable = ({dependentList, list}) => {
                 <td className="sNo">
                   <input
                     type="number"
-                    value={`${index+1}`}
+                    value={`${index + 1}`}
                     name="sNo"
                     className="sNoInput"
                     readOnly
@@ -151,12 +160,32 @@ const DependentTable = ({dependentList, list}) => {
                     className="religiousEducationInput"
                   />
                 </td>
-                <td className="religiousActivity">
-                  <Switch name="kanmool" onChange={(event) => handleChange(index, event)}/>
-                  <Switch name="navkarshi" onChange={(event) => handleChange(index, event)}/>
-                  <Switch name="pooja" onChange={(event) => handleChange(index, event)}/>
-                  <Switch name="nightDinner" onChange={(event) => handleChange(index, event)}/>
+                {/* <td className="religiousActivity"> */}
+                <td>
+                  <Switch
+                    name="kanmool"
+                    onChange={(event) => handleChange(index, event)}
+                  />
                 </td>
+                <td>
+                  <Switch
+                    name="navkarshi"
+                    onChange={(event) => handleChange(index, event)}
+                  />
+                </td>
+                <td>
+                  <Switch
+                    name="pooja"
+                    onChange={(event) => handleChange(index, event)}
+                  />
+                </td>
+                <td>
+                  <Switch
+                    name="nightDinner"
+                    onChange={(event) => handleChange(index, event)}
+                  />
+                </td>
+                {/* </td> */}
               </tr>
             );
           })}

@@ -7,6 +7,7 @@ import DependentDetails from "./DependentDetails/DependentDetails";
 import MedicalGrant from "./MedicalGrant/MedicalGrant";
 import EarningMember from "./EarningMember/EarningMember";
 import SkillDetails from "./SkillDetails/SkillDetails";
+import EducationGrant from "./EducationGrant/EducationGrant";
 
 export {
   PersonalDetails,
@@ -18,4 +19,5 @@ export {
   MedicalGrant,
   EarningMember,
   SkillDetails,
+  EducationGrant,
 };

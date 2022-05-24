@@ -10,15 +10,17 @@ import {
   Button,
 } from "@mui/material";
 import DependentTable from "./DependentTable/DependentTable";
+import UmemployedTable from "./UmemployedTable/UmemployedTable";
 
 const DependentDetails = ({ nextForm, backForm, data }) => {
   
   let formData = {
     dependentList: data?.dependentList || null,
-    education: data?.education || null,
-    experience: data?.experience || null,
+    // education: data?.education || null,
+    // experience: data?.experience || null,
+    unemployedList: data?.unemployedList || null,
     previousLoan: data?.previousLoan || false,
-    previousLoanAmount: data?.previousLoanAmount || null,
+    loanAmount: data?.loanAmount || null,
   };
 
   const handleChange = (event) => {
@@ -35,13 +37,18 @@ const DependentDetails = ({ nextForm, backForm, data }) => {
     formData.dependentList = dependentListArray
   }
 
+  const unemployedList = (unemployedListArray) => {
+    formData.unemployedPersonList = unemployedListArray
+  }
+
   return (
     <div id="DependentDetails" className="DependentDetails">
       <div className="formHeader">Dependent Details</div>
       <DependentTable dependentList={dependentList} list={data?.dependentList}/>
       <form className="DependentDetailsForm" onSubmit={submitForm}>
         <div className="formSubHeader">Unemployed Person:</div>
-        <TextField
+        <UmemployedTable unemployedList={unemployedList} list={data?.unemployedPersonList}/>
+        {/* <TextField
           className="formElements"
           label="Education"
           variant="outlined"
@@ -56,7 +63,8 @@ const DependentDetails = ({ nextForm, backForm, data }) => {
           name="experience"
           onChange={(event) => handleChange(event)}
           defaultValue={data?.experience}
-        />
+        /> */}
+        <div className="formSubHeader">Previous Loan Info:</div>
         <FormControl className="formElements">
           <FormLabel
             id="demo-row-radio-buttons-group-label"
@@ -68,7 +76,7 @@ const DependentDetails = ({ nextForm, backForm, data }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            defaultValue={data?.previousLoan}
+            defaultValue={formData?.previousLoan}
           >
             <FormControlLabel value={true} control={<Radio />} label="Yes" name="previousLoan" onChange={(event) => handleChange(event)}/>
             <FormControlLabel value={false} control={<Radio />} label="No" name="previousLoan" onChange={(event) => handleChange(event)}/>
@@ -79,9 +87,9 @@ const DependentDetails = ({ nextForm, backForm, data }) => {
           label="Previous Loan Amount (in Rs.)"
           variant="outlined"
           type="number"
-          name="previousLoanAmount"
+          name="loanAmount"
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.previousLoanAmount}
+          defaultValue={formData?.loanAmount}
         />
         <div className="btnContainer">
           <Button

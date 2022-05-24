@@ -12,8 +12,6 @@ import {
 } from "@mui/material";
 
 const MonthlyExpenses = ({ nextForm, backForm, data }) => {
-  // const [monthlyExpense, setMonthlyExpense] = useState(0);
-
   let formData = {
     maintainance: data?.maintainance || null,
     electric: data?.electric || null,
@@ -27,36 +25,19 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
     home: data?.home || "Owned",
   };
 
-  // const totalMonthlyExpenseCalculator = () => {
-  //   let maintainance = formData?.maintainance ?? 0;
-  //   let electric = formData?.electric ?? 0;
-  //   let medical = formData?.medical ?? 0;
-  //   let groceries = formData?.groceries ?? 0;
-  //   let telephone = formData?.telephone ?? 0;
-  //   let education = formData?.education ?? 0;
-  //   let tution = formData?.tution ?? 0;
-  //   let others = formData?.others ?? 0;
-  //   console.log(maintainance, electric, medical)
-  //   let totalMonthlyExpense =
-  //     maintainance +
-  //     electric +
-  //     medical +
-  //     groceries +
-  //     telephone +
-  //     education +
-  //     tution +
-  //     others;
-  //   setMonthlyExpense(totalMonthlyExpense);
-  // };
+  const [monthlyData, setMonthlyData] = useState({ ...formData });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    formData[name] = value;
-    // totalMonthlyExpenseCalculator();
+    // formData[name] = value;
+    let formDataCopy = { ...monthlyData };
+    formDataCopy[name] = value;
+    setMonthlyData(formDataCopy);
+    console.log(formDataCopy, "copy");
   };
 
   const submitForm = (event) => {
-    nextForm("monthlyExpenses", formData);
+    nextForm("monthlyExpenses", monthlyData);
     event.preventDefault();
   };
 
@@ -72,7 +53,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name="maintainance"
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.maintainance}
+          defaultValue={monthlyData?.maintainance}
           required
           InputProps={{
             startAdornment: (
@@ -88,7 +69,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name="electric"
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.electric}
+          defaultValue={monthlyData?.electric}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">Rs. </InputAdornment>
@@ -104,7 +85,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name="medical"
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.medical}
+          defaultValue={monthlyData?.medical}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">Rs. </InputAdornment>
@@ -120,7 +101,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name="groceries"
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.groceries}
+          defaultValue={monthlyData?.groceries}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">Rs. </InputAdornment>
@@ -136,7 +117,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name="telephone"
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.telephone}
+          defaultValue={monthlyData?.telephone}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">Rs. </InputAdornment>
@@ -152,7 +133,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name="education"
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.education}
+          defaultValue={monthlyData?.education}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">Rs. </InputAdornment>
@@ -168,7 +149,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name="tution"
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.tution}
+          defaultValue={monthlyData?.tution}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">Rs. </InputAdornment>
@@ -184,7 +165,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name="others"
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.others}
+          defaultValue={monthlyData?.others}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">Rs. </InputAdornment>
@@ -192,7 +173,17 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           }}
           required
         />
-        {/* <div>Total Monthly Expense: {monthlyExpense}</div> */}
+        <div className="totalExpenses">
+          Total Monthly Expense:{" "}
+          {Number(monthlyData?.maintainance) +
+            Number(monthlyData?.electric) +
+            Number(monthlyData?.medical) +
+            Number(monthlyData?.groceries) +
+            Number(monthlyData?.telephone) +
+            Number(monthlyData?.education) +
+            Number(monthlyData?.tution) +
+            Number(monthlyData?.others)}
+        </div>
         <TextField
           id="pincodeInput"
           className="formElements"
@@ -201,7 +192,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
           type="number"
           name="flatArea"
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.flatArea}
+          defaultValue={monthlyData?.flatArea}
           // InputProps={{
           //   startAdornment: (
           //     <InputAdornment position="end">sqft</InputAdornment>
@@ -221,7 +212,7 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            defaultValue={formData?.home}
+            defaultValue={monthlyData?.home}
           >
             <FormControlLabel
               value="Rented"

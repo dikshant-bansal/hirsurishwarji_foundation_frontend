@@ -6,6 +6,7 @@ const AdministrationDetails = ({ data }) => {
   let formData = {
     referredBy: data?.referredBy,
     address: data?.address,
+    surveyor: data?.surveyor,
   };
 
   return (
@@ -28,6 +29,15 @@ const AdministrationDetails = ({ data }) => {
           name="address"
           value={formData?.address}
           multiline
+        />
+        <TextField
+          id="surveyorInput"
+          className="formElements"
+          label="Surveyor:"
+          variant="outlined"
+          name="surveyor"
+          value={formData?.surveyor}
+          req
         />
       </div>
     </div>

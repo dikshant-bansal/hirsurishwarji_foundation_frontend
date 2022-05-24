@@ -1,13 +1,14 @@
 import React from "react";
 import "./UpdateDocuments.scss";
 import { TextField, Button } from "@mui/material";
+import BankDetailsTable from "./BankDetails/BankDetails";
 
 const UpdateDocuments = ({ nextForm, backForm, data }) => {
   let formData = {
-    aadhaarNumber: data?.aadhaarNumber || null,
+    aadharNumber: data?.aadharNumber || null,
     rationCard: data?.rationCard || null,
     panNumber: data?.panNumber || null,
-    bankAccount: data?.bankAccount || null,
+    bankAccounts: data?.bankAccounts || null,
     // rent : data?.rent || null,
     // electricity: data?.electricity || null,
     // insurer: data?.insurer || null,
@@ -28,19 +29,24 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
     event.preventDefault();
   };
 
+  const bankAccounts = (bankAccounts) => {
+    formData.bankAccounts = bankAccounts
+  }
+
   return (
     <div id="UpdateDocuments" className="UpdateDocuments">
       <div className="formHeader">Update Documents</div>
       <form className="updateDocumentsForm" onSubmit={submitForm}>
+        <BankDetailsTable bankAccounts={bankAccounts} list={data?.bankAccounts}/>
         <TextField
           id="aadhaarInput"
           className="formElements"
           label="Aadhaar Number"
           variant="outlined"
           type="number"
-          name='aadhaarNumber'
+          name='aadharNumber'
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.aadhaarNumber}
+          defaultValue={formData?.aadharNumber}
           required
         />
         {/* <div className="fileUpload">
@@ -65,7 +71,7 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
           className="formElements"
           label="Pan Number"
           variant="outlined"
-          type="number"
+          type="text"
           name='panNumber'
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.panNumber}
@@ -74,7 +80,7 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
         {/* <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
         </div> */}
-        <TextField
+        {/* <TextField
           id="bankInput"
           className="formElements"
           label="Bank Account Number"
@@ -83,7 +89,7 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.bankAccount}
           required
-        />
+        /> */}
         {/* <div className="fileUpload">
           <input name="fileUpload" className="fileUploadInput" type="file"></input>
         </div> */}

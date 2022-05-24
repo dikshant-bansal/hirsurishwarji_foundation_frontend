@@ -11,7 +11,7 @@ const SkillDetailsTable = ({ skillList, list }) => {
     phoneNumber: null,
   };
 
-  const [rowsData, setRowsData] = useState(list ? list :[]);
+  const [rowsData, setRowsData] = useState(list);
 
   const addTableRows = () => {
     setRowsData([...rowsData, rowsInput]);

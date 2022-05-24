@@ -9,7 +9,7 @@ const EarningMemberEdit = ({ data }) => {
   };
 
   const earningMembersList = (earningMembersList) => {
-    formData.earningMembersList = earningMembersList
+    data.earningMembersList = earningMembersList
   }
 
   return (

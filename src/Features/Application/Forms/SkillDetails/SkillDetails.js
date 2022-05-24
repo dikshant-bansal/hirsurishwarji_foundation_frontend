@@ -56,6 +56,16 @@ const SkillDetails = ({ backForm, submitFormDetails, skillDetailsData, administr
             required
             multiline
           />
+          <TextField
+            id="surveyorInput"
+            className="formElements"
+            label="Surveyor:"
+            variant="outlined"
+            name='surveyor'
+            onChange={(event) => handleChange(event)}
+            defaultValue={administrativeDetailsData?.surveyor}
+            required
+          />
         </div>
         <div className="btnContainer">
           <Button

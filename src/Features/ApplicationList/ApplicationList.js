@@ -28,7 +28,7 @@ const ApplicationList = ({ data }) => {
     { id: "approve", label: "Approve", minWidth: 120, sort: false },
     { id: "refer", label: "Refer", minWidth: 120, sort: false },
     { id: "view", label: "View", minWidth: 120, sort: false },
-    { id: "survey", label: "Survey", minWidth: 120, sort: false },
+    // { id: "survey", label: "Survey", minWidth: 120, sort: false },
   ];
 
   const approveBtn = (id) => {
@@ -38,12 +38,63 @@ const ApplicationList = ({ data }) => {
         className="approveBtn"
         variant="outlined"
         color="success"
-        onClick={() => navigate(`/approve/${id}`)}
-        size='small'
+        onClick={() => getToAprroveScreen(id)}
+        size="small"
       >
         Approve
       </Button>
     );
+  };
+
+  const getToAprroveScreen = (id) => {
+    let getApproveData = axios({
+      method: "GET",
+      url: `https://hs-foundation.herokuapp.com/approval/get/${id}`,
+      headers: { "Content-Type": "application/json" },
+    });
+    let getBankDetailsData = axios({
+      method: "GET",
+      url: `https://hs-foundation.herokuapp.com/bankDetails/get/${id}`,
+      headers: { "Content-Type": "application/json" },
+    });
+    let applicationDetailsData = axios({
+      method: "GET",
+      url: `https://hs-foundation.herokuapp.com/get/${id}`,
+      headers: { "Content-Type": "application/json" },
+    });
+    let surveyDetailsData = axios({
+      method: "GET",
+      url: `https://hs-foundation.herokuapp.com/survey/get/${id}`,
+      headers: { "Content-Type": "application/json" },
+    });
+    Promise.all([
+      getApproveData,
+      getBankDetailsData,
+      applicationDetailsData,
+      surveyDetailsData,
+    ])
+      .then((response) => {
+        let getApproveDataResponse = response[0];
+        let getBankDetailsDataResponse = response[1];
+        let applicationDetailsDataResponse = response[2];
+        let surveyDetailsDataResponse = response[3];
+        if (
+          getApproveDataResponse.status === 200 &&
+          getBankDetailsDataResponse.status === 200 &&
+          applicationDetailsDataResponse.status === 200 &&
+          surveyDetailsDataResponse.status === 200
+        ) {
+          navigate(`/approve/${id}`, {
+            state: {
+              approvalInfo: getApproveDataResponse.data,
+              bankInfo: getBankDetailsDataResponse.data,
+              applicationInfo: applicationDetailsDataResponse.data,
+              surveyInfo: surveyDetailsDataResponse.data,
+            },
+          });
+        }
+      })
+      .catch((error) => console.error("error", error));
   };
 
   const referBtn = () => {
@@ -53,7 +104,7 @@ const ApplicationList = ({ data }) => {
         className="referBtn"
         variant="outlined"
         color="secondary"
-        size='small'
+        size="small"
       >
         Refer
       </Button>
@@ -68,7 +119,7 @@ const ApplicationList = ({ data }) => {
         variant="outlined"
         // onClick={() => navigate(`/application/${id}`)}
         onClick={() => getApplicationInfo(id)}
-        size='small'
+        size="small"
       >
         View
       </Button>
@@ -76,33 +127,70 @@ const ApplicationList = ({ data }) => {
   };
 
   const getApplicationInfo = (id) => {
-    axios({
+    // axios({
+    //   method: "GET",
+    //   url: `https://hs-foundation.herokuapp.com/get/${id}`,
+    //   headers: { "Content-Type": "application/json" },
+    // })
+    //   .then((response) => {
+    //     if (response.status === 200) {
+    //       axios({
+    //         method: "GET",
+    //         url: `https://hs-foundation.herokuapp.com/survey/get/${id}`,
+    //         headers: { "Content-Type": "application/json" },
+    //       }).then((res) => {
+    //         if (response.status === 200) {
+    //           navigate(`/application/${id}`, {
+    //             state: { info: response.data, surveyInfo: res.data },
+    //           });
+    //         }
+    //       });
+    //     }
+    //   })
+    //   .catch((error) => console.error("error", error));
+    let applicationDetailsData = axios({
       method: "GET",
       url: `https://hs-foundation.herokuapp.com/get/${id}`,
       headers: { "Content-Type": "application/json" },
-    })
+    });
+    let surveyDetailsData = axios({
+      method: "GET",
+      url: `https://hs-foundation.herokuapp.com/survey/get/${id}`,
+      headers: { "Content-Type": "application/json" },
+    });
+    Promise.all([applicationDetailsData, surveyDetailsData])
       .then((response) => {
-        if (response.status === 200) {
-          navigate(`/application/${id}`, { state: { info: response.data } });
+        let applicationDetailsDataResponse = response[0];
+        let surveyDetailsDataResponse = response[1];
+        if (
+          applicationDetailsDataResponse.status === 200 &&
+          surveyDetailsDataResponse.status === 200
+        ) {
+          navigate(`/application/${id}`, {
+            state: {
+              info: applicationDetailsDataResponse.data,
+              surveyInfo: surveyDetailsDataResponse.data,
+            },
+          });
         }
       })
       .catch((error) => console.error("error", error));
   };
 
-  const surveyBtn = (id) => {
-    return (
-      <Button
-        id="surveyBtn"
-        className="surveyBtn"
-        variant="outlined"
-        onClick={() => navigate(`/survey/${id}`)}
-        // onClick={() => getSurveyInfo(id)}
-        size='small'
-      >
-        Survey
-      </Button>
-    );
-  };
+  // const surveyBtn = (id) => {
+  //   return (
+  //     <Button
+  //       id="surveyBtn"
+  //       className="surveyBtn"
+  //       variant="outlined"
+  //       onClick={() => navigate(`/survey/${id}`)}
+  //       // onClick={() => getSurveyInfo(id)}
+  //       size='small'
+  //     >
+  //       Survey
+  //     </Button>
+  //   );
+  // };
 
   // const getSurveyInfo = (id) => {
   //   axios({
@@ -118,13 +206,23 @@ const ApplicationList = ({ data }) => {
   //     .catch((error) => console.error("error", error));
   // };
 
-  const createData = (id, name, mobile, aadhaar, ration,status, approve, refer, view, survey) => {
-    return { id, name, mobile, aadhaar, ration, status, approve, refer, view, survey };
+  const createData = (
+    id,
+    name,
+    mobile,
+    aadhaar,
+    ration,
+    status,
+    approve,
+    refer,
+    view
+  ) => {
+    return { id, name, mobile, aadhaar, ration, status, approve, refer, view };
   };
 
   const rows = data.map((element, index) => {
     return createData(
-      index + 1,
+      element.id,
       element.name,
       element.mobileNumber,
       element.aadharnumber,
@@ -132,8 +230,8 @@ const ApplicationList = ({ data }) => {
       element.status,
       approveBtn(element.id),
       referBtn(),
-      viewBtn(element.id),
-      surveyBtn(element.id)
+      viewBtn(element.id)
+      // surveyBtn(element.id)
     );
   });
 

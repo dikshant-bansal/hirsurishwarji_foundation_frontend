@@ -21,7 +21,7 @@ const PersonalDetailsEdit = ({ data }) => {
     state: data?.state,
     pincode: data?.pincode,
     nativeTown: data?.nativeTown,
-    mobileNumber: data?.mobileNumber,
+    mobileNumber: data?.mobileNumber[0],
     phoneNumber: data?.phoneNumber,
     creed: data?.creed,
     category: data?.category,
@@ -83,7 +83,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='address'
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.address1}
+          defaultValue={formData?.address}
           multiline
           required
         />
@@ -94,7 +94,7 @@ const PersonalDetailsEdit = ({ data }) => {
           variant="outlined"
           name='city'
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.address2}
+          defaultValue={formData?.city}
           required
         />
         <TextField

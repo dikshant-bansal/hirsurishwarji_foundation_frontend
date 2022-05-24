@@ -10,7 +10,7 @@ const SkillDetailsEdit = ({ data }) => {
   };
 
   const skillList = (skillList) => {
-    formData.skillDetailsList = skillList;
+    data.skillDetailsList = skillList;
   }
 
   return (

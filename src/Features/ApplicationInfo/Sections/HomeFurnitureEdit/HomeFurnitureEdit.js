@@ -15,7 +15,7 @@ const HomeFurnitureEdit = ({ data }) => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    formData[name] = value
+    data[name] = value
   }
 
   return (

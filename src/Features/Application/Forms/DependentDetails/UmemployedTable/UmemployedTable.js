@@ -1,16 +1,20 @@
-import React, { useState } from "react";
-import "./EarningMemberTable.scss";
+import React, { useState, useEffect } from "react";
+import "./UmemployedTable.scss";
 import { Button } from "@mui/material";
 
-const EarningMemberTable = ({ earningMembersList, list }) => {
+const UmemployedTable = ({ unemployedList, list }) => {
+  useEffect(() => {
+    addTableRows();
+  }, []);
+
   const rowsInput = {
     sNo: null,
     name: null,
-    work: null,
-    phoneNumber: null,
+    education: null,
+    experience: null,
   };
 
-  const [rowsData, setRowsData] = useState(list);
+  const [rowsData, setRowsData] = useState(list ? list : []);
 
   const addTableRows = () => {
     setRowsData([...rowsData, rowsInput]);
@@ -30,22 +34,22 @@ const EarningMemberTable = ({ earningMembersList, list }) => {
     const { name, value } = event.target;
     const rowsInputData = [...rowsData];
     rowsInputData[index][name] = value;
-    if(rowsInputData[index].sNo === null){
-      rowsInputData[index].sNo = index+1
+    if (rowsInputData[index].sNo === null) {
+      rowsInputData[index].sNo = index + 1;
     }
     setRowsData(rowsInputData);
-    earningMembersList(rowsInputData)
+    unemployedList(rowsInputData);
   };
 
   return (
-    <div id="EarningMemberTable">
+    <div id="UmemployedTable">
       <table>
         <thead className="tableHead">
           <tr>
             <th className="sNo">S. No.</th>
             <th className="name">Name</th>
-            <th className="work">Work</th>
-            <th className="phoneNumber">Phone No.</th>
+            <th className="work">Education</th>
+            <th className="phoneNumber">Experience</th>
           </tr>
         </thead>
         <tbody className="tableBody">
@@ -55,7 +59,7 @@ const EarningMemberTable = ({ earningMembersList, list }) => {
                 <td className="SNo">
                   <input
                     type="number"
-                    value={`${index+1}`}
+                    value={`${index + 1}`}
                     name="sNo"
                     className="SNoInput"
                     readOnly
@@ -70,22 +74,22 @@ const EarningMemberTable = ({ earningMembersList, list }) => {
                     className="NameInput"
                   />
                 </td>
-                <td className="Work">
+                <td className="Education">
                   <input
                     type="text"
-                    value={rowData.work}
+                    value={rowData.education}
                     onChange={(event) => handleChange(index, event)}
-                    name="work"
-                    className="WorkInput"
+                    name="education"
+                    className="EducationInput"
                   />
                 </td>
-                <td className="PhoneNo">
+                <td className="Experience">
                   <input
-                    type="number"
-                    value={rowData.phoneNumber}
+                    type="text"
+                    value={rowData.experience}
                     onChange={(event) => handleChange(index, event)}
-                    name="phoneNumber"
-                    className="PhoneNoInput"
+                    name="experience"
+                    className="ExperienceInput"
                   />
                 </td>
               </tr>
@@ -116,4 +120,4 @@ const EarningMemberTable = ({ earningMembersList, list }) => {
   );
 };
 
-export default EarningMemberTable;
+export default UmemployedTable;

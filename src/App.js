@@ -17,12 +17,14 @@ import axios from "axios";
 
 const App = () => {
   const [data, setData] = useState([]);
+  const [addResponse, setAddResponse] = useState({});
 
   useEffect(() => {
     getData();
-  },[])
+  }, []);
 
   const addData = (newData) => {
+    setAddResponse({});
     axios({
       method: "POST",
       url: "https://hs-foundation.herokuapp.com/create",
@@ -32,6 +34,7 @@ const App = () => {
       .then((response) => {
         if (response.status === 201) {
           getData();
+          setAddResponse(response);
         }
       })
       .catch((error) => console.error("error", error));
@@ -59,16 +62,22 @@ const App = () => {
         <Routes>
           <Route
             path="/application"
-            element={<Application addData={addData} getData={getData} />}
+            element={
+              <Application
+                addData={addData}
+                getData={getData}
+                addResponse={addResponse}
+              />
+            }
           />
           <Route
             path="/applicationList"
             element={<ApplicationList data={data} />}
           />
           <Route path="/contactUs" element={<ContactUs />} />
-          <Route path="/application/:id" element={<ApplicationInfo />} />
-          <Route path="/survey/:id" element={<Survey />} />
-          <Route path="/approve/:id" element={<Approve />} />
+          <Route path="/application/:id" element={<ApplicationInfo getData={getData}/>} />
+          {/* <Route path="/survey/:id" element={<Survey />} /> */}
+          <Route path="/approve/:id" element={<Approve getData={getData}/>} />
           <Route path="/" element={<Home />} />
         </Routes>
       </Router>

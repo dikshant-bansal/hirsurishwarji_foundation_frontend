@@ -14,18 +14,35 @@ import {
   EarningMemberEdit,
   SkillDetailsEdit,
   AdministrationDetails,
-  // SurveyDetails,
+  SurveyDetails,
 } from "./Sections";
 // import { MockData } from "../../MockData";
 
-const ApplicationInfo = () => {
+const ApplicationInfo = ({ getData }) => {
   // const { id } = useParams();
   const location = useLocation();
   let applicationData = location.state.info;
+  let surveyData = location.state.surveyInfo;
+
+  const updateData = (data) => {
+    axios({
+      method: "POST",
+      url: "https://hs-foundation.herokuapp.com/update",
+      data: data,
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          getData();
+        }
+      })
+      .catch((error) => console.error("error", error));
+  };
 
   return (
     <div id="ApplicationInfo" className="ApplicationInfo">
       <div className="apllicationDetails">Application Details</div>
+      <div className="apllicationId">Application ID: {applicationData?.id}</div>
       <div className="availableData">
         <PersonalDetailsEdit data={applicationData?.personalDetails} />
         <UpdateDocumentsEdit data={applicationData?.updateDocuments} />
@@ -35,8 +52,13 @@ const ApplicationInfo = () => {
         <MonthlyExpensesEdit data={applicationData?.monthlyExpenses} />
         <HomeFurnitureEdit data={applicationData?.homeFurniture} />
         <DependentDetailsEdit data={applicationData?.dependentDetails} />
-        <MedicalGrantEdit data={applicationData?.medicalGrant} />
-        <EarningMemberEdit data={applicationData?.earningMember} />
+        {applicationData.personalDetails.category !== "Financial" && (
+          <MedicalGrantEdit
+            data={applicationData?.medicalGrant}
+            applicationData={applicationData}
+          />
+        )}
+        <EarningMemberEdit data={applicationData?.earningMembersDetails} />
         <SkillDetailsEdit data={applicationData?.skillDetails} />
         <AdministrationDetails data={applicationData?.administrationDetails} />
         <div className="btnContainer">
@@ -45,14 +67,14 @@ const ApplicationInfo = () => {
             className="updateBtn"
             variant="outlined"
             type="submit"
-            // onClick={() => console.log(applicationData, 'applicationData')}
+            onClick={() => updateData(applicationData)}
           >
             Update
           </Button>
         </div>
       </div>
-      {/* <div className="ruler"></div> */}
-      {/* <SurveyDetails /> */}
+      <div className="ruler"></div>
+      <SurveyDetails surveyData={surveyData} />
     </div>
   );
 };

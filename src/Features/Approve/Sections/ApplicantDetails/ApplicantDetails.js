@@ -2,14 +2,14 @@ import React from "react";
 import "./ApplicantDetails.scss";
 import { TextField } from "@mui/material";
 
-const ApplicantDetails = () => {
+const ApplicantDetails = ({ applicationInfo, surveyInfo }) => {
   let data = {
-    applicantName: "Keshav",
-    category: "Medical",
-    rationCardNumber: "86386238967239327",
-    applicationStatus: "Pending",
-    surveyDate: "12/01/2022",
-    appliedDate: "03/01/2022",
+    applicantName: applicationInfo.personalDetails.name,
+    category: applicationInfo.personalDetails.category,
+    rationCardNumber: applicationInfo.updateDocuments.rationCard,
+    applicationStatus: applicationInfo.status,
+    surveyDate: surveyInfo.surveyDate || '--',
+    appliedDate: applicationInfo.creationDate,
   };
 
   return (
@@ -70,7 +70,7 @@ const ApplicantDetails = () => {
           InputProps={{
             readOnly: true,
           }}
-          defaultValue={data.surveyDate}
+          defaultValue={data.surveyDate.includes('T') ? data.surveyDate.split('T')[0] : data.surveyDate}
         />
         <TextField
           id="appliedDateInput"
@@ -81,7 +81,7 @@ const ApplicantDetails = () => {
           InputProps={{
             readOnly: true,
           }}
-          defaultValue={data.appliedDate}
+          defaultValue={data.appliedDate.includes('T') ? data.appliedDate.split('T')[0] : data.appliedDate}
         />
       </div>
     </div>

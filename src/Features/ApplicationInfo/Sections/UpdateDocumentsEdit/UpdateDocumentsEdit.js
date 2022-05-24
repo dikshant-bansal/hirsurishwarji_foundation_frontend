@@ -1,13 +1,14 @@
 import React from "react";
 import "./UpdateDocumentsEdit.scss";
 import { TextField } from "@mui/material";
+import BankDetailsTable from "./BankDetails/BankDetails";
 
 const UpdateDocumentsEdit = ({ data }) => {
   let formData = {
-    aadhaarNumber: data?.aadhaarNumber || null,
+    aadharNumber: data?.aadharNumber || null,
     rationCard: data?.rationCard || null,
     panNumber: data?.panNumber || null,
-    bankAccount: data?.bankAccount || null,
+    bankAccounts: data?.bankAccounts || null,
     // rent : data?.rent || null,
     // electricity: data?.electricity || null,
     // insurer: data?.insurer || null,
@@ -23,19 +24,24 @@ const UpdateDocumentsEdit = ({ data }) => {
     data[name] = value
   }
 
+  const bankAccounts = (bankAccounts) => {
+    formData.bankAccounts = bankAccounts
+  }
+
   return (
     <div id="UpdateDocumentsEdit" className="UpdateDocumentsEdit">
       <div className="formHeader">Update Documents</div>
       <div className="updateDocumentsForm">
+      <BankDetailsTable bankAccounts={bankAccounts} list={data?.bankAccounts}/>
         <TextField
           id="aadhaarInput"
           className="formElements"
           label="Aadhaar Number"
           variant="outlined"
           type="number"
-          name='aadhaarNumber'
+          name='aadharNumber'
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.aadhaarNumber}
+          defaultValue={formData?.aadharNumber}
           required
         />
         <TextField
@@ -60,7 +66,7 @@ const UpdateDocumentsEdit = ({ data }) => {
           defaultValue={data?.panNumber}
           required
         />
-        <TextField
+        {/* <TextField
           id="bankInput"
           className="formElements"
           label="Bank Account Number"
@@ -69,7 +75,7 @@ const UpdateDocumentsEdit = ({ data }) => {
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.bankAccount}
           required
-        />
+        /> */}
         {/* <TextField
           id="rentInput"
           className="formElements"

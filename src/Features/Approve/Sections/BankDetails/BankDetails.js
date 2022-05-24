@@ -1,8 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import "./BankDetails.scss";
 import { TextField, Checkbox, Button } from "@mui/material";
+import axios from "axios";
+import DatePicker from "react-datepicker";
 
-const BankDetails = () => {
+const BankDetails = ({ bankInfo }) => {
+  let formData = {
+    amountApproved: bankInfo?.amountApproved,
+    bankAccountNumber: bankInfo?.bankAccountNumber,
+    bankName: bankInfo?.bankName,
+    chequeNeftNumber: bankInfo?.chequeNeftNumber,
+    grantAmount: bankInfo?.grantAmount,
+    grantDate: bankInfo?.grantDate || new Date(),
+    id: bankInfo?.id,
+  };
+
+  const [btnEnabled, setBtnEnabled] = useState(false);
+  const [data, setData] = useState(formData);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    let formDataCopy = { ...data };
+    formDataCopy[name] = value;
+    setData(formDataCopy);
+  };
+
+  const setDate = (date) => {
+    let formDataCopy = { ...data };
+    formDataCopy["grantDate"] = date;
+    setData(formDataCopy);
+  };
+
+  const submitBankDetails = () => {
+    axios({
+      method: "POST",
+      url: "https://hs-foundation.herokuapp.com/bankDetails/update",
+      data: data,
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => {
+       
+      })
+      .catch((error) => console.error("error", error));
+  };
+
   return (
     <div id="BankDetails" className="BankDetails">
       <div className="formHeader">Bank Details</div>
@@ -13,6 +54,7 @@ const BankDetails = () => {
           label="Bank Name"
           variant="outlined"
           name="bankName"
+          onChange={(event) => handleChange(event)}
         />
         <TextField
           id="bankAccountNumberInput"
@@ -21,6 +63,7 @@ const BankDetails = () => {
           variant="outlined"
           name="bankAccountNumber"
           type="number"
+          onChange={(event) => handleChange(event)}
         />
         <TextField
           id="amountApprovedInput"
@@ -29,6 +72,7 @@ const BankDetails = () => {
           variant="outlined"
           name="amountApproved"
           type="number"
+          onChange={(event) => handleChange(event)}
         />
         <TextField
           id="chequeNeftNumberInput"
@@ -37,6 +81,7 @@ const BankDetails = () => {
           variant="outlined"
           name="chequeNeftNumber"
           type="number"
+          onChange={(event) => handleChange(event)}
         />
         <TextField
           id="grantAmountInput"
@@ -45,9 +90,18 @@ const BankDetails = () => {
           variant="outlined"
           name="grantAmount"
           type="number"
+          onChange={(event) => handleChange(event)}
         />
+        <div id="formElements" className="formElements">
+          Date:
+          <DatePicker
+            selected={data.grantDate}
+            onChange={(date) => setDate(date)}
+            name="grantDate"
+          />
+        </div>
         <div>
-          <Checkbox />
+          <Checkbox onChange={() => setBtnEnabled((prev) => !prev)} />
           <span>
             Above details for Applicant are correct and ready for Grant.
           </span>
@@ -58,6 +112,8 @@ const BankDetails = () => {
             className="grantBtn"
             variant="outlined"
             type="submit"
+            onClick={() => submitBankDetails()}
+            disabled={!btnEnabled}
           >
             Grant
           </Button>

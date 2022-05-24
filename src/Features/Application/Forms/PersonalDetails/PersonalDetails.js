@@ -22,7 +22,7 @@ const PersonalDetails = ({ nextForm, data }) => {
     state: data?.state || 'Maharashtra',
     pincode: data?.pincode || null,
     nativeTown: data?.nativeTown || null,
-    mobileNumber: data?.mobileNumber || null,
+    mobileNumber: data?.mobileNumber[0] || null,
     phoneNumber: data?.phoneNumber || null,
     creed: data?.creed || null,
     category: data?.category || 'Medical',
@@ -31,7 +31,12 @@ const PersonalDetails = ({ nextForm, data }) => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    formData[name] = value
+    if(name === 'mobileNumber'){
+      formData['mobileNumber'] = []
+      formData['mobileNumber'][0] = value
+    }else {
+      formData[name] = value
+    }
   }
   
   const submitForm = (event) => {

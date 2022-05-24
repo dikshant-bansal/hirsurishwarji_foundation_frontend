@@ -11,9 +11,10 @@ import {
   MedicalGrant,
   EarningMember,
   SkillDetails,
+  EducationGrant,
 } from "./Forms";
 
-const Application = ({ addData, getData }) => {
+const Application = ({ addData, getData, addResponse }) => {
   const [activeFormIndex, setActiveFormIndex] = useState(0);
   const [collectiveData, setCollectiveData] = useState({});
   const [successAlert, setSuccessAlert] = useState(false);
@@ -23,23 +24,45 @@ const Application = ({ addData, getData }) => {
     let copyCollectiveData = { ...collectiveData };
     copyCollectiveData[formName] = formData;
     setCollectiveData({ ...copyCollectiveData });
-    setActiveFormIndex((prev) => prev + 1);
+    if (
+      copyCollectiveData?.personalDetails?.category === "Financial" &&
+      activeFormIndex === 5
+    ) {
+      setActiveFormIndex((prev) => prev + 2);
+    } else {
+      setActiveFormIndex((prev) => prev + 1);
+    }
+    scrollToTop();
+  };
+
+  const scrollToTop = () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   };
 
   const backForm = () => {
-    setActiveFormIndex((prev) => prev - 1);
+    if (
+      collectiveData.personalDetails.category === "Financial" &&
+      activeFormIndex === 7
+    ) {
+      setActiveFormIndex((prev) => prev - 2);
+    } else {
+      setActiveFormIndex((prev) => prev - 1);
+    }
+    scrollToTop();
   };
 
   const submitFormDetails = async (skillDetails, administrativeDetails) => {
     let copyCollectiveData = { ...collectiveData };
     copyCollectiveData.skillDetails = skillDetails;
-    copyCollectiveData.administrativeDetails = administrativeDetails;
+    copyCollectiveData.administrationDetails = administrativeDetails;
     setCollectiveData({ ...copyCollectiveData });
     addData({
       ...copyCollectiveData,
       status: "Pending",
-    })
+    });
     setSuccessAlert(true);
+
     // if (addDataResponse.status === 201) {
     //   setSuccessAlert(true);
     //   getData();
@@ -65,7 +88,7 @@ const Application = ({ addData, getData }) => {
     "Monthly Expenses",
     "Home Furniture Details",
     "Dependent Details",
-    "Medical Grant Details",
+    "Grant Details",
     "Earning Member Details",
     "Other Details",
   ];
@@ -104,7 +127,13 @@ const Application = ({ addData, getData }) => {
       nextForm={nextForm}
       backForm={backForm}
       data={collectiveData.medicalGrant}
+      collectiveData={collectiveData}
     />,
+    // <EducationGrant
+    //   nextForm={nextForm}
+    //   backForm={backForm}
+    //   data={collectiveData.medicalGrant}
+    // />,
     <EarningMember
       nextForm={nextForm}
       backForm={backForm}
@@ -132,17 +161,20 @@ const Application = ({ addData, getData }) => {
         </Stepper>
       </div>
       {successAlert || errorAlert ? (
-        <Alert
-          onClose={() =>
-            successAlert ? closeSucessAlert() : closeErrorAlert()
-          }
-        >
-          {`${
-            successAlert
-              ? "Your request has been processed successfully!"
-              : "Something went Wrong! Please try Again!!"
-          }`}
-        </Alert>
+        <div>
+          <Alert
+            onClose={() =>
+              successAlert ? closeSucessAlert() : closeErrorAlert()
+            }
+          >
+            {`${
+              successAlert
+                ? "Your request has been processed successfully!"
+                : "Something went Wrong! Please try Again!!"
+            }`}
+          </Alert>
+          <div>Application created with id: {addResponse.data.id}</div>
+        </div>
       ) : (
         stepsForm[activeFormIndex]
       )}

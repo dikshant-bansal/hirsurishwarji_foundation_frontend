@@ -9,24 +9,30 @@ import {
   FormLabel,
 } from "@mui/material";
 import DependentTable from "./DependentTable/DependentTable";
+import UmemployedTable from "./UmemployedTable/UmemployedTable";
 
 const DependentDetailsEdit = ({ data }) => {
   
   let formData = {
     dependentList: data?.dependentList,
-    education: data?.education,
-    experience: data?.experience,
+    // education: data?.education,
+    // experience: data?.experience,
+    unemployedPersonList: data?.unemployedPersonList,
     previousLoan: data?.previousLoan,
-    previousLoanAmount: data?.previousLoanAmount,
+    loanAmount: data?.loanAmount,
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-      formData[name] = value
+    data[name] = value
   }
 
   const dependentList = (dependentListArray) => {
-    formData.dependentList = dependentListArray
+    data.dependentList = dependentListArray
+  }
+
+  const unemployedList = (unemployedListArray) => {
+    data.unemployedPersonList = unemployedListArray
   }
 
   return (
@@ -34,8 +40,10 @@ const DependentDetailsEdit = ({ data }) => {
       <div className="formHeader">Dependent Details</div>
       <DependentTable dependentList={dependentList} list={formData?.dependentList}/>
       <div className="DependentDetailsForm">
-        <div className="formSubHeader">Unemployed Person:</div>
-        <TextField
+      <div className="formSubHeader">Unemployed Person:</div>
+        <UmemployedTable unemployedList={unemployedList} list={formData?.unemployedPersonList}/>
+        <div className="formSubHeader">Previous Loan Info:</div>
+        {/* <TextField
           className="formElements"
           label="Education"
           variant="outlined"
@@ -50,7 +58,7 @@ const DependentDetailsEdit = ({ data }) => {
           name="experience"
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.experience}
-        />
+        /> */}
         <FormControl className="formElements">
           <FormLabel
             id="demo-row-radio-buttons-group-label"
@@ -73,9 +81,9 @@ const DependentDetailsEdit = ({ data }) => {
           label="Previous Loan Amount (in Rs.)"
           variant="outlined"
           type="number"
-          name="previousLoanAmount"
+          name="loanAmount"
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.previousLoanAmount}
+          defaultValue={formData?.loanAmount}
         />
       </div>
     </div>

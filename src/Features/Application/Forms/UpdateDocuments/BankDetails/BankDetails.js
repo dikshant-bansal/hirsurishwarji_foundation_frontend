@@ -1,16 +1,21 @@
-import React, { useState } from "react";
-import "./EarningMemberTable.scss";
+import React, { useState, useEffect } from "react";
+import "./BankDetails.scss";
 import { Button } from "@mui/material";
 
-const EarningMemberTable = ({ earningMembersList, list }) => {
+const BankDetailsTable = ({ bankAccounts, list }) => {
+  useEffect(() => {
+    addTableRows();
+  }, []);
+
   const rowsInput = {
     sNo: null,
-    name: null,
-    work: null,
-    phoneNumber: null,
+    accountName: null,
+    accountNumber: null,
+    bankBranch: null,
+    bankName: null,
   };
 
-  const [rowsData, setRowsData] = useState(list);
+  const [rowsData, setRowsData] = useState(list ? list : []);
 
   const addTableRows = () => {
     setRowsData([...rowsData, rowsInput]);
@@ -30,62 +35,72 @@ const EarningMemberTable = ({ earningMembersList, list }) => {
     const { name, value } = event.target;
     const rowsInputData = [...rowsData];
     rowsInputData[index][name] = value;
-    if(rowsInputData[index].sNo === null){
-      rowsInputData[index].sNo = index+1
+    if (rowsInputData[index].sNo === null) {
+      rowsInputData[index].sNo = index + 1;
     }
     setRowsData(rowsInputData);
-    earningMembersList(rowsInputData)
+    bankAccounts(rowsInputData);
   };
 
   return (
-    <div id="EarningMemberTable">
+    <div id="BankDetailsTable">
       <table>
         <thead className="tableHead">
           <tr>
             <th className="sNo">S. No.</th>
-            <th className="name">Name</th>
-            <th className="work">Work</th>
-            <th className="phoneNumber">Phone No.</th>
+            <th className="name">Account Name</th>
+            <th className="work">Account Number</th>
+            <th className="phoneNumber">Bank Branch</th>
+            <th className="phoneNumber">Bank Name</th>
           </tr>
         </thead>
         <tbody className="tableBody">
           {rowsData?.map((rowData, index) => {
             return (
-              <tr>
+              <tr key={index}>
                 <td className="SNo">
                   <input
                     type="number"
-                    value={`${index+1}`}
+                    value={`${index + 1}`}
                     name="sNo"
                     className="SNoInput"
                     readOnly
                   />
                 </td>
-                <td className="Name">
+                <td className="AccountName">
                   <input
                     type="text"
-                    value={rowData.name}
+                    value={rowData.accountName}
                     onChange={(event) => handleChange(index, event)}
-                    name="name"
-                    className="NameInput"
+                    name="accountName"
+                    className="AccountNameInput"
                   />
                 </td>
-                <td className="Work">
+                <td className="AccountNumber">
                   <input
                     type="text"
-                    value={rowData.work}
+                    value={rowData.accountNumber}
                     onChange={(event) => handleChange(index, event)}
-                    name="work"
-                    className="WorkInput"
+                    name="accountNumber"
+                    className="AccountNumberInput"
                   />
                 </td>
-                <td className="PhoneNo">
+                <td className="BankName">
                   <input
-                    type="number"
-                    value={rowData.phoneNumber}
+                    type="text"
+                    value={rowData.bankName}
                     onChange={(event) => handleChange(index, event)}
-                    name="phoneNumber"
-                    className="PhoneNoInput"
+                    name="bankName"
+                    className="BankNameInput"
+                  />
+                </td>
+                <td className="BankBranch">
+                  <input
+                    type="text"
+                    value={rowData.bankBranch}
+                    onChange={(event) => handleChange(index, event)}
+                    name="bankBranch"
+                    className="BankBranchInput"
                   />
                 </td>
               </tr>
@@ -116,4 +131,4 @@ const EarningMemberTable = ({ earningMembersList, list }) => {
   );
 };
 
-export default EarningMemberTable;
+export default BankDetailsTable;
