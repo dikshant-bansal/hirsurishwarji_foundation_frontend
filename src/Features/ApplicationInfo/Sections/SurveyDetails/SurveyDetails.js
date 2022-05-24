@@ -11,7 +11,9 @@ const SurveyDetails = ({ surveyData }) => {
     surveyDoneBy: surveyData?.surveyDoneBy,
     surveyDetails: surveyData?.surveyDetails,
     specialNotes: surveyData?.specialNotes,
-    surveyDate: surveyData?.surveyDate || new Date(),
+    surveyDate: surveyData?.surveyDate
+      ? new Date(surveyData.surveyDate)
+      : new Date(),
   };
 
   const [data, setData] = useState(formData);
@@ -40,9 +42,7 @@ const SurveyDetails = ({ surveyData }) => {
       data: data,
       headers: { "Content-Type": "application/json" },
     })
-      .then((response) => {
-        
-      })
+      .then((response) => {})
       .catch((error) => console.error("error", error));
   };
 
@@ -81,7 +81,9 @@ const SurveyDetails = ({ surveyData }) => {
           Date:
           <DatePicker
             selected={data.surveyDate}
-            onChange={(date) => setDate(date)}
+            onChange={(date) => {
+              setDate(date);
+            }}
             name="surveyDate"
           />
         </div>

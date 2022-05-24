@@ -9,7 +9,7 @@ const ApprovalDetails = ({ approvalInfo }) => {
   let formData = {
     amountApproved: approvalInfo?.amountApproved,
     amountNeeded: approvalInfo?.amountNeeded,
-    approvalDate: approvalInfo?.approvalDate || new Date(),
+    approvalDate: approvalInfo?.approvalDate ? new Date(approvalInfo.approvalDate) : new Date(),
     approvedBy: approvalInfo?.approvedBy,
     comments: approvalInfo?.comments,
     id: approvalInfo?.id,

@@ -11,7 +11,7 @@ const BankDetails = ({ bankInfo }) => {
     bankName: bankInfo?.bankName,
     chequeNeftNumber: bankInfo?.chequeNeftNumber,
     grantAmount: bankInfo?.grantAmount,
-    grantDate: bankInfo?.grantDate || new Date(),
+    grantDate: bankInfo?.grantDate ? new Date(bankInfo.grantDate) : new Date(),
     id: bankInfo?.id,
   };
 

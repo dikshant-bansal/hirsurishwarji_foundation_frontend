@@ -173,7 +173,7 @@ const Application = ({ addData, getData, addResponse }) => {
                 : "Something went Wrong! Please try Again!!"
             }`}
           </Alert>
-          <div>Application created with id: {addResponse.data.id}</div>
+          {addResponse?.data?.id && <div>Application created with id: {addResponse.data.id}</div>}
         </div>
       ) : (
         stepsForm[activeFormIndex]
