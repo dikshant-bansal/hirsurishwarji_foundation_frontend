@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./MonthlyExpensesEdit.scss";
 import {
   TextField,
@@ -24,14 +24,30 @@ const MonthlyExpensesEdit = ({ data }) => {
     home: data?.home,
   };
 
+  const [monthlyData, setMonthlyData] = useState({ ...formData });
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     data[name] = value
+    let formDataCopy = { ...monthlyData };
+    formDataCopy[name] = value;
+    setMonthlyData(formDataCopy);
   }
 
   return (
     <div id="MonthlyExpensesEdit" className="MonthlyExpensesEdit">
       <div className="formHeader">Monthly Expenses Details</div>
+      <div className="totalExpenses">
+          Total Monthly Expense:{" "}
+          {Number(monthlyData?.maintainance) +
+            Number(monthlyData?.electric) +
+            Number(monthlyData?.medical) +
+            Number(monthlyData?.groceries) +
+            Number(monthlyData?.telephone) +
+            Number(monthlyData?.education) +
+            Number(monthlyData?.tution) +
+            Number(monthlyData?.others)}
+        </div>
       <div className="MonthlyExpensesForm">
         <TextField
           id="pincodeInput"
@@ -41,7 +57,7 @@ const MonthlyExpensesEdit = ({ data }) => {
           type="number"
           name='maintainance'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.maintainance}
+          defaultValue={monthlyData?.maintainance}
           InputProps={{
             startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
           }}
@@ -55,7 +71,7 @@ const MonthlyExpensesEdit = ({ data }) => {
           type="number"
           name='electric'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.electric}
+          defaultValue={monthlyData?.electric}
           InputProps={{
             startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
           }}
@@ -69,7 +85,7 @@ const MonthlyExpensesEdit = ({ data }) => {
           type="number"
           name='medical'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.medical}
+          defaultValue={monthlyData?.medical}
           InputProps={{
             startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
           }}
@@ -83,7 +99,7 @@ const MonthlyExpensesEdit = ({ data }) => {
           type="number"
           name='groceries'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.groceries}
+          defaultValue={monthlyData?.groceries}
           InputProps={{
             startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
           }}
@@ -97,7 +113,7 @@ const MonthlyExpensesEdit = ({ data }) => {
           type="number"
           name='telephone'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.telephone}
+          defaultValue={monthlyData?.telephone}
           InputProps={{
             startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
           }}
@@ -111,7 +127,7 @@ const MonthlyExpensesEdit = ({ data }) => {
           type="number"
           name='education'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.education}
+          defaultValue={monthlyData?.education}
           InputProps={{
             startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
           }}
@@ -125,7 +141,7 @@ const MonthlyExpensesEdit = ({ data }) => {
           type="number"
           name='tution'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.tution}
+          defaultValue={monthlyData?.tution}
           InputProps={{
             startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
           }}
@@ -139,7 +155,7 @@ const MonthlyExpensesEdit = ({ data }) => {
           type="number"
           name='others'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.others}
+          defaultValue={monthlyData?.others}
           InputProps={{
             startAdornment: <InputAdornment position="start">Rs. </InputAdornment>,
           }}
@@ -153,7 +169,7 @@ const MonthlyExpensesEdit = ({ data }) => {
           type="number"
           name='flatArea'
           onChange={(event) => handleChange(event)}
-          defaultValue={data?.flatArea}
+          defaultValue={monthlyData?.flatArea}
           // InputProps={{
           //   startAdornment: <InputAdornment position="end">sqft</InputAdornment>,
           //   // endAdornment: <InputAdornment position="end">sqft</InputAdornment>
@@ -171,7 +187,7 @@ const MonthlyExpensesEdit = ({ data }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            defaultValue={data?.home}
+            defaultValue={monthlyData?.home}
           >
             <FormControlLabel value="Rented" control={<Radio />} label="Rented" name='home' onChange={(event) => handleChange(event)}/>
             <FormControlLabel value="Owned" control={<Radio />} label="Owned" name='home' onChange={(event) => handleChange(event)}/>

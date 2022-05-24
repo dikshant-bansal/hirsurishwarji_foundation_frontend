@@ -33,7 +33,6 @@ const MonthlyExpenses = ({ nextForm, backForm, data }) => {
     let formDataCopy = { ...monthlyData };
     formDataCopy[name] = value;
     setMonthlyData(formDataCopy);
-    console.log(formDataCopy, "copy");
   };
 
   const submitForm = (event) => {
