@@ -39,6 +39,9 @@
             tr{
                 height: 20px;
                 margin: 5px 0px;
+                .switchTD{
+                    text-align: center;
+                }
                 td{
                     input{
                         border: 1px solid black;

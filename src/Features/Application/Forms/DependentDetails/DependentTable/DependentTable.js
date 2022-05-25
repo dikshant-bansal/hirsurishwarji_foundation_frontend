@@ -204,28 +204,28 @@ const DependentTable = ({ dependentList, list }) => {
                   />
                 </td>
                 {/* <td className="religiousActivity"> */}
-                <td>
+                <td className="switchTD">
                   <DragSwitch
                     name="kanmool"
                     onChange={(event) => handleKanmoolSwitchChange(index, event)}
                     checked={rowData?.kanmool}
                   />
                 </td>
-                <td>
+                <td className="switchTD">
                   <DragSwitch
                     name="navkarshi"
                     onChange={(event) => handleNavkarshiSwitchChange(index, event)}
                     checked={rowData?.navkarshi}
                   />
                 </td>
-                <td>
+                <td className="switchTD">
                   <DragSwitch
                     name="pooja"
                     onChange={(event) => handlePoojaSwitchChange(index, event)}
                     checked={rowData?.pooja}
                   />
                 </td>
-                <td>
+                <td className="switchTD">
                   <DragSwitch
                     name="nightDinner"
                     onChange={(event) => handleNightDinnerSwitchChange(index, event)}
