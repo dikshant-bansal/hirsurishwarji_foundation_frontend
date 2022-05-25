@@ -25,6 +25,7 @@ const SkillDetailsTable = ({ skillList, list }) => {
       rows = [rowsInput];
     }
     setRowsData(rows);
+    skillList(rows);
   };
 
   const handleChange = (index, event) => {

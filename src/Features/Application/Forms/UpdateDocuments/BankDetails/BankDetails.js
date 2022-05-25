@@ -29,6 +29,7 @@ const BankDetailsTable = ({ bankAccounts, list }) => {
       rows = [rowsInput];
     }
     setRowsData(rows);
+    bankAccounts(rows);
   };
 
   const handleChange = (index, event) => {

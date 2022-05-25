@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./DependentTable.scss";
-import { Button, Switch } from "@mui/material";
+import { Button } from "@mui/material";
 // import Switch from "react-switch";
+import { DragSwitch } from "react-dragswitch";
+import "react-dragswitch/dist/index.css";
 
 const DependentTable = ({ dependentList, list }) => {
-  const [kanmool, setKanmool] = useState(false);
-  const [navkarshi, setNavkarshi] = useState(false);
-  const [pooja, setPooja] = useState(false);
-  const [nightDinner, setNightDinner] = useState(false);
+  // const [kanmool, setKanmool] = useState(false);
+  // const [navkarshi, setNavkarshi] = useState(false);
+  // const [pooja, setPooja] = useState(false);
+  // const [nightDinner, setNightDinner] = useState(false);
 
   // useEffect(() => {
   //   addTableRows();
@@ -22,10 +24,10 @@ const DependentTable = ({ dependentList, list }) => {
     profession: null,
     income: null,
     religiousEducation: null,
-    kanmool: null,
-    navkarshi: null,
-    pooja: null,
-    nightDinner: null,
+    kanmool: false,
+    navkarshi: false,
+    pooja: false,
+    nightDinner: false,
   };
 
   const [rowsData, setRowsData] = useState(list ? list : []);
@@ -43,12 +45,53 @@ const DependentTable = ({ dependentList, list }) => {
       rows = [rowsInput];
     }
     setRowsData(rows);
+    dependentList(rows);
   };
 
   const handleChange = (index, event) => {
     const { name, value } = event.target;
     const rowsInputData = [...rowsData];
     rowsInputData[index][name] = value;
+    if (rowsInputData[index].sNo === null) {
+      rowsInputData[index].sNo = index + 1;
+    }
+    setRowsData(rowsInputData);
+    dependentList(rowsInputData);
+  };
+
+  const handleKanmoolSwitchChange = (index, event) => {
+    const rowsInputData = [...rowsData];
+    rowsInputData[index]['kanmool'] = event;
+    if (rowsInputData[index].sNo === null) {
+      rowsInputData[index].sNo = index + 1;
+    }
+    setRowsData(rowsInputData);
+    dependentList(rowsInputData);
+  };
+
+  const handleNavkarshiSwitchChange = (index, event) => {
+    const rowsInputData = [...rowsData];
+    rowsInputData[index]['navkarshi'] = event;
+    if (rowsInputData[index].sNo === null) {
+      rowsInputData[index].sNo = index + 1;
+    }
+    setRowsData(rowsInputData);
+    dependentList(rowsInputData);
+  };
+
+  const handlePoojaSwitchChange = (index, event) => {
+    const rowsInputData = [...rowsData];
+    rowsInputData[index]['pooja'] = event;
+    if (rowsInputData[index].sNo === null) {
+      rowsInputData[index].sNo = index + 1;
+    }
+    setRowsData(rowsInputData);
+    dependentList(rowsInputData);
+  };
+
+  const handleNightDinnerSwitchChange = (index, event) => {
+    const rowsInputData = [...rowsData];
+    rowsInputData[index]['nightDinner'] = event;
     if (rowsInputData[index].sNo === null) {
       rowsInputData[index].sNo = index + 1;
     }
@@ -162,27 +205,31 @@ const DependentTable = ({ dependentList, list }) => {
                 </td>
                 {/* <td className="religiousActivity"> */}
                 <td>
-                  <Switch
+                  <DragSwitch
                     name="kanmool"
-                    onChange={(event) => handleChange(index, event)}
+                    onChange={(event) => handleKanmoolSwitchChange(index, event)}
+                    checked={rowData?.kanmool}
                   />
                 </td>
                 <td>
-                  <Switch
+                  <DragSwitch
                     name="navkarshi"
-                    onChange={(event) => handleChange(index, event)}
+                    onChange={(event) => handleNavkarshiSwitchChange(index, event)}
+                    checked={rowData?.navkarshi}
                   />
                 </td>
                 <td>
-                  <Switch
+                  <DragSwitch
                     name="pooja"
-                    onChange={(event) => handleChange(index, event)}
+                    onChange={(event) => handlePoojaSwitchChange(index, event)}
+                    checked={rowData?.pooja}
                   />
                 </td>
                 <td>
-                  <Switch
+                  <DragSwitch
                     name="nightDinner"
-                    onChange={(event) => handleChange(index, event)}
+                    onChange={(event) => handleNightDinnerSwitchChange(index, event)}
+                    checked={rowData?.nightDinner}
                   />
                 </td>
                 {/* </td> */}

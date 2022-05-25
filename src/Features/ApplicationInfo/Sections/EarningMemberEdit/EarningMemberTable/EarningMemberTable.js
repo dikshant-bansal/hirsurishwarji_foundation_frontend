@@ -24,6 +24,7 @@ const EarningMemberTable = ({ earningMembersList, list }) => {
       rows = [rowsInput];
     }
     setRowsData(rows);
+    earningMembersList(rows);
   };
 
   const handleChange = (index, event) => {

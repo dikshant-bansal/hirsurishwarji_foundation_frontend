@@ -93,7 +93,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           variant="outlined"
           name="address"
           onChange={(event) => handleChange(event)}
-          defaultValue={formData?.address2}
+          defaultValue={formData?.address}
           multiline
           required
         />
