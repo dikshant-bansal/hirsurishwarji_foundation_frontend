@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 
-const SurveyDetails = ({ surveyData }) => {
+const SurveyDetails = ({ surveyData, applicationData, getData }) => {
   let formData = {
     id: surveyData?.id,
     surveyDoneBy: surveyData?.surveyDoneBy,
@@ -42,7 +42,21 @@ const SurveyDetails = ({ surveyData }) => {
       data: data,
       headers: { "Content-Type": "application/json" },
     })
-      .then((response) => {})
+      .then((response) => {
+        if(response.status === 200){
+          axios({
+            method: "POST",
+            url: "https://hs-foundation.herokuapp.com/update",
+            data: {...applicationData, status: "Survey Done"},
+            headers: { "Content-Type": "application/json" },
+          })
+            .then((res) => {
+              if (res.status === 200) {
+                getData();
+              }
+            })
+        }
+      })
       .catch((error) => console.error("error", error));
   };
 

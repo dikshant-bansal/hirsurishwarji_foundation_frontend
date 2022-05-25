@@ -8,6 +8,7 @@ import {
   FormControl,
   FormLabel,
 } from "@mui/material";
+import MobileNumbers from "./MobileNumbers/MobileNumbers";
 
 const PersonalDetailsEdit = ({ data }) => {
 
@@ -21,7 +22,7 @@ const PersonalDetailsEdit = ({ data }) => {
     state: data?.state,
     pincode: data?.pincode,
     nativeTown: data?.nativeTown,
-    mobileNumber: data?.mobileNumber[0],
+    mobileNumber: data?.mobileNumber,
     phoneNumber: data?.phoneNumber,
     creed: data?.creed,
     category: data?.category,
@@ -32,6 +33,10 @@ const PersonalDetailsEdit = ({ data }) => {
     const { name, value } = event.target;
     data[name] = value
   }
+
+  const mobileNumber = (mobileNumber) => {
+    data.mobileNumber = mobileNumber;
+  };
 
   return (
     <div id="PersonalDetailsEdit" className="PersonalDetailsEdit">
@@ -127,7 +132,7 @@ const PersonalDetailsEdit = ({ data }) => {
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.nativeTown}
         />
-        <TextField
+        {/* <TextField
           id="mobileNumberInput"
           className="formElements"
           label="Mobile Number"
@@ -137,7 +142,13 @@ const PersonalDetailsEdit = ({ data }) => {
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.mobileNumber}
           required
-        />
+        /> */}
+        <div className="formElements">
+          <MobileNumbers
+            mobileNumber={mobileNumber}
+            list={data?.mobileNumber}
+          />
+        </div>
         <TextField
           id="phoneNumberInput"
           className="formElements"

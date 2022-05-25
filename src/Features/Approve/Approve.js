@@ -13,9 +13,20 @@ const Approve = ({ getData }) => {
   return (
     <div id="Approve" className="Approve">
       <div className="pageHeader">Grant for Application</div>
-      <ApplicantDetails applicationInfo={applicationInfo} surveyInfo={surveyInfo}/>
-      <ApprovalDetails approvalInfo={approvalInfo} />
-      <BankDetails bankInfo={bankInfo} />
+      <ApplicantDetails
+        applicationInfo={applicationInfo}
+        surveyInfo={surveyInfo}
+      />
+      <ApprovalDetails
+        applicationInfo={applicationInfo}
+        approvalInfo={approvalInfo}
+        getData={getData}
+      />
+      <BankDetails
+        applicationInfo={applicationInfo}
+        bankInfo={bankInfo}
+        getData={getData}
+      />
     </div>
   );
 };

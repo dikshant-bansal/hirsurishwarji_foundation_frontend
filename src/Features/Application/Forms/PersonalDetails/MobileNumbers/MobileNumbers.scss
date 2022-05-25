@@ -1,0 +1,18 @@
+#MobileNumbers{
+    display: flex;
+    flex-direction: column;
+    .btnContainer{
+        margin: 10px 0px;
+        display: flex;
+        justify-content: space-around !important;
+        align-items: center !important;
+        #addBtn{
+            height: 30px;
+            margin: 5px;
+        }
+        #deleteBtn{
+            height: 30px;
+            margin: 5px;
+        }
+    }
+}

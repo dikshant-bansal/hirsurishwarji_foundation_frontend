@@ -28,6 +28,7 @@ const UmemployedTable = ({ unemployedList, list }) => {
       rows = [rowsInput];
     }
     setRowsData(rows);
+    unemployedList(rows);
   };
 
   const handleChange = (index, event) => {

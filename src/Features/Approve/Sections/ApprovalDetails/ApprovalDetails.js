@@ -1,15 +1,17 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./ApprovalDetails.scss";
 import { TextField, Checkbox, Button } from "@mui/material";
-import axios from 'axios';
+import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const ApprovalDetails = ({ approvalInfo }) => {
+const ApprovalDetails = ({ approvalInfo, getData, applicationInfo }) => {
   let formData = {
     amountApproved: approvalInfo?.amountApproved,
     amountNeeded: approvalInfo?.amountNeeded,
-    approvalDate: approvalInfo?.approvalDate ? new Date(approvalInfo.approvalDate) : new Date(),
+    approvalDate: approvalInfo?.approvalDate
+      ? new Date(approvalInfo.approvalDate)
+      : new Date(),
     approvedBy: approvalInfo?.approvedBy,
     comments: approvalInfo?.comments,
     id: approvalInfo?.id,
@@ -31,7 +33,7 @@ const ApprovalDetails = ({ approvalInfo }) => {
     setData(formDataCopy);
   };
 
-  const runApprove = () => {
+  const runApproveReject = (approve) => {
     axios({
       method: "POST",
       url: "https://hs-foundation.herokuapp.com/approval/update",
@@ -39,10 +41,24 @@ const ApprovalDetails = ({ approvalInfo }) => {
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => {
-        
+        if (response.status === 200) {
+          axios({
+            method: "POST",
+            url: "https://hs-foundation.herokuapp.com/update",
+            data: {
+              ...applicationInfo,
+              status: `${approve ? "Approved" : "Rejected"}`,
+            },
+            headers: { "Content-Type": "application/json" },
+          }).then((res) => {
+            if (res.status === 200) {
+              getData();
+            }
+          });
+        }
       })
       .catch((error) => console.error("error", error));
-  }
+  };
 
   return (
     <div id="ApprovalDetails" className="ApprovalDetails">
@@ -55,7 +71,7 @@ const ApprovalDetails = ({ approvalInfo }) => {
           variant="outlined"
           name="approvedBy"
           onChange={(event) => handleChange(event)}
-          />
+        />
         <TextField
           id="amountNeededInput"
           className="formElements"
@@ -64,7 +80,7 @@ const ApprovalDetails = ({ approvalInfo }) => {
           name="amountNeeded"
           type="number"
           onChange={(event) => handleChange(event)}
-          />
+        />
         <TextField
           id="amountApprovedInput"
           className="formElements"
@@ -73,7 +89,7 @@ const ApprovalDetails = ({ approvalInfo }) => {
           name="amountApproved"
           type="number"
           onChange={(event) => handleChange(event)}
-          />
+        />
         <TextField
           id="commentsInput"
           className="formElements"
@@ -83,7 +99,7 @@ const ApprovalDetails = ({ approvalInfo }) => {
           multiline
           rows={4}
           onChange={(event) => handleChange(event)}
-          />
+        />
         <div id="formElements" className="formElements">
           Date:
           <DatePicker
@@ -93,7 +109,7 @@ const ApprovalDetails = ({ approvalInfo }) => {
           />
         </div>
         <div>
-          <Checkbox onChange={() => setBtnEnabled(prev => !prev)} />
+          <Checkbox onChange={() => setBtnEnabled((prev) => !prev)} />
           <span>
             Above details for Applicant are correct and ready for Approve.
           </span>
@@ -105,6 +121,7 @@ const ApprovalDetails = ({ approvalInfo }) => {
             variant="outlined"
             color="error"
             disabled={!btnEnabled}
+            onClick={() => runApproveReject(false)}
           >
             Reject
           </Button>
@@ -113,7 +130,7 @@ const ApprovalDetails = ({ approvalInfo }) => {
             className="approveBtn"
             variant="outlined"
             type="submit"
-            onClick={() => runApprove()}
+            onClick={() => runApproveReject(true)}
             disabled={!btnEnabled}
           >
             Approve

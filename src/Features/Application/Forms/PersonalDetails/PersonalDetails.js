@@ -9,39 +9,38 @@ import {
   FormLabel,
   Button,
 } from "@mui/material";
+import MobileNumbers from "./MobileNumbers/MobileNumbers";
 
 const PersonalDetails = ({ nextForm, data }) => {
-
   let formData = {
     name: data?.name || null,
     // fatherName: data?.fatherName || null,
     // address1: data?.address1 || null,
     // address2: data?.address2 || null,
     address: data?.address || null,
-    city: data?.city || 'Mumbai',
-    state: data?.state || 'Maharashtra',
+    city: data?.city || "Mumbai",
+    state: data?.state || "Maharashtra",
     pincode: data?.pincode || null,
     nativeTown: data?.nativeTown || null,
-    mobileNumber: data?.mobileNumber[0] || null,
+    mobileNumber: data?.mobileNumber || null,
     phoneNumber: data?.phoneNumber || null,
     creed: data?.creed || null,
-    category: data?.category || 'Medical',
+    category: data?.category || "Medical",
     jain: data?.jain || false,
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if(name === 'mobileNumber'){
-      formData['mobileNumber'] = []
-      formData['mobileNumber'][0] = value
-    }else {
-      formData[name] = value
-    }
-  }
-  
+    formData[name] = value;
+  };
+
   const submitForm = (event) => {
     nextForm("personalDetails", formData);
     event.preventDefault();
+  };
+
+  const mobileNumber = (mobileNumber) => {
+    formData.mobileNumber = mobileNumber;
   };
 
   return (
@@ -53,7 +52,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           className="formElements"
           label="Full Name"
           variant="outlined"
-          name='name'
+          name="name"
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.name}
           required
@@ -92,7 +91,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           className="formElements"
           label="Address"
           variant="outlined"
-          name='address'
+          name="address"
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.address2}
           multiline
@@ -103,7 +102,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           className="formElements"
           label="City"
           variant="outlined"
-          name='city'
+          name="city"
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.city}
           required
@@ -113,7 +112,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           className="formElements"
           label="State"
           variant="outlined"
-          name='state'
+          name="state"
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.state}
           required
@@ -124,7 +123,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           label="PinCode"
           variant="outlined"
           type="number"
-          name='pincode'
+          name="pincode"
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.pincode}
           required
@@ -134,27 +133,33 @@ const PersonalDetails = ({ nextForm, data }) => {
           className="formElements"
           label="Native Town"
           variant="outlined"
-          name='nativeTown'
+          name="nativeTown"
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.nativeTown}
         />
-        <TextField
+        <div className="formElements">
+          <MobileNumbers
+            mobileNumber={mobileNumber}
+            list={data?.mobileNumber}
+          />
+        </div>
+        {/* <TextField
           id="mobileNumberInput"
           className="formElements"
           label="Mobile Number"
           variant="outlined"
           type="number"
-          name='mobileNumber'
+          name="mobileNumber"
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.mobileNumber}
           required
-        />
+        /> */}
         <TextField
           id="phoneNumberInput"
           className="formElements"
           label="Phone Number"
           variant="outlined"
-          name='phoneNumber'
+          name="phoneNumber"
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.phoneNumber}
         />
@@ -163,7 +168,7 @@ const PersonalDetails = ({ nextForm, data }) => {
           className="formElements"
           label="Creed"
           variant="outlined"
-          name='creed'
+          name="creed"
           onChange={(event) => handleChange(event)}
           defaultValue={formData?.creed}
         />
@@ -210,8 +215,20 @@ const PersonalDetails = ({ nextForm, data }) => {
             name="row-radio-buttons-group"
             defaultValue={formData?.jain}
           >
-            <FormControlLabel value={true} control={<Radio />} label="Yes" name='jain' onChange={(event) => handleChange(event)}/>
-            <FormControlLabel value={false} control={<Radio />} label="No" name='jain' onChange={(event) => handleChange(event)}/>
+            <FormControlLabel
+              value={true}
+              control={<Radio />}
+              label="Yes"
+              name="jain"
+              onChange={(event) => handleChange(event)}
+            />
+            <FormControlLabel
+              value={false}
+              control={<Radio />}
+              label="No"
+              name="jain"
+              onChange={(event) => handleChange(event)}
+            />
           </RadioGroup>
         </FormControl>
         <div className="btnContainer">

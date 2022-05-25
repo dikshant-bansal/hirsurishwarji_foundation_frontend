@@ -4,7 +4,7 @@ import { TextField, Checkbox, Button } from "@mui/material";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 
-const BankDetails = ({ bankInfo }) => {
+const BankDetails = ({ bankInfo, applicationInfo, getData }) => {
   let formData = {
     amountApproved: bankInfo?.amountApproved,
     bankAccountNumber: bankInfo?.bankAccountNumber,
@@ -39,7 +39,21 @@ const BankDetails = ({ bankInfo }) => {
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => {
-       
+        if (response.status === 200) {
+          axios({
+            method: "POST",
+            url: "https://hs-foundation.herokuapp.com/update",
+            data: {
+              ...applicationInfo,
+              status: "Granted",
+            },
+            headers: { "Content-Type": "application/json" },
+          }).then((res) => {
+            if (res.status === 200) {
+              getData();
+            }
+          });
+        }
       })
       .catch((error) => console.error("error", error));
   };

@@ -43,6 +43,7 @@ const DependentTable = ({ dependentList, list }) => {
       rows = [rowsInput];
     }
     setRowsData(rows);
+    dependentList(rows);
   };
 
   const handleChange = (index, event) => {

@@ -74,7 +74,7 @@ const ApplicationInfo = ({ getData }) => {
         </div>
       </div>
       <div className="ruler"></div>
-      <SurveyDetails surveyData={surveyData} />
+      <SurveyDetails surveyData={surveyData} applicationData={applicationData} getData={getData}/>
     </div>
   );
 };
