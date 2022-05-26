@@ -11,6 +11,7 @@ import {
   TablePagination,
   TableRow,
   Button,
+  TextField,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -19,40 +20,88 @@ const ApplicationList = ({ data }) => {
   const navigate = useNavigate();
 
   const columns = [
-    { id: "id", label: "ID", minWidth: 50, sort: true, sortAsc: true },
-    { id: "name", label: "Name", minWidth: 170, sort: true, sortAsc: true },
     {
-      id: "mobile",
+      id: "id",
+      label: "ID",
+      minWidth: 50,
+      sort: true,
+      sortAsc: true,
+      search: true,
+      searchWidth: 3,
+    },
+    {
+      id: "name",
+      label: "Name",
+      minWidth: 170,
+      sort: true,
+      sortAsc: true,
+      search: true,
+      searchWidth: 15,
+    },
+    {
+      id: "mobileNumber",
       label: "Mobile Number",
       minWidth: 130,
       sort: true,
       sortAsc: true,
+      search: true,
+      searchWidth: 10,
     },
     {
-      id: "aadhaar",
+      id: "aadharnumber",
       label: "Aadhar Number",
       minWidth: 140,
       sort: true,
       sortAsc: true,
+      search: true,
+      searchWidth: 12,
     },
     {
-      id: "ration",
+      id: "rationCard",
       label: "Ration Card Number",
       minWidth: 140,
       sort: true,
       sortAsc: true,
+      search: true,
+      searchWidth: 10,
     },
-    { id: "status", label: "Status", minWidth: 95, sort: false, sortAsc: true },
+    {
+      id: "status",
+      label: "Status",
+      minWidth: 95,
+      sort: false,
+      sortAsc: true,
+      search: false,
+      searchWidth: 5,
+    },
     {
       id: "approve",
       label: "Approve",
       minWidth: 120,
       sort: false,
       sortAsc: true,
+      search: false,
+      searchWidth: 5,
     },
-    { id: "refer", label: "Refer", minWidth: 120, sort: false, sortAsc: true },
-    { id: "view", label: "View", minWidth: 120, sort: false, sortAsc: true },
-    // { id: "survey", label: "Survey", minWidth: 120, sort: false, sortAsc:true },
+    {
+      id: "refer",
+      label: "Refer",
+      minWidth: 120,
+      sort: false,
+      sortAsc: true,
+      search: false,
+      searchWidth: 5,
+    },
+    {
+      id: "view",
+      label: "View",
+      minWidth: 120,
+      sort: false,
+      sortAsc: true,
+      search: false,
+      searchWidth: 5,
+    },
+    // { id: "survey", label: "Survey", minWidth: 120, sort: false, sortAsc:true, search: false, searchWidth: 5, },
   ];
 
   const approveBtn = (id) => {
@@ -183,15 +232,15 @@ const ApplicationList = ({ data }) => {
   const createData = (
     id,
     name,
-    mobile,
-    aadhaar,
-    ration,
+    mobileNumber,
+    aadharnumber,
+    rationCard,
     status,
     approve,
     refer,
     view
   ) => {
-    return { id, name, mobile, aadhaar, ration, status, approve, refer, view };
+    return { id, name, mobileNumber, aadharnumber, rationCard, status, approve, refer, view };
   };
 
   useEffect(() => {
@@ -237,14 +286,22 @@ const ApplicationList = ({ data }) => {
       return item;
     });
     const dataCopy = tableData.sort((obj1, obj2) => {
-      if(obj1[sortedItem.id] > obj2[sortedItem.id]){
-        return sortedItem.sortAsc ? 1 : -1
+      if (obj1[sortedItem.id] > obj2[sortedItem.id]) {
+        return sortedItem.sortAsc ? 1 : -1;
       } else {
-        return sortedItem.sortAsc ? -1 : 1
+        return sortedItem.sortAsc ? -1 : 1;
       }
-      // return 1;
-    })
+    });
     setColumnHeaders([...columnCopy]);
+    setTableData([...dataCopy]);
+  };
+
+  const onSearchHandler = (columnId, event) => {
+    console.log(columnId)
+    let searchText = event.target.value;
+    const dataCopy = data.filter((item) =>
+      item[columnId]?.toString().toLowerCase().includes(searchText?.toString().toLowerCase())
+    );
     setTableData([...dataCopy]);
   };
 
@@ -261,16 +318,29 @@ const ApplicationList = ({ data }) => {
                     align={column.align}
                     style={{ width: column.minWidth }}
                   >
-                    {column.sort ? (
-                      <TableSortLabel
-                        active={column.sort}
-                        direction={column.sortAsc ? "asc" : "desc"}
-                        onClick={() => createSortHandler(column.id)}
-                      >
-                        {column.label}
-                      </TableSortLabel>
-                    ) : (
-                      `${column.label}`
+                    <div>
+                      {column.sort ? (
+                        <TableSortLabel
+                          active={column.sort}
+                          direction={column.sortAsc ? "asc" : "desc"}
+                          onClick={() => createSortHandler(column.id)}
+                        >
+                          {column.label}
+                        </TableSortLabel>
+                      ) : (
+                        `${column.label}`
+                      )}
+                    </div>
+                    {column.search && (
+                      <div className="searchDiv" width={column.width}>
+                        <input
+                          size={column.searchWidth}
+                          placeholder={"Search"}
+                          onChange={(event) =>
+                            onSearchHandler(column.id, event)
+                          }
+                        />
+                      </div>
                     )}
                   </TableCell>
                 ))}

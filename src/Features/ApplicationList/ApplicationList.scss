@@ -9,11 +9,21 @@
                 thead{
                     border: 2px solid;
                     tr{
+                        height: 120px;
                         th{
                             border-right-width: 1px;
                             border-right-style: solid;
                             border-right-color: inherit;
                             font-weight: bold;
+                            position: relative;
+                            // span{
+                            //     position: absolute;
+                            //     top: 0;
+                            // }
+                            .searchDiv{
+                                position: absolute;
+                                bottom: 2px;
+                            }
                         }
                     }
                 }
