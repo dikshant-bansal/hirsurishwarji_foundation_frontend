@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./ApplicationList.scss";
 import {
   Paper,
@@ -19,16 +19,40 @@ const ApplicationList = ({ data }) => {
   const navigate = useNavigate();
 
   const columns = [
-    { id: "id", label: "ID", minWidth: 50, sort: true },
-    { id: "name", label: "Name", minWidth: 170, sort: true },
-    { id: "mobile", label: "Mobile Number", minWidth: 130, sort: true },
-    { id: "aadhaar", label: "Aadhar Number", minWidth: 140, sort: true },
-    { id: "ration", label: "Ration Card Number", minWidth: 140, sort: true },
-    { id: "status", label: "Status", minWidth: 95, sort: false },
-    { id: "approve", label: "Approve", minWidth: 120, sort: false },
-    { id: "refer", label: "Refer", minWidth: 120, sort: false },
-    { id: "view", label: "View", minWidth: 120, sort: false },
-    // { id: "survey", label: "Survey", minWidth: 120, sort: false },
+    { id: "id", label: "ID", minWidth: 50, sort: true, sortAsc: true },
+    { id: "name", label: "Name", minWidth: 170, sort: true, sortAsc: true },
+    {
+      id: "mobile",
+      label: "Mobile Number",
+      minWidth: 130,
+      sort: true,
+      sortAsc: true,
+    },
+    {
+      id: "aadhaar",
+      label: "Aadhar Number",
+      minWidth: 140,
+      sort: true,
+      sortAsc: true,
+    },
+    {
+      id: "ration",
+      label: "Ration Card Number",
+      minWidth: 140,
+      sort: true,
+      sortAsc: true,
+    },
+    { id: "status", label: "Status", minWidth: 95, sort: false, sortAsc: true },
+    {
+      id: "approve",
+      label: "Approve",
+      minWidth: 120,
+      sort: false,
+      sortAsc: true,
+    },
+    { id: "refer", label: "Refer", minWidth: 120, sort: false, sortAsc: true },
+    { id: "view", label: "View", minWidth: 120, sort: false, sortAsc: true },
+    // { id: "survey", label: "Survey", minWidth: 120, sort: false, sortAsc:true },
   ];
 
   const approveBtn = (id) => {
@@ -127,27 +151,6 @@ const ApplicationList = ({ data }) => {
   };
 
   const getApplicationInfo = (id) => {
-    // axios({
-    //   method: "GET",
-    //   url: `https://hs-foundation.herokuapp.com/get/${id}`,
-    //   headers: { "Content-Type": "application/json" },
-    // })
-    //   .then((response) => {
-    //     if (response.status === 200) {
-    //       axios({
-    //         method: "GET",
-    //         url: `https://hs-foundation.herokuapp.com/survey/get/${id}`,
-    //         headers: { "Content-Type": "application/json" },
-    //       }).then((res) => {
-    //         if (response.status === 200) {
-    //           navigate(`/application/${id}`, {
-    //             state: { info: response.data, surveyInfo: res.data },
-    //           });
-    //         }
-    //       });
-    //     }
-    //   })
-    //   .catch((error) => console.error("error", error));
     let applicationDetailsData = axios({
       method: "GET",
       url: `https://hs-foundation.herokuapp.com/get/${id}`,
@@ -177,35 +180,6 @@ const ApplicationList = ({ data }) => {
       .catch((error) => console.error("error", error));
   };
 
-  // const surveyBtn = (id) => {
-  //   return (
-  //     <Button
-  //       id="surveyBtn"
-  //       className="surveyBtn"
-  //       variant="outlined"
-  //       onClick={() => navigate(`/survey/${id}`)}
-  //       // onClick={() => getSurveyInfo(id)}
-  //       size='small'
-  //     >
-  //       Survey
-  //     </Button>
-  //   );
-  // };
-
-  // const getSurveyInfo = (id) => {
-  //   axios({
-  //     method: "GET",
-  //     url: `https://hs-foundation.herokuapp.com/survey/get/${id}`,
-  //     headers: { "Content-Type": "application/json" },
-  //   })
-  //     .then((response) => {
-  //       if (response.status === 200) {
-  //         navigate(`/survey/${id}`, {state: {surveyInfo : response.data}})
-  //       }
-  //     })
-  //     .catch((error) => console.error("error", error));
-  // };
-
   const createData = (
     id,
     name,
@@ -220,7 +194,16 @@ const ApplicationList = ({ data }) => {
     return { id, name, mobile, aadhaar, ration, status, approve, refer, view };
   };
 
-  const rows = data.map((element, index) => {
+  useEffect(() => {
+    setTableData(data);
+  }, [data]);
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [columnHeaders, setColumnHeaders] = useState([...columns]);
+  const [tableData, setTableData] = useState([...data]);
+
+  const rows = tableData.map((element, index) => {
     return createData(
       element.id,
       element.name,
@@ -235,9 +218,6 @@ const ApplicationList = ({ data }) => {
     );
   });
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -247,6 +227,27 @@ const ApplicationList = ({ data }) => {
     setPage(0);
   };
 
+  const createSortHandler = (columnId) => {
+    let sortedItem = undefined;
+    const columnCopy = columnHeaders.map((item) => {
+      if (item.id === columnId) {
+        item.sortAsc = !item.sortAsc;
+        sortedItem = item;
+      }
+      return item;
+    });
+    const dataCopy = tableData.sort((obj1, obj2) => {
+      if(obj1[sortedItem.id] > obj2[sortedItem.id]){
+        return sortedItem.sortAsc ? 1 : -1
+      } else {
+        return sortedItem.sortAsc ? -1 : 1
+      }
+      // return 1;
+    })
+    setColumnHeaders([...columnCopy]);
+    setTableData([...dataCopy]);
+  };
+
   return (
     <div id="ApplicationList">
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -254,19 +255,23 @@ const ApplicationList = ({ data }) => {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                {columns.map((column) => (
+                {columnHeaders.map((column) => (
                   <TableCell
                     key={column.id}
                     align={column.align}
                     style={{ width: column.minWidth }}
                   >
-                    {/* <TableSortLabel
-                      active={column.sort}
-                      direction={"asc"}
-                      // onClick={createSortHandler(headCell.id)}
-                    > */}
-                    {column.label}
-                    {/* </TableSortLabel> */}
+                    {column.sort ? (
+                      <TableSortLabel
+                        active={column.sort}
+                        direction={column.sortAsc ? "asc" : "desc"}
+                        onClick={() => createSortHandler(column.id)}
+                      >
+                        {column.label}
+                      </TableSortLabel>
+                    ) : (
+                      `${column.label}`
+                    )}
                   </TableCell>
                 ))}
               </TableRow>
@@ -277,7 +282,7 @@ const ApplicationList = ({ data }) => {
                 .map((row) => {
                   return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                      {columns.map((column) => {
+                      {columnHeaders.map((column) => {
                         const value = row[column.id];
                         return (
                           <TableCell key={column.id} align={column.align}>
