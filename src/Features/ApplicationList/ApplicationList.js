@@ -140,22 +140,30 @@ const ApplicationList = ({ data }) => {
       url: `https://hs-foundation.herokuapp.com/survey/get/${id}`,
       headers: { "Content-Type": "application/json" },
     });
+    let historyData = axios({
+      method: "GET",
+      url: `https://hs-foundation.herokuapp.com/search/with/application/${id}`,
+      headers: { "Content-Type": "application/json" },
+    });
     Promise.all([
       getApproveData,
       getBankDetailsData,
       applicationDetailsData,
       surveyDetailsData,
+      historyData,
     ])
       .then((response) => {
         let getApproveDataResponse = response[0];
         let getBankDetailsDataResponse = response[1];
         let applicationDetailsDataResponse = response[2];
         let surveyDetailsDataResponse = response[3];
+        let historyDataResponse = response[4];
         if (
           getApproveDataResponse.status === 200 &&
           getBankDetailsDataResponse.status === 200 &&
           applicationDetailsDataResponse.status === 200 &&
-          surveyDetailsDataResponse.status === 200
+          surveyDetailsDataResponse.status === 200 && 
+          historyDataResponse.status === 200
         ) {
           navigate(`/approve/${id}`, {
             state: {
@@ -163,6 +171,7 @@ const ApplicationList = ({ data }) => {
               bankInfo: getBankDetailsDataResponse.data,
               applicationInfo: applicationDetailsDataResponse.data,
               surveyInfo: surveyDetailsDataResponse.data,
+              historyData: historyDataResponse.data,
             },
           });
         }

@@ -1,18 +1,24 @@
-#MobileNumbers{
-    display: flex;
-    flex-direction: column;
-    .btnContainer{
-        margin: 10px 0px;
-        display: flex;
-        justify-content: space-around !important;
-        align-items: center !important;
-        #addBtn{
-            height: 30px;
-            margin: 5px;
-        }
-        #deleteBtn{
-            height: 30px;
-            margin: 5px;
-        }
+#MobileNumbers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .mobile {
+    .formElements {
+      width: fit-content;
     }
+  }
+  .btnContainer {
+    margin: 0px 0px 10px 0px !important;
+    display: flex;
+    justify-content: space-around !important;
+    align-items: center !important;
+    #addBtn {
+      height: 30px;
+      margin: 5px;
+    }
+    #deleteBtn {
+      height: 30px;
+      margin: 5px;
+    }
+  }
 }

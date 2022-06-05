@@ -3,9 +3,9 @@ import "./MobileNumbers.scss";
 import { TextField, Button } from "@mui/material";
 
 const MobileNumbers = ({ mobileNumber, list }) => {
-  useEffect(() => {
-    addTableRows();
-  }, []);
+  // useEffect(() => {
+  //   addTableRows();
+  // }, []);
 
   const [rowsData, setRowsData] = useState(list);
 
@@ -32,6 +32,7 @@ const MobileNumbers = ({ mobileNumber, list }) => {
 
   return (
     <div id="MobileNumbers">
+      <div className="mobile">
       {rowsData?.map((rowData, index) => {
         return (
           <TextField
@@ -48,6 +49,7 @@ const MobileNumbers = ({ mobileNumber, list }) => {
           />
         );
       })}
+      </div>
       <div className="btnContainer">
         <span>Additional Mobile No:</span>
         <span>

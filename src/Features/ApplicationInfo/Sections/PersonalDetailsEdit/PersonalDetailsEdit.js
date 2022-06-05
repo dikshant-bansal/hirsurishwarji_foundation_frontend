@@ -143,12 +143,12 @@ const PersonalDetailsEdit = ({ data }) => {
           defaultValue={formData?.mobileNumber}
           required
         /> */}
-        <div className="formElements">
+        {/* <div className="formElements"> */}
           <MobileNumbers
             mobileNumber={mobileNumber}
             list={data?.mobileNumber}
           />
-        </div>
+        {/* </div> */}
         <TextField
           id="phoneNumberInput"
           className="formElements"
