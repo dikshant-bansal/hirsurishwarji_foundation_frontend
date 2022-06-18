@@ -17,6 +17,7 @@ import {
   SurveyDetails,
 } from "./Sections";
 // import { MockData } from "../../MockData";
+import { Loader } from "../../Components";
 
 const ApplicationInfo = ({ getData }) => {
   // const { id } = useParams();
@@ -24,7 +25,10 @@ const ApplicationInfo = ({ getData }) => {
   let applicationData = location.state.info;
   let surveyData = location.state.surveyInfo;
 
+  const [showLoader, setShowLoader] = useState(false);
+
   const updateData = (data) => {
+    setShowLoader(true);
     axios({
       method: "POST",
       url: "https://hs-foundation.herokuapp.com/update",
@@ -34,13 +38,18 @@ const ApplicationInfo = ({ getData }) => {
       .then((response) => {
         if (response.status === 200) {
           getData();
+          setShowLoader(false);
         }
       })
-      .catch((error) => console.error("error", error));
+      .catch((error) => {
+        console.error("error", error);
+        setShowLoader(false);
+      });
   };
 
   return (
     <div id="ApplicationInfo" className="ApplicationInfo">
+      {showLoader && <Loader />}
       <div className="apllicationDetails">Application Details</div>
       <div className="apllicationId">Application ID: {applicationData?.id}</div>
       <div className="availableData">
@@ -74,7 +83,11 @@ const ApplicationInfo = ({ getData }) => {
         </div>
       </div>
       <div className="ruler"></div>
-      <SurveyDetails surveyData={surveyData} applicationData={applicationData} getData={getData}/>
+      <SurveyDetails
+        surveyData={surveyData}
+        applicationData={applicationData}
+        getData={getData}
+      />
     </div>
   );
 };

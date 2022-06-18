@@ -13,12 +13,21 @@ import {
   SkillDetails,
   EducationGrant,
 } from "./Forms";
+import { Loader } from "../../Components";
 
-const Application = ({ addData, getData, addResponse }) => {
+const Application = ({
+  addData,
+  getData,
+  addResponse,
+  showLoading,
+  addSuccess,
+  addError,
+  removeAddAlert,
+}) => {
   const [activeFormIndex, setActiveFormIndex] = useState(0);
   const [collectiveData, setCollectiveData] = useState({});
-  const [successAlert, setSuccessAlert] = useState(false);
-  const [errorAlert, setErrorAlert] = useState(false);
+  // const [successAlert, setSuccessAlert] = useState(false);
+  // const [errorAlert, setErrorAlert] = useState(false);
 
   const nextForm = (formName, formData) => {
     let copyCollectiveData = { ...collectiveData };
@@ -60,7 +69,7 @@ const Application = ({ addData, getData, addResponse }) => {
     addData({
       ...copyCollectiveData,
     });
-    setSuccessAlert(true);
+    // setSuccessAlert(true);
 
     // if (addDataResponse.status === 201) {
     //   setSuccessAlert(true);
@@ -73,11 +82,13 @@ const Application = ({ addData, getData, addResponse }) => {
   const closeSucessAlert = () => {
     setCollectiveData({});
     setActiveFormIndex(0);
-    setSuccessAlert(false);
+    // setSuccessAlert(false);
+    removeAddAlert();
   };
 
   const closeErrorAlert = () => {
-    setErrorAlert(false);
+    // setErrorAlert(false);
+    removeAddAlert();
   };
 
   const steps = [
@@ -148,6 +159,7 @@ const Application = ({ addData, getData, addResponse }) => {
 
   return (
     <div id="Application" className="Application">
+      {showLoading && <Loader />}
       <div className="stepperContainer">
         <Stepper activeStep={activeFormIndex}>
           {steps.map((label, index) => {
@@ -159,32 +171,37 @@ const Application = ({ addData, getData, addResponse }) => {
           })}
         </Stepper>
       </div>
-      {successAlert || errorAlert ? (
+      {addSuccess || addError ? (
         <div>
           <Alert
             onClose={() =>
-              successAlert ? closeSucessAlert() : closeErrorAlert()
+              addSuccess ? closeSucessAlert() : closeErrorAlert()
             }
+            severity= {addSuccess ? 'success' : (addError && 'error')}
           >
-            {`${
-              successAlert
-                ? "Your request has been processed successfully!"
-                : "Something went Wrong! Please try Again!!"
-            }`}
+            {addSuccess && "Your request has been processed successfully!"}
+            {addError && "Something went Wrong! Please try Again!!"}
           </Alert>
-          {addResponse?.data?.id && <div>Application created with id: {addResponse.data.id}</div>}
+          {addResponse?.data?.id && (
+            <div className="successId">Application created with id: {addResponse.data.id}</div>
+          )}
         </div>
       ) : (
         stepsForm[activeFormIndex]
       )}
-      {/* {successAlert ? (
-        <Alert onClose={() => closeSucessAlert()}>
-          Your request has been processed successfully!
-        </Alert>
+      {/* {addSuccess ? (
+        <div>
+          <Alert onClose={() => closeSucessAlert()}>
+            Your request has been processed successfully!
+          </Alert>
+          {addResponse?.data?.id && (
+            <div>Application created with id: {addResponse.data.id}</div>
+          )}
+        </div>
       ) : (
         stepsForm[activeFormIndex]
       )}
-      {errorAlert ? (
+      {addError ? (
         <Alert onClose={() => closeErrorAlert()}>
           Something went Wrong! Please try Again!!
         </Alert>

@@ -18,6 +18,9 @@ import axios from "axios";
 const App = () => {
   const [data, setData] = useState([]);
   const [addResponse, setAddResponse] = useState({});
+  const [showLoader, setShowLoader] = useState(false);
+  const [addSuccess, setAddSuccess] = useState(undefined);
+  const [addError, setAddError] = useState(undefined);
 
   useEffect(() => {
     getData();
@@ -25,6 +28,9 @@ const App = () => {
 
   const addData = (newData) => {
     setAddResponse({});
+    setShowLoader(true);
+    setAddError(undefined);
+    setAddSuccess(undefined);
     axios({
       method: "POST",
       url: "https://hs-foundation.herokuapp.com/create",
@@ -32,15 +38,27 @@ const App = () => {
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => {
-        if (response.status === 201) {
+        if (response.status === 200) {
           getData();
           setAddResponse(response);
+          setShowLoader(false);
+          setAddSuccess(true);
+          setAddError(false);
+        } else{
+          setAddSuccess(false);
+          setAddError(true);
         }
       })
-      .catch((error) => console.error("error", error));
+      .catch((error) => {
+        console.error("error", error);
+        setShowLoader(false);
+        setAddSuccess(false);
+        setAddError(true);
+      });
   };
 
   const getData = () => {
+    setShowLoader(true);
     axios({
       method: "GET",
       url: "https://hs-foundation.herokuapp.com/fetch/views",
@@ -50,10 +68,19 @@ const App = () => {
         if (response.status === 200) {
           const allApplications = response.data;
           setData(allApplications.reverse());
+          setShowLoader(false);
         }
       })
-      .catch((error) => console.error("error", error));
+      .catch((error) => {
+        console.error("error", error);
+        setShowLoader(false);
+      });
   };
+
+  const removeAddAlert = () => {
+    setAddSuccess(undefined);
+    setAddError(undefined);
+  }
 
   return (
     <div className="App">
@@ -67,17 +94,24 @@ const App = () => {
                 addData={addData}
                 getData={getData}
                 addResponse={addResponse}
+                showLoading={showLoader}
+                addSuccess={addSuccess}
+                addError={addError}
+                removeAddAlert={removeAddAlert}
               />
             }
           />
           <Route
             path="/applicationList"
-            element={<ApplicationList data={data} />}
+            element={<ApplicationList data={data} showLoading={showLoader} />}
           />
           <Route path="/contactUs" element={<ContactUs />} />
-          <Route path="/application/:id" element={<ApplicationInfo getData={getData}/>} />
+          <Route
+            path="/application/:id"
+            element={<ApplicationInfo getData={getData} />}
+          />
           {/* <Route path="/survey/:id" element={<Survey />} /> */}
-          <Route path="/approve/:id" element={<Approve getData={getData}/>} />
+          <Route path="/approve/:id" element={<Approve getData={getData} />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </Router>

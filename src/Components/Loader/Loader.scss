@@ -1,0 +1,21 @@
+#Loader {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.7;
+  //   opacity: ${({ active }) => (active ? '1' : '0')};
+//   background-color: rgba(255, 255, 255, 0.9);
+  //   visibility: ${({ active }) => (active ? 'visible' : 'hidden')};
+  //   transition: visibility ${({ active }) => (active ? '0s' : '.2s')},
+  //     opacity ${({ active }) => (active ? '.08s' : '.2s')} linear;
+  background-color: black;
+  z-index: 10;
+  .spinner{
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+}

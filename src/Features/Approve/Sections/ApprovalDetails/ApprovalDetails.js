@@ -5,6 +5,7 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "../../../../Components";
 
 const ApprovalDetails = ({ approvalInfo, getData, applicationInfo }) => {
   const navigate = useNavigate();
@@ -21,7 +22,8 @@ const ApprovalDetails = ({ approvalInfo, getData, applicationInfo }) => {
   };
 
   const [btnEnabled, setBtnEnabled] = useState(false);
-  const [data, setData] = useState({...formData});
+  const [data, setData] = useState({ ...formData });
+  const [showLoader, setShowLoader] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -37,6 +39,7 @@ const ApprovalDetails = ({ approvalInfo, getData, applicationInfo }) => {
   };
 
   const runApproveReject = (approve) => {
+    setShowLoader(true);
     axios({
       method: "POST",
       url: "https://hs-foundation.herokuapp.com/approval/update",
@@ -47,6 +50,7 @@ const ApprovalDetails = ({ approvalInfo, getData, applicationInfo }) => {
         if (response.status === 200) {
           getData();
           navigate(`/applicationList`);
+          setShowLoader(false);
           // axios({
           //   method: "POST",
           //   url: "https://hs-foundation.herokuapp.com/update",
@@ -63,11 +67,15 @@ const ApprovalDetails = ({ approvalInfo, getData, applicationInfo }) => {
           // });
         }
       })
-      .catch((error) => console.error("error", error));
+      .catch((error) => {
+        console.error("error", error);
+        setShowLoader(false);
+      });
   };
 
   return (
     <div id="ApprovalDetails" className="ApprovalDetails">
+      {showLoader && <Loader />}
       <div className="formHeader">Approval Details</div>
       <div className="approvalDetailsForm">
         <TextField

@@ -15,8 +15,9 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Loader } from "../../Components";
 
-const ApplicationList = ({ data }) => {
+const ApplicationList = ({ data, showLoading }) => {
   const navigate = useNavigate();
 
   const columns = [
@@ -120,6 +121,7 @@ const ApplicationList = ({ data }) => {
   };
 
   const getToAprroveScreen = (id) => {
+    setShowLoader(true);
     let getApproveData = axios({
       method: "GET",
       url: `https://hs-foundation.herokuapp.com/approval/get/${id}`,
@@ -162,9 +164,10 @@ const ApplicationList = ({ data }) => {
           getApproveDataResponse.status === 200 &&
           getBankDetailsDataResponse.status === 200 &&
           applicationDetailsDataResponse.status === 200 &&
-          surveyDetailsDataResponse.status === 200 && 
+          surveyDetailsDataResponse.status === 200 &&
           historyDataResponse.status === 200
         ) {
+          setShowLoader(false);
           navigate(`/approve/${id}`, {
             state: {
               approvalInfo: getApproveDataResponse.data,
@@ -176,7 +179,10 @@ const ApplicationList = ({ data }) => {
           });
         }
       })
-      .catch((error) => console.error("error", error));
+      .catch((error) => {
+        console.error("error", error);
+        setShowLoader(false);
+      });
   };
 
   const referBtn = () => {
@@ -209,6 +215,7 @@ const ApplicationList = ({ data }) => {
   };
 
   const getApplicationInfo = (id) => {
+    setShowLoader(true);
     let applicationDetailsData = axios({
       method: "GET",
       url: `https://hs-foundation.herokuapp.com/get/${id}`,
@@ -233,9 +240,13 @@ const ApplicationList = ({ data }) => {
               surveyInfo: surveyDetailsDataResponse.data,
             },
           });
+          setShowLoader(false);
         }
       })
-      .catch((error) => console.error("error", error));
+      .catch((error) => {
+        console.error("error", error);
+        setShowLoader(false);
+      });
   };
 
   const createData = (
@@ -249,7 +260,17 @@ const ApplicationList = ({ data }) => {
     refer,
     view
   ) => {
-    return { id, name, mobileNumber, aadharnumber, rationCard, status, approve, refer, view };
+    return {
+      id,
+      name,
+      mobileNumber,
+      aadharnumber,
+      rationCard,
+      status,
+      approve,
+      refer,
+      view,
+    };
   };
 
   useEffect(() => {
@@ -260,6 +281,7 @@ const ApplicationList = ({ data }) => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [columnHeaders, setColumnHeaders] = useState([...columns]);
   const [tableData, setTableData] = useState([...data]);
+  const [showLoader, setShowLoader] = useState(false);
 
   const rows = tableData.map((element, index) => {
     return createData(
@@ -308,13 +330,17 @@ const ApplicationList = ({ data }) => {
   const onSearchHandler = (columnId, event) => {
     let searchText = event.target.value;
     const dataCopy = data.filter((item) =>
-      item[columnId]?.toString().toLowerCase().includes(searchText?.toString().toLowerCase())
+      item[columnId]
+        ?.toString()
+        .toLowerCase()
+        .includes(searchText?.toString().toLowerCase())
     );
     setTableData([...dataCopy]);
   };
 
   return (
     <div id="ApplicationList">
+      {(showLoader || showLoading) && <Loader />}
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer>
           <Table stickyHeader aria-label="sticky table">

@@ -4,6 +4,7 @@ import { TextField, Checkbox, Button } from "@mui/material";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "../../../../Components";
 
 const BankDetails = ({ bankInfo, applicationInfo, getData }) => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const BankDetails = ({ bankInfo, applicationInfo, getData }) => {
 
   const [btnEnabled, setBtnEnabled] = useState(false);
   const [data, setData] = useState(formData);
+  const [showLoader, setShowLoader] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -35,6 +37,7 @@ const BankDetails = ({ bankInfo, applicationInfo, getData }) => {
   };
 
   const submitBankDetails = () => {
+    setShowLoader(true);
     axios({
       method: "POST",
       url: "https://hs-foundation.herokuapp.com/bankDetails/update",
@@ -45,6 +48,7 @@ const BankDetails = ({ bankInfo, applicationInfo, getData }) => {
         if (response.status === 200) {
           getData();
           navigate(`/applicationList`);
+          setShowLoader(false);
           // axios({
           //   method: "POST",
           //   url: "https://hs-foundation.herokuapp.com/update",
@@ -60,11 +64,15 @@ const BankDetails = ({ bankInfo, applicationInfo, getData }) => {
           // });
         }
       })
-      .catch((error) => console.error("error", error));
+      .catch((error) => {
+        console.error("error", error);
+        setShowLoader(false);
+      });
   };
 
   return (
     <div id="BankDetails" className="BankDetails">
+      {showLoader && <Loader />}
       <div className="formHeader">Bank Details</div>
       <div className="bankDetailsForm">
         <TextField

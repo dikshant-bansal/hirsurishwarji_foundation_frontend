@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SurveyDetails.scss";
 import { TextField, Button } from "@mui/material";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "../../../../Components";
 
 const SurveyDetails = ({ surveyData, applicationData, getData }) => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const SurveyDetails = ({ surveyData, applicationData, getData }) => {
   };
 
   const [data, setData] = useState(formData);
+  const [showLoader, setShowLoader] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -39,6 +41,7 @@ const SurveyDetails = ({ surveyData, applicationData, getData }) => {
   };
 
   const update = () => {
+    setShowLoader(true);
     axios({
       method: "POST",
       url: "https://hs-foundation.herokuapp.com/survey/update",
@@ -46,26 +49,21 @@ const SurveyDetails = ({ surveyData, applicationData, getData }) => {
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => {
-        if(response.status === 200){
-          axios({
-            method: "POST",
-            url: "https://hs-foundation.herokuapp.com/update",
-            data: {...applicationData},
-            headers: { "Content-Type": "application/json" },
-          })
-            .then((res) => {
-              if (res.status === 200) {
-                getData();
-                navigate(`/applicationList`)
-              }
-            })
+        if (response.status === 200) {
+          setShowLoader(false);
+          getData();
+          navigate(`/applicationList`);
         }
       })
-      .catch((error) => console.error("error", error));
+      .catch((error) => {
+        console.error("error", error);
+        setShowLoader(false);
+      });
   };
 
   return (
     <div id="SurveyDetails" className="SurveyDetails">
+      {showLoader && <Loader />}
       <div className="formHeader">Survey Details</div>
       <form className="SurveyDetailsForm" onSubmit={submitForm}>
         <TextField
