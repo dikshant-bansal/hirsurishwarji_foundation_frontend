@@ -4,8 +4,11 @@ import { TextField, Checkbox, Button } from "@mui/material";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
 
 const ApprovalDetails = ({ approvalInfo, getData, applicationInfo }) => {
+  const navigate = useNavigate();
+
   let formData = {
     amountApproved: approvalInfo?.amountApproved,
     amountNeeded: approvalInfo?.amountNeeded,
@@ -18,7 +21,7 @@ const ApprovalDetails = ({ approvalInfo, getData, applicationInfo }) => {
   };
 
   const [btnEnabled, setBtnEnabled] = useState(false);
-  const [data, setData] = useState(formData);
+  const [data, setData] = useState({...formData});
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -37,24 +40,27 @@ const ApprovalDetails = ({ approvalInfo, getData, applicationInfo }) => {
     axios({
       method: "POST",
       url: "https://hs-foundation.herokuapp.com/approval/update",
-      data: formData,
+      data: { ...data, approved: `${approve ? true : false}` },
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => {
         if (response.status === 200) {
-          axios({
-            method: "POST",
-            url: "https://hs-foundation.herokuapp.com/update",
-            data: {
-              ...applicationInfo,
-              status: `${approve ? "Approved" : "Rejected"}`,
-            },
-            headers: { "Content-Type": "application/json" },
-          }).then((res) => {
-            if (res.status === 200) {
-              getData();
-            }
-          });
+          getData();
+          navigate(`/applicationList`);
+          // axios({
+          //   method: "POST",
+          //   url: "https://hs-foundation.herokuapp.com/update",
+          //   data: {
+          //     ...data,
+          //     approved: `${approve ? true : false}`
+          //   },
+          //   headers: { "Content-Type": "application/json" },
+          // }).then((res) => {
+          //   if (res.status === 200) {
+          //     getData();
+          //     navigate(`/applicationList`)
+          //   }
+          // });
         }
       })
       .catch((error) => console.error("error", error));
@@ -71,6 +77,7 @@ const ApprovalDetails = ({ approvalInfo, getData, applicationInfo }) => {
           variant="outlined"
           name="approvedBy"
           onChange={(event) => handleChange(event)}
+          defaultValue={data?.approvedBy}
         />
         <TextField
           id="amountNeededInput"
@@ -80,6 +87,7 @@ const ApprovalDetails = ({ approvalInfo, getData, applicationInfo }) => {
           name="amountNeeded"
           type="number"
           onChange={(event) => handleChange(event)}
+          defaultValue={data?.amountNeeded}
         />
         <TextField
           id="amountApprovedInput"
@@ -89,6 +97,7 @@ const ApprovalDetails = ({ approvalInfo, getData, applicationInfo }) => {
           name="amountApproved"
           type="number"
           onChange={(event) => handleChange(event)}
+          defaultValue={data?.amountApproved}
         />
         <TextField
           id="commentsInput"
@@ -99,6 +108,7 @@ const ApprovalDetails = ({ approvalInfo, getData, applicationInfo }) => {
           multiline
           rows={4}
           onChange={(event) => handleChange(event)}
+          defaultValue={data?.comments}
         />
         <div id="formElements" className="formElements">
           Date:

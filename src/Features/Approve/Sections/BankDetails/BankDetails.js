@@ -3,8 +3,11 @@ import "./BankDetails.scss";
 import { TextField, Checkbox, Button } from "@mui/material";
 import axios from "axios";
 import DatePicker from "react-datepicker";
+import { useNavigate } from "react-router-dom";
 
 const BankDetails = ({ bankInfo, applicationInfo, getData }) => {
+  const navigate = useNavigate();
+
   let formData = {
     amountApproved: bankInfo?.amountApproved,
     bankAccountNumber: bankInfo?.bankAccountNumber,
@@ -40,19 +43,21 @@ const BankDetails = ({ bankInfo, applicationInfo, getData }) => {
     })
       .then((response) => {
         if (response.status === 200) {
-          axios({
-            method: "POST",
-            url: "https://hs-foundation.herokuapp.com/update",
-            data: {
-              ...applicationInfo,
-              status: "Granted",
-            },
-            headers: { "Content-Type": "application/json" },
-          }).then((res) => {
-            if (res.status === 200) {
-              getData();
-            }
-          });
+          getData();
+          navigate(`/applicationList`);
+          // axios({
+          //   method: "POST",
+          //   url: "https://hs-foundation.herokuapp.com/update",
+          //   data: {
+          //     ...applicationInfo,
+          //   },
+          //   headers: { "Content-Type": "application/json" },
+          // }).then((res) => {
+          //   if (res.status === 200) {
+          //     getData();
+          //     navigate(`/applicationList`);
+          //   }
+          // });
         }
       })
       .catch((error) => console.error("error", error));
@@ -69,6 +74,7 @@ const BankDetails = ({ bankInfo, applicationInfo, getData }) => {
           variant="outlined"
           name="bankName"
           onChange={(event) => handleChange(event)}
+          defaultValue={data?.bankName}
         />
         <TextField
           id="bankAccountNumberInput"
@@ -78,6 +84,7 @@ const BankDetails = ({ bankInfo, applicationInfo, getData }) => {
           name="bankAccountNumber"
           type="number"
           onChange={(event) => handleChange(event)}
+          defaultValue={data?.bankAccountNumber}
         />
         <TextField
           id="amountApprovedInput"
@@ -87,6 +94,7 @@ const BankDetails = ({ bankInfo, applicationInfo, getData }) => {
           name="amountApproved"
           type="number"
           onChange={(event) => handleChange(event)}
+          defaultValue={data?.amountApproved}
         />
         <TextField
           id="chequeNeftNumberInput"
@@ -96,15 +104,17 @@ const BankDetails = ({ bankInfo, applicationInfo, getData }) => {
           name="chequeNeftNumber"
           type="number"
           onChange={(event) => handleChange(event)}
+          defaultValue={data?.chequeNeftNumber}
         />
         <TextField
           id="grantAmountInput"
           className="formElements"
-          label="Grany Amount"
+          label="Grant Amount"
           variant="outlined"
           name="grantAmount"
           type="number"
           onChange={(event) => handleChange(event)}
+          defaultValue={data?.grantAmount}
         />
         <div id="formElements" className="formElements">
           Date:

@@ -4,8 +4,11 @@ import { TextField, Button } from "@mui/material";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SurveyDetails = ({ surveyData, applicationData, getData }) => {
+  const navigate = useNavigate();
+
   let formData = {
     id: surveyData?.id,
     surveyDoneBy: surveyData?.surveyDoneBy,
@@ -47,12 +50,13 @@ const SurveyDetails = ({ surveyData, applicationData, getData }) => {
           axios({
             method: "POST",
             url: "https://hs-foundation.herokuapp.com/update",
-            data: {...applicationData, status: "Survey Done"},
+            data: {...applicationData},
             headers: { "Content-Type": "application/json" },
           })
             .then((res) => {
               if (res.status === 200) {
                 getData();
+                navigate(`/applicationList`)
               }
             })
         }

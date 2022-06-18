@@ -102,7 +102,7 @@ const UpdateDocuments = ({ nextForm, backForm, data }) => {
           className="formElements"
           label="Ration Card Number"
           variant="outlined"
-          type="number"
+          type="text"
           name="rationCard"
           onChange={(event) => {
             if(Berror){

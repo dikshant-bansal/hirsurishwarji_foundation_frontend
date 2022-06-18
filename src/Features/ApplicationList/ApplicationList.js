@@ -306,7 +306,6 @@ const ApplicationList = ({ data }) => {
   };
 
   const onSearchHandler = (columnId, event) => {
-    console.log(columnId)
     let searchText = event.target.value;
     const dataCopy = data.filter((item) =>
       item[columnId]?.toString().toLowerCase().includes(searchText?.toString().toLowerCase())

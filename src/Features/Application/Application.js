@@ -59,7 +59,6 @@ const Application = ({ addData, getData, addResponse }) => {
     setCollectiveData({ ...copyCollectiveData });
     addData({
       ...copyCollectiveData,
-      status: "Pending",
     });
     setSuccessAlert(true);
 
