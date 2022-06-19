@@ -1,0 +1,21 @@
+#Home{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    .corouselWrapper{
+        width: 60%;
+        .carousel-root{
+            .carousel-slider{
+                .animated{
+                    .slide{
+                        margin: auto;
+                    }
+                }
+            }
+            .carousel{
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+}
